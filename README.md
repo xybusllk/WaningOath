@@ -2,109 +2,87 @@
 
 > **延绵若梦，终至如约。**
 
-一个自研世界观（CCRF / UNEG / 暴风眼 / 掠夺者 × 弥尘异常 × 三重访问协议）的
-**现代二次元回合制养成游戏**。给家人和朋友玩，没有付费、没有内购。
+《未尽之誓》是一款现代都市 × 异常收容题材的回合制养成游戏。
 
-- **战斗**：崩铁式行动条 + 绝区零式属性异常积蓄条 + 全队共享的「共鸣指数」+ 比率减伤
-- **养成**：等级 80 / 突破 / 技能 14 级 / **权阶协议**（同卡突破 6 阶）/ 武器覆写 5 阶 / 6 部位套装
-- **抽卡**：叫「权限申请」，160 协议原码一抽，0.6% 五星、55 抽软保底、80 抽小保底
-- **当前内容**：主线**序章**（S0~S9 全流程可玩）+ 13 名可玩角色 + 完整的养成 / 抽卡 / 图鉴闭环
+「弥尘」泄漏之后，世界被重新划分：UNEG 守着旧秩序，CCRF 收容异常，掠夺者在无管制区讨生活，
+而暴风眼在这一切之间维持着一块不设防的地方。你将作为一个被「约定」绑来的人，从 Site 14 的后山醒来。
 
 ![大厅](docs/screenshots/home.png)
 ![剧情](docs/screenshots/story-s5.png)
 
-> 截图里的人物与场景是 AI 生成的美术资源，**不随本仓库分发**，见 [ASSETS.md](ASSETS.md)。
+## 玩法
 
----
+- **战斗**：行动条驱动的回合制。八种属性各自积累异常条，叠满触发异常；同一次行动窗口里凑齐多种属性
+  即产生「紊乱」。全队共用一条「共鸣指数」——普攻换共鸣，共鸣换节奏。
+- **养成**：等级 80、四次突破、技能 14 级、**权阶协议**（同卡突破 6 阶）、武器**权限覆写** 5 阶、
+  六部位角色专属套装。角色面板由「等级 + 突破 + 武器 + 装备」逐层折算，全部在服务端结算。
+- **获取**：角色与武器通过「权限申请」取得。160 协议原码一次，五星 0.6%，55 抽软保底、80 抽小保底，
+  角色可歪、武器不歪。
 
-## 技术栈
+当前版本开放**序章**（S0–S9 全流程）与 **13 名可玩角色**，配套战斗、养成、权限申请与收容图鉴。
 
-| 层 | 技术 | 说明 |
+## 项目构成
+
+| 层 | 技术 | 职责 |
 |-|-|-|
-| 客户端 | **Godot 4.7.1（.NET 版）+ C#** | **全部界面由代码搭建**（只有一个 `Main.tscn`），无绝对像素定位 |
-| 战斗内核 | .NET 9 / C# | `WaningOath.Core`：行动条、伤害管线、属性异常、权阶、装备、**确定性 RNG** |
-| 服务端 | .NET 9 / C# | `WaningOath.Server`：`TcpListener` + 手写最小 HTTP/1.1，零依赖 |
-| 离线模拟 | .NET 9 / C# | `WaningOath.Sim`：`battle` / `verify` / `batch` / `loadout` / `validate` |
-| 数据 | JSON | `data/`：13 角色 / 5 敌人 / 29 关卡 / 64 状态 / 17 武器 / 13 套装 |
-| 图标 | 已随包 | 技能 / 权阶 / 固有 / 叙事图标为项目自有资源，直接放在 `Assets/Icons/` |
+| 客户端 | Godot 4.7.1（.NET 版）+ C# | 全部界面由代码搭建，容器布局，无绝对像素定位 |
+| 战斗内核 | .NET 9 | 行动条、伤害管线、属性异常、权阶、装备与确定性 RNG |
+| 服务端 | .NET 9 | 存档权威、成长与关卡结算、权限申请、战斗重放校验 |
+| 离线模拟 | .NET 9 | 批量对战、验算用例、配装体检、数据校验 |
+| 数据 | JSON | `data/` 下的角色 / 状态 / 武器 / 套装 / 关卡 / 规则表 |
 
-**服务端是唯一权威**：进度、结算、掉落全部在服务器侧算，客户端不留进度副本。
-战斗重放由 `battle/verify` 复核——客户端提交 `{choices, claimedOutcome, claimedLogHash}`，
-服务端自己算一遍再比对，对不上就 409。
-
----
+服务端是唯一权威：进度与结算全部在服务器侧完成，客户端不保留进度副本；上报的战斗结果会由服务端
+用同一份指令重算并比对日志指纹，对不上即拒绝。
 
 ## 目录结构
 
 ```
-WaningOath.sln              四个工程的解决方案
-Directory.Build.props       共用编译设置（TreatWarningsAsErrors = true）
-nuget.config                离线包源（指向 Godot 自带的 nupkgs）
+WaningOath.sln              解决方案（四个工程）
+Directory.Build.props       共用编译设置（警告即错误）
+nuget.config                离线包源
 
-data/                       游戏静态数据（角色 / 状态 / 武器 / 套装 / 关卡 / 表）
+data/                       游戏静态数据
 WaningOath.Core/            战斗内核 + 数据模型 + 校验器
-WaningOath.Sim/             命令行模拟器（验收都在这里跑）
+WaningOath.Sim/             命令行模拟器
 WaningOath.Server/          游戏服务端
-WaningOath/                 Godot 客户端（Scripts/ + Assets/）
-tools/                      构建 / 运行 / 冒烟 / 诊断脚本
+WaningOath/                 Godot 客户端
+tools/                      构建、运行、冒烟与诊断脚本
 docs/screenshots/           界面预览
 ```
 
-> 设计文档（战斗 / 数值 / 经济 / 角色表）、剧情正文与美术需求**不在本仓库**：
-> 它们是制作组的内部资料，公开仓库只放"编译与运行所需的东西"。
+## 构建
 
----
-
-## 快速开始
-
-### 依赖
-
-1. **.NET SDK 9**（本机开发时放在 `.dotnet/`，见 `tools\env.cmd`；也可用全局安装的 SDK）
-2. **Godot 4.7.1 — .NET 版**（不是标准版，标准版不支持 C#）
-   解压到 `Godot4/Godot_v4.7.1-stable_mono_win64/`
-   —— `nuget.config` 把包源指向它的 `GodotSharp\Tools\nupkgs`，路径必须一致
-3. 中文字体（可选）：`Noto Sans SC` → `WaningOath/Assets/Fonts/NotoSansSC-VF.ttf`
-4. 美术（可选）：见 [ASSETS.md](ASSETS.md)，不放也能跑完整流程
-
-### 构建与验收
+需要 **.NET SDK 9** 与 **Godot 4.7.1（.NET 版）**。把 Godot 解压到
+`Godot4/Godot_v4.7.1-stable_mono_win64/`——`nuget.config` 的离线包源指向它自带的 `GodotSharp\Tools\nupkgs`。
 
 ```bat
-tools\build.cmd                                    :: 四个工程，0 警告 0 错误是硬门禁
-tools\run-sim.cmd validate                         :: 数据校验（31 条，0 错误）
-tools\run-sim.cmd verify                           :: 验算用例
-tools\run-sim.cmd batch                            :: 四档投入 × 四个靶场 × 64 种子
-tools\godot-smoke.ps1                              :: 客户端 22 屏 × 两种分辨率（无头）
+tools\build.cmd              :: 四个工程
+tools\run-sim.cmd validate   :: 数据校验
+tools\run-server.cmd         :: 启动服务端
+tools\run-client.cmd         :: 启动客户端
 ```
 
-### 跑起来
+界面中文字体使用 Noto Sans SC，放到 `WaningOath/Assets/Fonts/NotoSansSC-VF.ttf`；
+美术资源与字体不随仓库分发，见 [ASSETS.md](ASSETS.md)。
 
-```bat
-tools\run-server.cmd        :: 起 /api/game/*（TcpListener）
-tools\run-client.cmd        :: 起 Godot 客户端（先建 Debug 程序集）
-```
+## 参与贡献
 
----
-
-## 已知限制
-
-- **美术缺位**：立绘与场景图不进库，克隆下来能玩但"没画"（见 [ASSETS.md](ASSETS.md)）。
-- **没有音频**：BGM / 音效 / 配音全部为 0，客户端也没有播放通路。
-- **数据校验有 60 条警告**（0 错误）：主要是历史遗留的未登记技能位与一处面板偏差，改数据前先看 `WaningOath.Core/Data/Validator.cs` 里对应的校验项。
-- **只支持 Windows 脚本**：`tools/*.cmd` 是 cmd 批处理；Linux/macOS 需要自己改路径。
-- **本机工具链是"工作区内自带"式**：`.dotnet/` + `Godot4/` 都不进库。
-
----
+- 提交前请确保 `tools\build.cmd` 零警告零错误，且 `tools\run-sim.cmd validate` 为 0 错误。
+- 改动客户端界面时，请一并跑 `tools\godot-smoke.ps1`（22 屏 × 两种分辨率）。
+- 改动数值或角色数据时，请先跑 `tools\run-sim.cmd batch` 看批量结果，再决定是否落盘。
+- 提交信息请说明「改了什么、为什么」；涉及数值的请附上模拟对比。
+- 发现 bug 或想讨论设计，开 issue 即可。
 
 ## 许可
 
 | 范围 | 许可证 |
 |-|-|
-| 源代码 | **PolyForm Noncommercial License 1.0.0** — [LICENSE](LICENSE) |
-| 创作内容（数据 / 剧情 / 文档） | **CC BY-NC 4.0** — [LICENSE-CONTENT](LICENSE-CONTENT) |
-| 美术资源 | **不包含、不授权** — [ASSETS.md](ASSETS.md) |
-| 第三方 | 各自的许可证 — [NOTICE](NOTICE) |
+| 源代码 | PolyForm Noncommercial License 1.0.0 — [LICENSE](LICENSE) |
+| 内容（数据、剧情脚本、文档、图标） | CC BY-NC 4.0 — [LICENSE-CONTENT](LICENSE-CONTENT) |
+| 美术资源 | 不随仓库分发 — [ASSETS.md](ASSETS.md) |
+| 第三方组件 | 各自的许可证 — [NOTICE](NOTICE) |
 
-简言之：**可以读、可以改、可以自己玩，不可以商用**；商业授权需单独联系。
+本项目仅供非商业用途；商业授权请与制作组联系。
 
 ## 致谢
 
