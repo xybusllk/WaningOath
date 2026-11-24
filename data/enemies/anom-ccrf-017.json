@@ -1,0 +1,43 @@
+{
+  "id": "anom-ccrf-017",
+  "name": "犬型异常",
+  "ccrfCode": "CCRF-017",
+
+  "tier": "minion",
+  "category": "anomaly",
+  "level": 85,
+
+  "base": {
+    "atk": 600,
+    "hp": 8000,
+    "def": 200,
+    "speed": 95,
+    "critRate": 0.05,
+    "critDmg": 1.50,
+    "energyMax": 0,
+    "threat": 50
+  },
+
+  "resistAll": 0.0,
+  "resist": {},
+  "anomalyResist": {},
+
+  "aiProfile": "default",
+
+  "skills": [
+    {
+      "id": "skill-017-pounce",
+      "kind": "basic",
+      "name": "扑击",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "cost": { "energy": 0, "resonanceIndex": 0 },
+      "hits": [
+        { "multiplier": 1.00, "target": "main", "element": "physical" }
+      ],
+      "description": "对单体造成 100% 攻击力的物理伤害。",
+      "rawText": "犬型异常不具备技能组，只有扑击。"
+    }
+  ]
+}

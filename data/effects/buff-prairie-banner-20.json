@@ -1,0 +1,17 @@
+{
+  "id": "buff-prairie-banner-20",
+  "name": "燎原·军旗",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 3,
+  "appliesTo": "partyAll",
+  "mods": [],
+  "elemMods": [
+    { "kind": "DmgBonus", "element": "fire", "op": "Add", "value": 0.20, "source": "燎原 · 全队火属性伤害 +20%" }
+  ],
+  "description": "3 发火种的燎原带来的士气：**全队火属性伤害 +20%**，持续 3 自然回合。",
+  "note": "⚠️ 与 `buff-prairie-banner-10` **同名不同 id**，理由与三档燎原一致（同名的两个档不会同时存在，而读它的人按名字找）。⚠️ 光环的计时依据挂在瓦列里娅身上，见 `buff-prairie-banner-10` 的 note。归属：`原始角色设定\\瓦列里娅.txt`。",
+  "exclusiveTo": []
+}

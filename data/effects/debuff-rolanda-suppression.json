@@ -1,0 +1,16 @@
+{
+  "id": "debuff-rolanda-suppression",
+  "name": "火力压制",
+  "kind": "debuff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 2,
+  "mods": [
+    { "kind": "Atk", "op": "Pct", "value": -0.15, "source": "火力压制：攻击力 −15%" }
+  ],
+  "elemMods": [],
+  "description": "攻击力 −15%，持续 2 自然回合；原稿还写「无法获得护盾」，当前引擎尚未拦截护盾获取，已在 §13.9 标明。",
+  "note": "无法获得护盾尚未实现为状态拦截；不伪造为已生效。",
+  "exclusiveTo": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "weap-chenxing-yongtantiao",
+  "name": "晨星咏叹调",
+  "rarity": 5,
+  "weaponType": "focus",
+  "owner": "char-hoshimi-aino",
+
+  "mainStat": { "kind": "Hp", "op": "Pct", "value": 0.60, "note": "5★ 满级值。02 §5.2：这是唯一一条单列高档的主属性（5★ 60% / 4★ 40% / 3★ 20%）" },
+  "subStat": { "kind": "Hp", "op": "Add", "value": 800, "note": "低于 5★ 池的 1,200 上限 —— 101 §2 已定「专属武器可低于上限、不可高于」" },
+
+  "effect": {
+    "appliesWhen": { "weaponType": "focus" },
+    "initialOverrideRank": 1,
+    "constant": { "selfHpFlatBonus": 1200 },
+    "trigger": { "hook": "onSkillCast", "duration": 0, "target": "self", "note": "101 §4.6：展开领域时（领域由技能的 onCast 部署，故挂 onSkillCast）" },
+    "tiers": [
+      { "rank": 1, "healBonus": 0.20 },
+      { "rank": 2, "healBonus": 0.22 },
+      { "rank": 3, "healBonus": 0.25 },
+      { "rank": 4, "healBonus": 0.28 },
+      { "rank": 5, "healBonus": 0.30 }
+    ],
+    "description": "装备者（仅施术仪）**展开领域**时：装备者**生命上限 +1,200 点**（常驻部分），且给予自身**治疗量加成 +20/22/25/28/30%**。五段依次对应权限覆写 1~5 阶。"
+  },
+
+  "growth": { "mainAndSubGrowWithLevel": true, "levelFactor": 2.195, "effectGrowsWithOverrideOnly": true },
+  "note": "⚠️ **全作第一把施术仪**，补掉 102 长期挂着的「单刀 / 长剑 / 施术仪 / 配枪 里三类没人用」中的一档（101 §4.6）。⚠️ **特效的触发条件是「展开领域」而不是「释放终结技」**：她的领域由终结技展开，但若将来出现不靠终结技展开领域的手段，本特效应对其同样生效 ⇒ **判定依据写 `deployField`，不要实现成 `ultimate`**（101 §4.6）。⚠️ **主属性 60% + 副属性 800 + 特效 1,200 是叠加的**：三者分属「随等级成长的百分比 / 随等级成长的固定值 / 只随覆写成长的固定值」三条成长轴，**不要合并计算**。⚠️ 初始权限覆写原稿未给，取 **1 阶**。⚠️ 武器系统整体属 M7，本文件当前只作声明与 M3 校验输入，不进战斗。",
+  "flavor": "一把形制古朴的电子键琴，琴弦是 Site-14 研究部门用可控异常做的「光弦琴」——拨弦时泛起涟漪状光晕，亮度不低但能量极低。"
+}

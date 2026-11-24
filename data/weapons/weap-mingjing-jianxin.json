@@ -1,0 +1,27 @@
+{
+  "id": "weap-mingjing-jianxin",
+  "name": "明镜鉴心",
+  "rarity": 4,
+  "weaponType": "dao",
+  "owner": "char-qianyu-jingxing",
+
+  "mainStat": { "kind": "Atk", "op": "Pct", "value": 0.20, "note": "4★ 满级值。这个 20% 就是 101 §1 里四星档 5★ 30% × 2/3 = 20% 的锚点" },
+
+  "effect": {
+    "appliesWhen": { "weaponType": "dao" },
+    "initialOverrideRank": 1,
+    "trigger": { "hook": "onUltimateCast", "duration": 0, "target": "partyAll", "note": "101 §4.5：释放终结技时，我方全体行动提前" },
+    "tiers": [
+      { "rank": 1, "partyAdvanceActionPct": 0.15 },
+      { "rank": 2, "partyAdvanceActionPct": 0.18 },
+      { "rank": 3, "partyAdvanceActionPct": 0.20 },
+      { "rank": 4, "partyAdvanceActionPct": 0.23 },
+      { "rank": 5, "partyAdvanceActionPct": 0.25 }
+    ],
+    "description": "装备者（仅单刀类）释放**终结技**时：**我方全体行动提前 15/18/20/23/25%**。五段依次对应权限覆写 1~5 阶。"
+  },
+
+  "growth": { "mainAndSubGrowWithLevel": true, "levelFactor": 2.195, "effectGrowsWithOverrideOnly": true },
+  "note": "⚠️ **全作第一把 4★ 武器，也是「部件数分级」的第一个实例**：只有**主属性 + 特效**两件，**没有副属性位**（101 §0.1 · 104）。⚠️ **口径澄清**：原稿写「单手剑」，但类型栏写的是「单刀」——按 05 §3 的 weaponType 枚举取 **dao**；「单手剑」只是外观描述，**不是长剑类**（101 §4.5）。⚠️ **强度标记**：全队行动提前 25% 是**排轴级效果**，与 01 §1.2 的「速度使用纪律」有交互关系，**具体数值待 M2 实测**。⚠️ 武器系统整体属 M7，本文件当前只作声明与 M3 校验输入，不进战斗。",
+  "flavor": "仿佛由镜子打造，却又如钢铁般坚韧。挥动时能看见自己的倒影慢了半拍——那半拍就是它提前给你的。"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "stage-sim-highboss",
+  "name": "高难首领档靶场",
+  "kind": "sim",
+
+  "party": ["char-shouyueren", "char-qianyu-xingyao", "char-belrand", "char-alice"],
+  "partyModes": {},
+
+  "enemies": ["anom-ccrf-411-highboss"],
+
+  "maxRound": 15,
+  "fixedPanel": true,
+  "presetLevel": 80,
+  "skillLevel": 10,
+  "initialEnergyFull": false,
+
+  "environment": { "all": 1.0, "anomaly": 1.0, "disorder": 1.0, "element": {} },
+
+  "_note": "**M2 平衡实测用的档位靶场**（不是游戏内容，不进序章、不进图鉴）。数值全部照抄 02 §8.2 的敌人档位表，**没有发明任何数字**；队伍 = 当前 data 里已有的 4 名角色（守约人 / 千语星遥 / 贝尔兰德 / 爱丽丝），presetLevel 80 / skillLevel 10（0 权阶的技能上限，01 §5.2）。⚠️ **分档跑法**：`tools\run-sim.cmd batch --runs 64`（四档投入 × 本关 × 64 种子，面板由 `data/tables/tiers.json` 的锚点插值给出；**武器与装备本身尚未进战斗**，属 M7）。`Sim battle` 不带 `--tier` 时跑的是「80 级裸装 + 技能 10 级」的裸面板。**实测结果已回填 `02 §8.1.2`**。高难首领 Lv90 · 350,000 血 / 1,200 防 / 6,500 攻（02 §8.2 · 减伤率 33.3%）。**02 §8.3 第 4 条要求「大毕业 0+1 队期望通关 ≤ 9 轮」——本关就是验算它的靶子。** ⚠️ 本体是「高塔凝视者」的档位靶子，正式的高难首领待作者指定。"
+,
+  "reward": {
+    "note": "kind = sim 的靶场**不发任何奖励** —— 它是 M2 的平衡实测工具，不是游戏内容。服务端对 kind=sim 直接拒绝结算。",
+    "repeatable": true,
+    "firstClear": { "protocolCode": 0, "credit": 0, "items": {} },
+    "repeat": { "protocolCode": 0, "credit": 0, "items": {} }
+  }
+}

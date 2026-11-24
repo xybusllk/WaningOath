@@ -1,0 +1,14 @@
+{
+  "id": "buff-ember",
+  "name": "余火",
+  "kind": "buff",
+  "stackCap": 6,
+  "stackable": true,
+  "durationUnit": "turn",
+  "duration": 0,
+  "mods": [
+    { "kind": "Atk", "op": "Pct", "value": 0.04, "source": "余火" }
+  ],
+  "elemMods": [],
+  "description": "贝尔兰德天赋「野火不尽」（07 §8.3）。每层攻击力 +4%，最多 6 层（满层 +24%）。⚠️ **duration = 0 = 永久**（本作里「持续时间为 0」表示不递减，见 01 §1.3 的计时三分法）。「永远不消耗」是 `100` #74 的裁决：它是不可逆的终盘状态。"
+}

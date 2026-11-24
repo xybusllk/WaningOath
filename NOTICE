@@ -1,0 +1,44 @@
+# NOTICE
+
+未尽之誓 / WaningOath  
+Copyright (c) 2026 WaningOath Dev and contributors
+
+本仓库的不同部分适用不同许可证：
+
+- **源代码**（`*.cs`、`*.mjs`、`*.py`、`*.ps1`、`*.cmd`、工程文件）——根目录
+  [LICENSE](LICENSE) 的 **PolyForm Noncommercial License 1.0.0**。
+- **创作内容**（`data/`、`剧情文本/`、`策划案/` 等文档与设定）——[LICENSE-CONTENT](LICENSE-CONTENT)
+  的 **CC BY-NC 4.0**。
+- **美术资源**——**不在本仓库内，也未授权**，见 [ASSETS.md](ASSETS.md)。
+
+## 第三方组件
+
+### Godot Engine
+
+- 本项目运行时依赖 **Godot 4.7.1（.NET 版）**，但**不随仓库分发**。
+- License: MIT — https://godotengine.org/license
+- 自行安装后，用 `Godot4/` 目录或任意路径下的 Godot 可执行文件打开 `WaningOath/` 工程。
+
+### Noto Sans SC
+
+- 界面中文字体，**不随仓库分发**（需自行下载，见 [ASSETS.md §4](ASSETS.md)）。
+- License: SIL Open Font License 1.1 — https://scripts.sil.org/OFL
+
+### .NET SDK
+
+- 编译需要 **.NET SDK 9**，**不随仓库分发**。
+- License: MIT — https://github.com/dotnet/runtime/blob/main/LICENSE.TXT
+
+## 关于 AI 生成资源
+
+角色立绘与场景图由 AI 图像生成工具产出，成品带「豆包 AI 生成」水印，
+其著作权归属在现行法下不明晰。**这类资源未提交进本仓库**，详见 [ASSETS.md](ASSETS.md)。
+
+仓库中的**代码、数据、文档与图标**由项目成员撰写或由本仓库自带的工具生成，
+不属于上述情形。
+
+## 与姊妹项目的关系
+
+同一位维护者另有 [DeepSeek Character Creation Harness](https://github.com/xybusllk/DeepSeek-Character-Creation-Harness)
+（角色创作与数值评估台）。它**不在本仓库内**（`.gitignore` 已挡 `dsh-balance-client/`、
+`dsh-balance-model/`），且沿用各自的许可证。

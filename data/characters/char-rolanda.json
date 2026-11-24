@@ -1,0 +1,400 @@
+{
+  "id": "char-rolanda",
+  "name": "罗兰达",
+  "title": "黑林壁垒",
+  "rarity": 5,
+  "element": "physical",
+  "path": "healer",
+  "anchorRow": "survival",
+  "weaponType": "gun",
+  "faction": ["UNEG"],
+  "birthday": "12-05",
+  "genderVariant": false,
+
+  "_comment": "07 §13。罗兰达：物理 / 配枪 / 生存·治疗。基础面板取自作者档案（1 级 240 / 5,000 / 120 / 95 / 5% / 150% / 能量 100 / 仇恨 50），突破生命 +5% ×4。核心资源「转速」用 gainStack 的普通资源实现；嘲讽、致命保护、按层数分段、对持盾目标最终加伤是通用引擎原语。已知近似见 §13.9。",
+  "base": {
+    "atk": 260,
+    "hp": 4000,
+    "def": 120,
+    "speed": 95,
+    "critRate": 0.05,
+    "critDmg": 1.50,
+    "energyMax": 100,
+    "energyOverflowCap": 0,
+    "threat": 50
+  },
+  "growth": {
+    "panelGrowth": 1.01,
+    "breakthroughBonus": { "hp": 0.05 }
+  },
+
+  "finalDamageVsShielded": 0.30,
+
+  "skills": {
+    "basic": {
+      "id": "skill-rolanda-danfa-dianshe",
+      "kind": "basic",
+      "name": "单发点射",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "basic",
+      "cost": { "energy": 0, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 1, "energy": 20 },
+      "hits": [
+        {
+          "multiplier": 1.0,
+          "target": "main",
+          "element": "physical",
+          "onHit": [
+            {
+              "type": "conditional",
+              "condition": "notStatus:过热",
+              "then": [
+                {
+                  "type": "gainStack",
+                  "stack": "转速",
+                  "amount": 1,
+                  "cap": 9,
+                  "target": "self"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "description": "对指定敌方单体造成 100% 攻击力物理伤害；+1 共鸣指数、+20 能量；获得 1 层「转速」。",
+      "rawText": "单发点射｜单攻｜+1 共鸣指数｜+20 能量｜100% 攻击力物理伤害｜获得 1 层「转速」"
+    },
+
+    "resonance": {
+      "id": "skill-rolanda-quyu-fengsuo",
+      "kind": "resonance",
+      "name": "区域封锁",
+      "targetType": "self",
+      "scalingBase": "atk",
+      "scalingArray": "resonance",
+      "cost": { "energy": 0, "resonanceIndex": 1 },
+      "gain": { "resonanceIndex": 0, "energy": 40 },
+      "onCast": [
+        {
+          "type": "applyBuff",
+          "buffId": "buff-rolanda-taunt",
+          "stacks": 1,
+          "duration": 2,
+          "target": "self"
+        },
+        {
+          "type": "applyBuff",
+          "buffId": "buff-rolanda-armor",
+          "stacks": 1,
+          "duration": 2,
+          "target": "self"
+        }
+      ],
+      "description": "−1 共鸣指数、+40 能量；自身仇恨提升至 100（嘲讽），持续 2 自然回合；获得「陶瓷复合装甲」2 自然回合：每受到一次攻击叠 1 层，最多 3 层，每层 12% 减伤（最多 36%，与其他减伤取最高），获得新层时刷新持续时间。",
+      "rawText": "区域封锁｜辅助｜−1 共鸣指数｜+40 能量｜自身仇恨提升至 100，持续 2 自然回合｜获得「陶瓷复合装甲」2 自然回合，每受击 +1 层，上限 3 层，每层 12% 减伤"
+    },
+
+    "ultimate": {
+      "id": "skill-rolanda-huoli-yazhi",
+      "kind": "ultimate",
+      "name": "火力压制",
+      "targetType": "aoe",
+      "scalingBase": "atk",
+      "scalingArray": "ultimate",
+      "cost": { "energy": 100, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "onCast": [
+        {
+          "type": "dealDamage",
+          "target": "allEnemies",
+          "element": "physical",
+          "multiplier": 0.6,
+          "perStack": "转速",
+          "hitsPerStack": 1,
+          "scalingBase": "atk"
+        },
+        {
+          "type": "applyDebuff",
+          "debuffId": "debuff-rolanda-suppression",
+          "stacks": 1,
+          "duration": 2,
+          "target": "allEnemies"
+        },
+        {
+          "type": "conditional",
+          "condition": "knobAtLeast:overheatImmune:1",
+          "then": [],
+          "onFail": [
+            {
+              "type": "applyBuff",
+              "buffId": "buff-rolanda-overheat",
+              "stacks": 1,
+              "duration": 2,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "description": "消耗 100 能量；对敌方全体造成段数等于当前「转速」层数的物理伤害，每段 60% 攻击力；对持盾 / 召唤物目标额外 +30% 最终伤害；施加「火力压制」：攻击力 −15%、无法获得护盾，持续 2 自然回合。释放后不消耗「转速」，但进入「过热」2 自然回合（权阶Ⅵ 取消过热）。",
+      "rawText": "火力压制｜群攻｜消耗 100 能量｜段数 = 转速层数，每段 60% 攻击力物理伤害｜对护盾/召唤物伤害 +30%｜敌方全体攻击力 −15%、无法获得护盾 2 自然回合｜不消耗转速，但进入过热 2 自然回合"
+    },
+
+    "talent": {
+      "id": "skill-rolanda-waiyuan-jiatelin",
+      "kind": "talent",
+      "name": "外源驱动加特林",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "triggers": [
+        {
+          "hook": "onDamageTaken",
+          "scope": "self",
+          "effects": [
+            {
+              "type": "dealDamage",
+              "target": "mainTarget",
+              "element": "physical",
+              "multiplier": 0.2,
+              "perStack": "转速",
+              "hitsPerStack": 1,
+              "knob": "counterDamageBonus",
+              "scalingBase": "atk"
+            },
+            {
+              "type": "gainEnergy",
+              "amount": 20,
+              "target": "self"
+            },
+            {
+              "type": "conditional",
+              "condition": "notStatus:过热",
+              "then": [
+                {
+                  "type": "gainStack",
+                  "stack": "转速",
+                  "amount": 1,
+                  "cap": 9,
+                  "target": "self"
+                }
+              ]
+            },
+            {
+              "type": "applyBuff",
+              "buffId": "buff-rolanda-armor",
+              "stacks": 1,
+              "duration": 2,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "hook": "onDamageTaken",
+          "scope": "self",
+          "condition": "statusAtLeast:嘲讽:1",
+          "effects": [
+            {
+              "type": "conditional",
+              "condition": "notStatus:过热",
+              "then": [
+                {
+                  "type": "gainStack",
+                  "stack": "转速",
+                  "amount": 1,
+                  "cap": 9,
+                  "target": "self"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "description": "每次受到攻击后，自动反击攻击者：段数等于当前「转速」层数，每段 20% 攻击力物理伤害；+20 能量；受击获得 1 层「转速」与 1 层「装甲」。反击不视为追加攻击、不占行动、不获得「转速」。罗兰达在场时，我方全体对持盾 / 召唤物目标伤害 +30%。",
+      "rawText": "外源驱动加特林｜反击｜每次受击后对攻击者反击，段数 = 转速层数，每段 20% 攻击力｜+20 能量｜不视为追加攻击、不占行动、反击不获得转速｜在场时全队对护盾目标伤害 +30%"
+    },
+
+    "inherent1": {
+      "id": "skill-rolanda-heilin-jijiu",
+      "kind": "inherent1",
+      "name": "黑林特制急救注射剂",
+      "targetType": "partyAll",
+      "scalingBase": "hp",
+      "scalingArray": "none",
+      "triggers": [
+        {
+          "hook": "onBattleStart",
+          "scope": "self",
+          "effects": [
+            {
+              "type": "applyBuff",
+              "buffId": "buff-rolanda-guard-self",
+              "stacks": 1,
+              "duration": 0,
+              "target": "self"
+            },
+            {
+              "type": "applyBuff",
+              "buffId": "buff-rolanda-guard-ally",
+              "stacks": 1,
+              "duration": 0,
+              "target": "partyAll"
+            },
+            {
+              "type": "heal",
+              "target": "self",
+              "pctMaxHp": 0.0,
+              "_note": "校验 18 要求 healer 持有 heal 原子；真正的治疗在致命保护触发时由 Combat.TryLethalGuard 执行，这里不产生额外治疗。"
+            }
+          ]
+        }
+      ],
+      "description": "罗兰达受到致命伤害时，免疫本次伤害并恢复自身生命上限 80%；队伍内其他友方受到致命伤害时，免疫本次伤害、恢复其生命上限 50%，并使全队获得 10% 全伤害提高。每名角色每场战斗触发一次。",
+      "rawText": "黑林特制急救注射剂｜战斗固有｜罗兰达致命伤害免疫并恢复 80% 生命上限｜其他友方致命伤害免疫并恢复 50% 生命上限，且全队获得 10% 全伤害提高"
+    }
+  },
+
+  "eidolons": [
+    {
+      "rank": 1,
+      "name": "战备等级",
+      "triggers": [
+        {
+          "hook": "onBattleStart",
+          "scope": "self",
+          "effects": [
+            {
+              "type": "gainStack",
+              "stack": "转速",
+              "amount": 2,
+              "cap": 9,
+              "target": "self"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "要点防御",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "counterDamageBonus",
+          "value": 0.5
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "总体动员",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 12
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "过载阈值",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "spinCap",
+          "value": 3
+        }
+      ],
+      "triggers": [
+        {
+          "hook": "onDamageTaken",
+          "scope": "self",
+          "effects": [
+            {
+              "type": "conditional",
+              "condition": "notStatus:过热",
+              "then": [
+                {
+                  "type": "gainStack",
+                  "stack": "转速",
+                  "amount": 1,
+                  "cap": 12,
+                  "target": "self"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "全民防御",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 14
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "name": "膛压峰值",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "overheatImmune",
+          "value": 1
+        },
+        {
+          "type": "modifyStat",
+          "stat": "shieldedDamageBonus",
+          "value": 0.30
+        }
+      ],
+      "triggers": [
+        {
+          "hook": "onUltimateCast",
+          "scope": "self",
+          "effects": [
+            {
+              "type": "delayAction",
+              "target": "allEnemies",
+              "value": 0.2
+            },
+            {
+              "type": "applyBuff",
+              "buffId": "buff-rolanda-taunt",
+              "stacks": 1,
+              "duration": 1,
+              "target": "self"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "signatureWeapon": "weap-haful-shouwangzhe",
+  "gearSet": "gear-hedi-fangxian",
+
+  "lore": {
+    "quote": "站到我后面。",
+    "narrativeSkills": ["冗余传动系统", "运动意图预判"],
+    "secrets": [
+      "行政立法权 1 级 / 异常科研权 0 级 / 军事管理权 2 级",
+      "左机械臂曾被炸断，靠备用传动回路自锁",
+      "精神状况不佳，不常社交"
+    ],
+    "speechStyle": "不善言辞、可靠；台词短，几乎不解释自己",
+    "relationships": {}
+  },
+
+  "_note": "实装近似：① 嘲讽用 StatusDef.taunt（单体攻击优先选持嘲讽者），不处理“仇恨值为 100 期间强制指向”的额外特判；② 「转速」自然回合衰减尚未接线（只做获得 / 上限 / 消耗）；③ 「无法获得护盾」目前只写在描述与 debuff 里，未单独拦截护盾；④ 专武物理减伤用通用 DamageReduction 近似（会同时减其他属性）；⑤ 武器 / 套装属 M7 声明层，战斗内由 EquipEffects 接入的部分已写。"
+}

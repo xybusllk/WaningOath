@@ -1,0 +1,16 @@
+{
+  "id": "buff-execution-ready",
+  "name": "可处决",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 0,
+  "mods": [],
+  "elemMods": [],
+  "forcedSkill": "bloom",
+  "forcedTarget": "lowestHpEnemy",
+  "description": "下一次行动被替换为元素绽放「处决」。由「打开保险」在敌人进入可处决状态时施加；执行后由「处决」的 onCast 消耗。",
+  "note": "⚠️ 强制行动由 `BattleRules.ForcedChoice` + `ManualPolicy/GreedyPolicy` 实现；它返回的是一条普通 ActionChoice，因此服务端重放能对齐。归属：`原始角色设定\\卡尔尼菲琪亚.txt` 天赋。",
+  "exclusiveTo": []
+}

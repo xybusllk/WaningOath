@@ -1,0 +1,28 @@
+{
+  "id": "weap-gongtong-peiqiang",
+  "name": "林靖远共统配枪",
+  "rarity": 5,
+  "weaponType": "gun",
+  "owner": "char-lin-jingyuan",
+
+  "mainStat": { "kind": "Atk", "op": "Pct", "value": 0.30, "note": "5★ 满级值（101 §1）" },
+  "subStat": { "kind": "Atk", "op": "Add", "value": 520, "note": "原稿写 +530，高于 101 §2 的 5★ 池上限 520 ⇒ 按上限改为 520（§2 已定「专属武器可低于上限、不可高于」）" },
+
+  "effect": {
+    "appliesWhen": { "weaponType": "gun" },
+    "initialOverrideRank": 1,
+    "trigger": { "hook": "onAnomalyTrigger", "duration": 2, "target": "self", "note": "101 §4.7：施加属性异常时，持续 2 回合、叠加时刷新" },
+    "tiers": [
+      { "rank": 1, "anomalyBuildUpBonus": 0.15 },
+      { "rank": 2, "anomalyBuildUpBonus": 0.175 },
+      { "rank": 3, "anomalyBuildUpBonus": 0.20 },
+      { "rank": 4, "anomalyBuildUpBonus": 0.225 },
+      { "rank": 5, "anomalyBuildUpBonus": 0.25 }
+    ],
+    "description": "装备者（仅配枪）**施加属性异常**时：装备者**属性异常积蓄效率 +15/17.5/20/22.5/25%**（**直接加算**），**持续 2 回合、叠加时刷新**。五段依次对应权限覆写 1~5 阶。"
+  },
+
+  "growth": { "mainAndSubGrowWithLevel": true, "levelFactor": 2.195, "effectGrowsWithOverrideOnly": true },
+  "note": "⚠️ **全作首把配枪**（102 §1 长期挂着「单刀 / 长剑 / 施术仪 / 配枪 里三类没人用」；继星见爱乃补上施术仪之后她补上配枪 ⇒ **只剩「长剑」无人**，而贝尔兰德随后认领了长剑）。⚠️ **补完了原稿缺失的持续时间**：【我提议】**持续 2 回合、叠加时刷新**（与 01 §6.2 通则 3 一致，101 §4.7）。⚠️ **这是一条自我强化的循环，M2 要专门看**：施加异常 → 积蓄效率提高 → 更快再施加异常。虽然 01 §3.1 的「技能直接施加层数不经过进度条」（`applyAnomalyStack`）不产生积蓄，但她的**常规命中**会产生 ⇒ 这条特效在她身上接近常驻。**验收口径**：看它会不会让「抗性 > 10% 的敌人无法积蓄」（01 §3.1）这条硬线失效。⚠️ 武器系统整体属 M7，本文件当前只作声明与 M3 校验输入，不进战斗。",
+  "flavor": "UNEG 统一配发的制式等离子卡宾步枪，黑色哑光、几乎没有装饰，只有瞄准镜与枪口处有一行小字：「林靖远共统配枪」。"
+}

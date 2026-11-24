@@ -1,0 +1,14 @@
+{
+  "id": "buff-mirror-mark",
+  "name": "镜印",
+  "kind": "buff",
+  "stackCap": 6,
+  "stackable": true,
+  "durationUnit": "turn",
+  "duration": 0,
+  "mods": [],
+  "elemMods": [],
+  "exclusiveTo": ["char-qianyu-xingyao", "char-xingyao-star-oath", "char-xingyao-darknight"],
+  "description": "千语镜星天赋「绝对同步率」③ 共享给星遥形态的「镜印」：每一位在场的星遥形态各获得一份同名但独立的副本，各上限 6 层、互不影响，也不与她自己的「镜印」层数相加。天赋④ 的附加伤害按该层数结算。",
+  "note": "标记类增益（01 §6.1 的资源型堆叠），不是共鸣指数 / 能量 / 星忆。duration 0 = 永久。她自己的「镜印」用 gainStack 资源计数（终结技要按层消耗），本 buff 只承载星遥形态身上的独立副本；exclusiveTo 即 02 §0 宪法 5 的专拐名单（104 庚3）。"
+}

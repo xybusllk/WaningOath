@@ -1,0 +1,77 @@
+{
+  "id": "anom-ccrf-509",
+  "name": "失焦者",
+  "ccrfCode": "CCRF-509",
+
+  "tier": "normal",
+  "category": "anomaly",
+  "level": 89,
+
+  "base": {
+    "atk": 2200,
+    "hp": 60000,
+    "def": 400,
+    "speed": 90,
+    "critRate": 0.05,
+    "critDmg": 1.50,
+    "energyMax": 60,
+    "threat": 50
+  },
+
+  "resistAll": 0.0,
+  "resist": {},
+  "anomalyResist": {},
+
+  "aiProfile": "default",
+
+  "skills": [
+    {
+      "id": "skill-shijiao-tuya",
+      "kind": "basic",
+      "name": "触压",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "cost": { "energy": 0, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 0, "energy": 20 },
+      "hits": [
+        { "multiplier": 1.00, "target": "main", "element": "physical" }
+      ],
+      "description": "以体表覆盖目标，造成 100% 攻击力的物理伤害。+20 能量。",
+      "rawText": "509 没有视觉器官，依靠地表震动感知猎物；攻击方式为「覆盖」。"
+    },
+    {
+      "id": "skill-shijiao-fumo",
+      "kind": "skill",
+      "name": "覆膜",
+      "targetType": "aoe",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "cost": { "energy": 40, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "onCast": [
+        {
+          "type": "applyDebuff",
+          "debuffId": "debuff-blur",
+          "stacks": 1,
+          "duration": 2,
+          "target": "allEnemies",
+          "stackCounter": "perAttack"
+        }
+      ],
+      "triggers": [
+        {
+          "_note": "第 2 次覆盖起：模糊显著延长（2 → 4 单位回合）。第 3 次起不再加重（stackCap 封顶后层数不变、不再触发本钩子），但技能本身的 applyDebuff 每次都把持续时间刷新回 4。⚠️ scope 是 **enemy** 而不是 self —— scope 判的是**事件里的行动者**（被叠层的是我方角色），不是「钩子挂在哪一边」；写成 self 会永远不触发。",
+          "hook": "onStackReach",
+          "scope": "enemy",
+          "condition": "actorStatusAtLeast:视觉模糊:2",
+          "effects": [
+            { "type": "applyDebuff", "debuffId": "debuff-blur", "stacks": 1, "duration": 4, "target": "mainTarget" }
+          ]
+        }
+      ],
+      "description": "以自身为中心释放一片**低黏度体液**，覆盖半径约 1.5 米：被覆盖的皮肤不会受腐蚀或灼伤，但该区域的视觉感知出现**持续的、可逆的模糊**（「视觉模糊」1 层）。体液具有**累积性** —— 同一目标被覆盖两次后模糊感显著延长（2 → 4 单位回合）并伴随行动迟滞（「视觉模糊」每层速度 −10%、上限 2 层 = −20%，`02 §1.2` 的速度纪律内），**第三次不再加重、只刷新持续时间**。",
+      "rawText": "「在同一场遭遇中放任 509 反复出手，是新手最常见的失误。」—— SITE14 新入人员野外生存课·第一节"
+    }
+  ]
+}

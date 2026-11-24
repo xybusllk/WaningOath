@@ -1,0 +1,55 @@
+# Game Content License
+
+未尽之誓 / WaningOath — Game Content  
+Copyright (c) 2026 WaningOath Dev and contributors
+
+除非某个文件或目录另有说明，下列**非代码的创作内容**采用
+**知识共享 署名—非商业性使用 4.0 国际许可协议**
+（Creative Commons Attribution-NonCommercial 4.0 International，`CC-BY-NC-4.0`）：
+
+- `data/` —— 角色档案、技能、状态、武器、套装、关卡、剧情表与数值表
+- `WaningOath/Assets/Story/` —— 剧情脚本（供客户端读取）
+- `docs/` 与仓库根目录的说明文档、界面预览图
+- `WaningOath/Assets/Icons/` —— 本项目原创的图标资源
+
+协议摘要：
+
+- 允许：以**非商业**目的复制、修改、演绎、分享。
+- 要求：署名、给出协议链接、并**注明是否做了修改**。
+- 禁止：用于商业优势或金钱报酬。
+
+协议全文：
+
+- [CC BY-NC 4.0 法律文本](LICENSES/CC-BY-NC-4.0.txt)
+- https://creativecommons.org/licenses/by-nc/4.0/
+
+商业授权需单独取得版权人书面许可。
+
+---
+
+## 明确**不在**本协议范围内的内容
+
+### 1. 源代码
+
+源代码另行采用 **PolyForm Noncommercial License 1.0.0**，见仓库根目录 [LICENSE](LICENSE)。
+
+### 2. 美术资源（**本仓库不包含**）
+
+角色立绘、场景图等由 **AI 图像生成工具**产出，其著作权归属在现行法下并不明晰。
+**这类资源没有被提交进本仓库，也没有被授权**——详见 [ASSETS.md](ASSETS.md)。
+因此 `LICENSE-CONTENT` **不覆盖**任何立绘 / 场景图，也不覆盖包含它们的界面截图之外的再分发。
+
+### 3. 第三方组件
+
+- **Noto Sans SC** 字体：SIL Open Font License 1.1，**未随仓库分发**（需自行下载）。
+- **Godot Engine**：MIT，**未随仓库分发**（需自行安装）。
+- 其余见 [NOTICE](NOTICE)。
+
+---
+
+## 署名
+
+- 项目：未尽之誓 / WaningOath
+- 世界观、角色与数值设计：[宪法号五等风帆护卫舰](https://github.com/xybusllk)（作者）
+- 维护：[xybusllk](https://github.com/xybusllk)
+- 全部贡献者见 [CREDITS.md](CREDITS.md)

@@ -1,0 +1,22 @@
+{
+  "id": "buff-coop-blessing",
+  "name": "如常的加护",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "turn",
+  "duration": 1,
+  "mods": [
+    { "kind": "CritRate", "op": "Add", "value": 0.125, "source": "如常的加护" }
+  ],
+  "elemMods": [
+    { "kind": "DmgAmp", "element": "Physical", "op": "Add", "value": 0.10, "source": "如常的加护" },
+    { "kind": "DmgAmp", "element": "Ice", "op": "Add", "value": 0.10, "source": "如常的加护" },
+    { "kind": "DmgAmp", "element": "Fire", "op": "Add", "value": 0.10, "source": "如常的加护" },
+    { "kind": "DmgAmp", "element": "Lightning", "op": "Add", "value": 0.10, "source": "如常的加护" },
+    { "kind": "DmgAmp", "element": "Wind", "op": "Add", "value": 0.10, "source": "如常的加护" },
+    { "kind": "DmgAmp", "element": "Resonance", "op": "Add", "value": 0.10, "source": "如常的加护" }
+  ],
+  "description": "九尾狐的共生灵天赋（`07 §9.3`）：被选中发动协同攻击的角色，**全属性伤害加深 10%**（同数值同时计入增伤区与穿透区）、**暴击率 +12.5%**，持续 1 回合。",
+  "note": "只对被 `coopAttack` 选中的那一位生效（`target: \"coopTarget\"`），不是全队。离谒 / 咏叹在取值时解析到冰 / 共振，故只需列六条。"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "gear-jingmian-liuying",
+  "name": "镜面留影",
+  "rarity": 5,
+  "_note": "千语镜星的专属套装（07 §5.5 · 我提议 · 原稿未给）。4 件的减伤按 01 §2.2 取最高、不叠加。",
+  "tiers": [
+    { "pieces": 2, "description": "能量恢复效率 +10%",
+      "effects": [ { "type": "modifyStat", "stat": "energyRegen", "value": 0.10, "target": "self" } ] },
+    { "pieces": 4, "description": "「静止镜像」存在期间我方全体受到的伤害降低 10%（取最高、不叠加）；「镜印」层数上限 +1（6 → 7）",
+      "effects": [
+        { "type": "modifyStat", "stat": "damageReduction", "value": 0.10, "target": "partyAll", "condition": "summonAlive" },
+        { "type": "modifyStat", "stat": "mirrorMarkCap", "delta": 1, "target": "self" }
+      ] }
+  ],
+  "description": "千语镜星 · 4★ 辅助。"
+}

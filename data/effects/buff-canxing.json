@@ -1,0 +1,15 @@
+{
+  "id": "buff-canxing",
+  "name": "灿星",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "turn",
+  "duration": 5,
+  "mods": [
+    { "kind": "CritRate", "op": "Add", "value": 0.20, "source": "灿星" },
+    { "kind": "CritDmg", "op": "Add", "value": 0.40, "source": "灿星" }
+  ],
+  "elemMods": [],
+  "description": "群星誓约终结技「比群星更闪耀的」展开的领域增益：自身暴击率 +20% / 暴击伤害 +40%，持续 5 次自身行动。"
+}

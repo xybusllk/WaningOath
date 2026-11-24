@@ -1,0 +1,85 @@
+{
+  "_comment": "M2 的投入档位表（02 §8.1.1 + §7 + §1.2 的可执行化）。这是给 Sim batch 分档用的，同时是 M7 养成系统折算面板时的同一套锚点。",
+  "version": 1,
+  "source": "策划案/02-数值系统设定.md §1.2 / §7 / §8.1.1",
+  "skillLevel": 10,
+  "_skillLevelNote": "四档全部按 0 权阶算（§8.1.1 写的是『0+1』= 0 权阶 + 1 把专属武器）。02 §4：0 权阶、未突破时技能等级上限就是 10，所以四档一律 10 级，不随档位变化。权阶效果属 M7。",
+  "_panelNote": "档位只定义『面板到什么程度』，不定义『靠哪件装备达到』。中间两档按 裸装 → 满配 的完成度线性插值（0 / 0.35 / 0.70 / 1.00）。这是本轮设定的折算口径，等 M7 的武器/装备进战斗后由真实配装取代。",
+  "_critNote": "双暴不按同一完成度插值：它按 02 §8.1.1 的四行锚点（50/200 · 60/240 · 65/270）反解出系数，再按各行自己的『满配双暴』缩放。所以主C 在 0+1 低配档正好是 §8.1.1 的 50% / 200%。",
+  "rows": {
+    "dps": {
+      "name": "常规主C",
+      "atkNaked": 658, "hpNaked": 7902,
+      "atkFull": 3000, "hpFull": 8000, "defFull": 2000, "speedFull": 105,
+      "critRateFull": 0.65, "critDmgFull": 2.70
+    },
+    "hpDps": {
+      "name": "生命主C",
+      "atkNaked": 571, "hpNaked": 11414,
+      "atkFull": 2000, "hpFull": 15000, "defFull": 2000, "speedFull": 105,
+      "critRateFull": 0.65, "critDmgFull": 2.70
+    },
+    "subDps": {
+      "name": "副C",
+      "atkNaked": 637, "hpNaked": 7024,
+      "atkFull": 2600, "hpFull": 7100, "defFull": 2000, "speedFull": 110,
+      "critRateFull": 0.60, "critDmgFull": 2.40
+    },
+    "support": {
+      "name": "常规辅助",
+      "atkNaked": 571, "hpNaked": 6366,
+      "atkFull": 2200, "hpFull": 6400, "defFull": 2000, "speedFull": 170,
+      "critRateFull": 0.05, "critDmgFull": 1.50
+    },
+    "frailSupport": {
+      "name": "脆皮辅助（4星）",
+      "atkNaked": 527, "hpNaked": 5707,
+      "atkFull": 2000, "hpFull": 5800, "defFull": 2000, "speedFull": 150,
+      "critRateFull": 0.05, "critDmgFull": 1.50
+    },
+    "survival": {
+      "name": "生存 / 治疗位",
+      "atkNaked": 571, "hpNaked": 8780,
+      "atkFull": 2200, "hpFull": 19000, "defFull": 2000, "speedFull": 140,
+      "critRateFull": 0.05, "critDmgFull": 1.50
+    }
+  },
+  "tiers": [
+    {
+      "id": "tier-0plus0",
+      "name": "0+0 裸装",
+      "panelK": 0.0,
+      "critRateK": 0.0,
+      "critDmgK": 0.0,
+      "hasSignatureWeapon": false,
+      "note": "不装武器、不装装备。80 级裸面板 = 1 级值 × 1.01^79。暴击 5% / 150%（§1.2 的基础值）。"
+    },
+    {
+      "id": "tier-0plus1-low",
+      "name": "0+1 低配",
+      "panelK": 0.35,
+      "critRateK": 0.75,
+      "critDmgK": 0.4167,
+      "hasSignatureWeapon": true,
+      "note": "0 权阶 + 1 把专属武器，装备词条差。面板完成度 35%；双暴按 §8.1.1 反解（主C 正好落在 50% / 200%）。"
+    },
+    {
+      "id": "tier-mid",
+      "name": "中配",
+      "panelK": 0.70,
+      "critRateK": 0.9167,
+      "critDmgK": 0.75,
+      "hasSignatureWeapon": true,
+      "note": "0 权阶 + 专武，装备词条中等。面板完成度 70%；主C 双暴 60% / 240%（§8.1.1）。"
+    },
+    {
+      "id": "tier-graduate",
+      "name": "大毕业",
+      "panelK": 1.0,
+      "critRateK": 1.0,
+      "critDmgK": 1.0,
+      "hasSignatureWeapon": true,
+      "note": "02 §7 的平衡基准：按定位查表取满配面板，主C 双暴 65% / 270%（§8.1.1 的『平衡基准』行）。02 §8.3 第 4 条的『大毕业 0+1 对高难首领 ≤9 轮』指的就是这一档。"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "debuff-frightened",
+  "name": "担惊受怕",
+  "kind": "debuff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 2,
+  "mods": [
+    { "kind": "Def", "op": "Pct", "value": -0.30, "source": "担惊受怕（连续被无人机盯上）" }
+  ],
+  "elemMods": [],
+  "description": "连续被无人机袭击之后彻底乱了阵脚。**防御 −30%，行动延后 30%，持续 2 自然回合**。",
+  "note": "⚠️ 减防用状态模组，**行动延后走 `delayAction` 原子**（由触发它的那条效果一起施加）——「行动延后」不是面板词条，它改的是行动条，塞进 `mods` 里不会生效。⚠️ 触发条件：同一目标**连续 3 个自然回合**被无人机袭击。⚠️ 实现上的近似：用 `debuff-drone-watch` 叠 3 层 + 2 自然回合的窗口来表达「连续」，触发后把计数清零 —— 引擎没有「连续回合」这个原语，这条**已记入 `100` 待裁**。归属：`原始角色设定\\瓦列里娅.txt`。",
+  "exclusiveTo": []
+}

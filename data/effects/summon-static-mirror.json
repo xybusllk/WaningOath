@@ -1,0 +1,13 @@
+{
+  "id": "summon-static-mirror",
+  "name": "静止镜像",
+  "kind": "summon",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "turn",
+  "duration": 3,
+  "mods": [],
+  "elemMods": [],
+  "description": "千语镜星「静止镜像」（07 §5）。不占 4 人上场位；有独立 AV 但**从不产生指令**；**没有防御力**（故防御区恒 R = 0）；免疫一切直接秒杀；**不计入「我方 4 人全部无法行动」**；吃「我方全体 / 我方单位」类增益。（01 §1.5）",
+  "exclusiveTo": []
+}

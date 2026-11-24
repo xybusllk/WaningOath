@@ -1,0 +1,33 @@
+{
+  "id": "stage-hazard-lightning",
+  "name": "高危样本 · 雷",
+  "kind": "hazard",
+  "variant": "lightning",
+  "_note": "「定期清剿」刷本。数值口径：02 §2.3（阶跃核心 40 配额 / 高危样本 60 配额）与 03 §2 的材料表。敌人暂用已落盘的异常体（属性刷本的\"属性\"体现在掉落物与入口上，异常体本身还没有逐属性落盘）。",
+  "party": [
+    "char-shouyueren",
+    "char-qianyu-xingyao",
+    "char-belrand",
+    "char-alice"
+  ],
+  "enemies": [
+    "anom-ccrf-411"
+  ],
+  "maxRound": 15,
+  "reward": {
+    "note": "产出与消耗照抄 02 §2.3 / 03 §2；首通奖励翻倍属【我提议】。",
+    "repeatable": true,
+    "staminaCost": 60,
+    "unlockProtocolLevel": 3,
+    "firstClear": {
+      "items": {
+        "hazardSample": 6
+      }
+    },
+    "repeat": {
+      "items": {
+        "hazardSample": 4
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "debuff-verdict",
+  "name": "裁决",
+  "kind": "debuff",
+  "stackCap": 3,
+  "stackable": true,
+  "durationUnit": "round",
+  "duration": 0,
+  "mods": [],
+  "elemMods": [],
+  "description": "卡尔尼菲琪亚施加的裁决印记，上限 3 层。3 层时目标进入「可处决」状态；本状态没有自然持续时间，直到被消耗或目标死亡。",
+  "note": "⚠️ 原稿没有写裁决的持续回合；按「印记」处理为永久，直到被处决/死亡。归属：`原始角色设定\\卡尔尼菲琪亚.txt`。",
+  "exclusiveTo": []
+}

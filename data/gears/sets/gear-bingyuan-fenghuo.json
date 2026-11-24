@@ -1,0 +1,16 @@
+{
+  "id": "gear-bingyuan-fenghuo",
+  "name": "冰原烽火",
+  "rarity": 5,
+  "_note": "瓦列里娅的专属套装。2 / 4 件效果逐字取自作者本轮的追加稿。4 件套的「意志」与角色天赋的「意志」是**同一条资源**（上限 5 层）—— 两处都往上加，所以上限只写在一个地方（角色的天赋里），这里只负责加层与消费。",
+  "tiers": [
+    { "pieces": 2, "description": "火属性伤害提高 10%",
+      "effects": [ { "type": "modifyStat", "stat": "dmgBonusFire", "value": 0.10, "target": "self" } ] },
+    { "pieces": 4, "description": "无人机发起攻击时，瓦列里娅获得 1 层「意志」（上限 5）。每层「意志」使无人机伤害 +10%；「意志」满 5 层时，可消耗全部「意志」额外部署 2 架无人机（不受无人机上限影响）",
+      "effects": [
+        { "type": "modifyStat", "stat": "droneDamageBonusPerWill", "value": 0.10, "target": "self" },
+        { "type": "modifyStat", "stat": "willDeployDrones", "value": 2, "target": "self" }
+      ] }
+  ],
+  "description": "瓦列里娅 · 火属性副C（可燃 DoT + 协同攻击）。"
+}

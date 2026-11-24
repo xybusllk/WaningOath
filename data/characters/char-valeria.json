@@ -1,0 +1,722 @@
+{
+  "id": "char-valeria",
+  "name": "瓦列里娅",
+  "title": "西冰原纵队最高指挥（名誉）",
+  "rarity": 5,
+  "element": "fire",
+  "path": "sub_dps",
+  "anchorRow": "subDps",
+  "weaponType": "focus",
+  "faction": [
+    "PILLAGER"
+  ],
+  "birthday": "11-07",
+  "genderVariant": false,
+  "base": {
+    "atk": 290,
+    "hp": 3200,
+    "def": 100,
+    "speed": 100,
+    "critRate": 0.05,
+    "critDmg": 1.5,
+    "energyMax": 0,
+    "energyOverflowCap": 0,
+    "threat": 50
+  },
+  "growth": {
+    "panelGrowth": 1.01,
+    "breakthroughBonus": {
+      "atk": 0.05
+    }
+  },
+  "_comment": "07 追加角色。**唯一一个没有能量体系的角色**（energyMax 0，`01 §4.2`）—— 档案写死终结技「仅消耗火种、无能量体系」，所以普攻也不再产能量。倍率口径 = 01 §5.2 裁决 #62 方案 B：下面的倍率就是 1 级最终倍率。三条资源（火种 / 无人机 / 意志）都是**层数计数**，不是状态。",
+  "skills": {
+    "basic": {
+      "id": "skill-chuandi-xinghuo",
+      "kind": "basic",
+      "name": "传递星火",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "basic",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "resonanceIndex": 1,
+        "energy": 0
+      },
+      "onCast": [
+        {
+          "type": "gainStack",
+          "stack": "火种",
+          "amount": 1,
+          "cap": 3,
+          "target": "self"
+        },
+        {
+          "type": "gainStack",
+          "stack": "无人机",
+          "amount": 2,
+          "cap": 5,
+          "target": "self"
+        }
+      ],
+      "hits": [
+        {
+          "multiplier": 1,
+          "target": "main",
+          "element": "fire",
+          "accumulateAnomaly": true,
+          "onHit": [
+            {
+              "_note": "**驱散必须排在施加之前**：施加那条是 unique 的，目标已有「可爆火种」时会整条跳过；若先施加，条件就永远为假，驱散一次都不会发生。",
+              "type": "conditional",
+              "condition": "targetLacksStatus:可爆火种",
+              "then": [
+                {
+                  "type": "dispel",
+                  "count": 1,
+                  "target": "mainTarget"
+                }
+              ]
+            },
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-explosive-kindling",
+              "stacks": 1,
+              "target": "mainTarget",
+              "unique": true,
+              "stackCounter": "perAttack"
+            },
+            {
+              "type": "applyAnomalyStack",
+              "element": "fire",
+              "stacks": 1,
+              "chance": 1,
+              "target": "mainTarget",
+              "stackCounter": "perHit"
+            }
+          ]
+        }
+      ],
+      "description": "对指定敌方单体造成100%攻击力火属性伤害；获得1发火种（上限3）和2架无人机（上限5）。若目标未持有「可爆火种」：先驱散目标1个增益，再施加「可爆火种」并附加1层可燃。「可爆火种」全场唯一。",
+      "rawText": "对指定敌方单体造成100%攻击力火属性伤害；获得1发火种（上限3）和2架无人机（上限5）。若目标未持有「可爆火种」：先驱散目标1个增益，再施加「可爆火种」并附加1层可燃。「可爆火种」全场唯一。",
+      "optimization": {
+        "source": "优化稿/瓦列里娅-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "resonance": {
+      "id": "skill-douzheng-biaoji",
+      "kind": "resonance",
+      "name": "斗争标记",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "resonance",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 1,
+        "stack": "火种",
+        "stackAmount": 1,
+        "freeWhen": "stackAtLeast:意志:5"
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 0
+      },
+      "onCast": [
+        {
+          "_note": "「意志」满 5 层的那一次：不消耗火种（cost.freeWhen），并额外获得 2 架无人机，随后清空意志。",
+          "type": "conditional",
+          "condition": "stackAtLeast:意志:5",
+          "then": [
+            {
+              "type": "gainStack",
+              "stack": "无人机",
+              "amount": 2,
+              "cap": 5,
+              "target": "self"
+            },
+            {
+              "type": "spendStack",
+              "stack": "意志",
+              "amount": 5,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "hits": [
+        {
+          "multiplier": 2.2,
+          "target": "main",
+          "element": "fire",
+          "accumulateAnomaly": true,
+          "onHit": [
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-strife-mark",
+              "stacks": 1,
+              "duration": 2,
+              "target": "mainTarget",
+              "stackCounter": "perAttack"
+            }
+          ]
+        }
+      ],
+      "description": "消耗1发火种（0发不可放；若「意志」满5层，这一次不消耗火种，并额外获得2架无人机、清空意志）。对指定敌方单体造成220%攻击力火属性伤害，施加「斗争标记」。⚠️「斗争标记」持续3自然回合，或累计被协同攻击5次，先到者消失（每次无人机协同出手计1次；标记期间天赋②⑥ 恒为成立状态）。队友攻击被标记的敌人时，消耗1架无人机进行一次协同攻击，并返还1发火种（上限3）；每次队友攻击都触发，没有每回合上限。她自己攻击持有「斗争标记」的敌人时，同样触发协同攻击，但无人机消耗与伤害按50%结算。",
+      "rawText": "消耗1发火种（0发不可放；若「意志」满5层，这一次不消耗火种，并额外获得2架无人机、清空意志）。对指定敌方单体造成220%攻击力火属性伤害，施加「斗争标记」。⚠️「斗争标记」持续3自然回合，或累计被协同攻击5次，先到者消失（每次无人机协同出手计1次；标记期间天赋②⑥ 恒为成立状态）。队友攻击被标记的敌人时，消耗1架无人机进行一次协同攻击，并返还1发火种（上限3）；每次队友攻击都触发，没有每回合上限。她自己攻击持有「斗争标记」的敌人时，同样触发协同攻击，但无人机消耗与伤害按50%结算。",
+      "optimization": {
+        "source": "优化稿/瓦列里娅-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "ultimate": {
+      "id": "skill-chichao-xinghuo",
+      "kind": "ultimate",
+      "name": "赤潮涌动·星火燎原",
+      "targetType": "self",
+      "scalingBase": "atk",
+      "scalingArray": "ultimate",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0,
+        "requires": "stackAtLeast:火种:1",
+        "oncePerRound": true
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 0
+      },
+      "onCast": [
+        {
+          "_note": "三档**互斥**：≥3 先判、然后恰好 2、恰好 1。消耗写在分支里而不是写 cost.stack —— 因为 cost 在 onCast **之前**扣，扣完再看火种就永远是 0 了。",
+          "type": "conditional",
+          "condition": "stackAtLeast:火种:3",
+          "then": [
+            {
+              "type": "applyBuff",
+              "buffId": "buff-prairie-fire-3",
+              "stacks": 1,
+              "duration": 3,
+              "target": "self"
+            },
+            {
+              "type": "applyBuff",
+              "buffId": "buff-prairie-banner-20",
+              "stacks": 1,
+              "duration": 3,
+              "target": "partyAll"
+            },
+            {
+              "type": "spendStack",
+              "stack": "火种",
+              "amount": 3,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "type": "conditional",
+          "condition": "stackExactly:火种:2",
+          "then": [
+            {
+              "type": "applyBuff",
+              "buffId": "buff-prairie-fire-2",
+              "stacks": 1,
+              "duration": 3,
+              "target": "self"
+            },
+            {
+              "type": "applyBuff",
+              "buffId": "buff-prairie-banner-10",
+              "stacks": 1,
+              "duration": 3,
+              "target": "partyAll"
+            },
+            {
+              "type": "spendStack",
+              "stack": "火种",
+              "amount": 2,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "type": "conditional",
+          "condition": "stackExactly:火种:1",
+          "then": [
+            {
+              "type": "applyBuff",
+              "buffId": "buff-prairie-fire-1",
+              "stacks": 1,
+              "duration": 2,
+              "target": "self"
+            },
+            {
+              "type": "spendStack",
+              "stack": "火种",
+              "amount": 1,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "description": "消耗火种（≥1才可放，至多消耗3火种）；无能量。三档互斥：1发火种→「燎原」持续2自然回合，无人机伤害+30%，无人机额外可燃+1层；2发火种→持续3自然回合，无人机伤害+50%，无人机额外可燃+1层，全队火伤+20%（「燎原·军旗」）；3发火种→持续3自然回合，无人机伤害+75%，无人机额外可燃+2层，全队火伤+45%（「燎原·军旗」）。「燎原」期间无人机攻击不消耗无人机。",
+      "rawText": "消耗火种（≥1才可放，至多消耗3火种）；无能量。三档互斥：1发火种→「燎原」持续2自然回合，无人机伤害+30%，无人机额外可燃+1层；2发火种→持续3自然回合，无人机伤害+50%，无人机额外可燃+1层，全队火伤+20%（「燎原·军旗」）；3发火种→持续3自然回合，无人机伤害+75%，无人机额外可燃+2层，全队火伤+45%（「燎原·军旗」）。「燎原」期间无人机攻击不消耗无人机。",
+      "optimization": {
+        "source": "优化稿/瓦列里娅-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "talent": {
+      "id": "skill-bingyuan-bumie",
+      "kind": "talent",
+      "name": "冰原不灭的意志",
+      "scalingArray": "none",
+      "triggers": [
+        {
+          "_note": "① 未标记任何目标 ⇒ 行动结束 +1 无人机。",
+          "hook": "onTurnEnd",
+          "scope": "self",
+          "condition": "noEnemyHasStatus:斗争标记",
+          "effects": [
+            {
+              "type": "gainStack",
+              "stack": "无人机",
+              "amount": 1,
+              "cap": 5,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "_note": "② 队友攻击被「斗争标记」的敌人 ⇒ 消耗 1 架无人机协同攻击一次。**每次队友攻击都触发**（作者裁决），没有每回合上限；`allyOther` 把「她自己」排除在外。",
+          "hook": "onAttack",
+          "scope": "allyOther",
+          "condition": "targetStatusAtLeast:斗争标记:1",
+          "effects": [
+            {
+              "_note": "燎原期间不消耗无人机 —— 用 `notStatus:燎原` 包住消耗，而不是把消耗删掉。",
+              "type": "conditional",
+              "condition": "notStatus:燎原",
+              "then": [
+                {
+                  "type": "spendStack",
+                  "stack": "无人机",
+                  "amount": 1,
+                  "target": "self"
+                },
+                {
+                  "type": "gainStack",
+                  "stack": "意志",
+                  "amount": 1,
+                  "cap": 5,
+                  "target": "self"
+                },
+                {
+                  "_note": "权阶Ⅳ「赤潮的意志」：每消耗 1 架无人机，全队火属性伤害 +3%（2 回合，最多 3 层）。闸门读 `dmgBonusFire`；状态本身可叠 3 层。",
+                  "type": "conditional",
+                  "condition": "knobAtLeast:dmgBonusFire:0.001",
+                  "then": [
+                    {
+                      "type": "applyBuff",
+                      "buffId": "buff-red-tide-will",
+                      "stacks": 1,
+                      "duration": 2,
+                      "target": "partyAll",
+                      "stackCounter": "perAttack"
+                    }
+                  ]
+                },
+                {
+                  "_note": "权阶Ⅵ「燎原的黎明」：协同攻击消耗无人机时 50% 返还 1 架。概率从 `droneRefundChance` 旋钮读，不在数据里抄第二遍。",
+                  "type": "conditional",
+                  "condition": "knobAtLeast:droneRefundChance:0.01",
+                  "then": [
+                    {
+                      "type": "chanceCheck",
+                      "chanceKnob": "droneRefundChance",
+                      "onSuccess": [
+                        {
+                          "type": "gainStack",
+                          "stack": "无人机",
+                          "amount": 1,
+                          "cap": 6,
+                          "target": "self"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "additionalDamage",
+              "element": "fire",
+              "multiplier": 0.6,
+              "target": "mainTarget",
+              "knob": "droneDamageBonus",
+              "accumulateAnomaly": true,
+              "canCrit": true
+            },
+            {
+              "_note": "「不灭的意志」：生命低于 30% 时无人机伤害 +30%。写成 0.60 × 30% = 0.18 的**追加段**而不是改倍率 —— 0.60 + 0.18 = 0.78 = 0.60 × 1.30，等价，且不需要新钩子。",
+              "type": "conditional",
+              "condition": "hpBelow:0.30",
+              "then": [
+                {
+                  "type": "additionalDamage",
+                  "element": "fire",
+                  "multiplier": 0.18,
+                  "target": "mainTarget",
+                  "knob": "droneDamageBonus",
+                  "accumulateAnomaly": true,
+                  "canCrit": true
+                }
+              ]
+            },
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-panic",
+              "stacks": 1,
+              "duration": 2,
+              "target": "mainTarget",
+              "stackCounter": "perAttack"
+            },
+            {
+              "_note": "权阶Ⅳ「辉光校准」：惊慌的减防 −20% → −25%。多出来的 −5% 走一条独立的 defPct（Pct 相加），0 权阶不会出现（闸门读 EidolonKnobs）。",
+              "type": "conditional",
+              "condition": "knobAtLeast:panicDefDown:0.01",
+              "then": [
+                {
+                  "type": "modifyStat",
+                  "stat": "defPct",
+                  "value": -0.05,
+                  "target": "mainTarget",
+                  "duration": 2
+                }
+              ]
+            },
+            {
+              "type": "applyAnomalyStack",
+              "element": "fire",
+              "stacks": 1,
+              "extraStacksKnob": "droneExtraCombust",
+              "chance": 1,
+              "target": "mainTarget",
+              "stackCounter": "perHit"
+            },
+            {
+              "type": "conditional",
+              "condition": "targetStatusAtLeast:可爆火种:1",
+              "then": [
+                {
+                  "type": "applyDebuff",
+                  "debuffId": "debuff-explosive-kindling",
+                  "stacks": 1,
+                  "target": "mainTarget",
+                  "stackCounter": "perAttack"
+                }
+              ]
+            },
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-drone-watch",
+              "stacks": 1,
+              "duration": 2,
+              "target": "mainTarget",
+              "stackCounter": "perAttack"
+            }
+          ]
+        },
+        {
+          "_note": "③ 无人机锁定攒到 3 ⇒ 担惊受怕（行动延后 30% + 防御 −30%），随后计数清零。事件行动者是**被叠层的那一方**，所以条件读 actorStatusAtLeast。",
+          "hook": "onStackReach",
+          "scope": "self",
+          "condition": "actorStatusAtLeast:无人机锁定:3",
+          "effects": [
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-frightened",
+              "stacks": 1,
+              "duration": 2,
+              "target": "mainTarget",
+              "stackCounter": "perAttack"
+            },
+            {
+              "type": "delayAction",
+              "amount": 0.3,
+              "target": "mainTarget"
+            },
+            {
+              "type": "decayStatus",
+              "statusId": "debuff-drone-watch",
+              "amount": 3,
+              "target": "mainTarget"
+            }
+          ]
+        },
+        {
+          "_note": "④ 权阶Ⅱ 解锁的**引爆**：队友攻击持有「可爆火种」的敌人时引爆，每层 30% 攻击力火伤并施加 1 层可燃。闸门读 `EidolonKnobs.explosiveKindlingDetonate` ⇒ 0/Ⅰ 权阶只挂火种不引爆，Ⅱ 权阶起才引爆（`100` #153/#157）。",
+          "hook": "onAttack",
+          "scope": "allyOther",
+          "condition": "targetStatusAtLeast:可爆火种:1 AND knobAtLeast:explosiveKindlingDetonate:1",
+          "oncePerTurn": 1,
+          "effects": [
+            {
+              "type": "conditional",
+              "condition": "targetStatusAtLeast:可爆火种:1",
+              "then": [
+                {
+                  "type": "additionalDamage",
+                  "element": "fire",
+                  "multiplier": 0.3,
+                  "perTargetStatus": "可爆火种",
+                  "target": "mainTarget",
+                  "accumulateAnomaly": true
+                }
+              ]
+            },
+            {
+              "type": "applyAnomalyStack",
+              "element": "fire",
+              "stacks": 1,
+              "chance": 1,
+              "target": "mainTarget",
+              "stackCounter": "perAttack"
+            },
+            {
+              "type": "decayStatus",
+              "statusId": "debuff-explosive-kindling",
+              "amount": 3,
+              "target": "mainTarget"
+            }
+          ]
+        },
+        {
+          "_note": "⑤「辉光管的节拍」：无人机 ≥3 时她暴击率 +10%。用 1 自然回合时长的增益表达「当前是否满足」，每次无人机数量变化时重算。",
+          "hook": "onStackReach",
+          "scope": "self",
+          "condition": "stackAtLeast:无人机:3",
+          "effects": [
+            {
+              "type": "modifyStat",
+              "stat": "critRate",
+              "value": 0.1,
+              "target": "self",
+              "duration": 1
+            }
+          ]
+        },
+        {
+          "_note": "⑥ 权阶Ⅱ「辉光管的誓言」后半句：天赋①从「未标记时 +1」改为「**每回合必定** +1」。写法是**只在有标记时补一条**，与①互补；两条不会在未标记时叠成 +2。",
+          "hook": "onTurnEnd",
+          "scope": "self",
+          "condition": "enemyHasStatus:斗争标记 AND knobAtLeast:explosiveKindlingDetonate:1",
+          "effects": [
+            {
+              "type": "gainStack",
+              "stack": "无人机",
+              "amount": 1,
+              "cap": 5,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "description": "共6条触发：①onTurnEnd：场上没有敌人持有「斗争标记」→获得1架无人机；②onAttack：别的队友攻击持有「斗争标记」的敌人→实际消耗1架无人机→获得1层「意志」；无人机协同攻击一次，并返还1发火种（上限3）；每消耗1架无人机，自身获得1层「冰原护盾」（上限3层，每层吸收12%生命上限，持续2自然回合，获得新层时刷新全部层数持续时间）；③onStackReach：目标「无人机锁定」≥3→施加「担惊受怕」2回合；行动延后30%；「无人机锁定」−3；④onAttack：队友攻击持有「可爆火种」的敌人且权阶≥Ⅱ→引爆「可爆火种」：每层30%攻击力火伤；+1层可燃；层数清零（每单位回合1次）；⑤onStackReach：自身「无人机」≥3→暴击率+10%，1自然回合；⑥onTurnEnd：有敌人持有「斗争标记」且权阶≥Ⅱ→获得1架无人机（与①互补，合起来=每回合必定+1）；⑦onTurnStart：场上存在持有「斗争标记」的敌人→自身获得1层「冰原护盾」（保底来源，不依赖无人机消耗）。无人机攻击：60%攻击力火属性附加伤害；她生命<30%时追加0.18（合计0.78）；施加「惊慌」（防御−20%，2回合）；+1层可燃；若目标持有「可爆火种」则为其+1层（上限3）；对目标叠1层「无人机锁定」（2回合）；3层→「担惊受怕」（行动延后30%、防御−30%，2回合）。",
+      "rawText": "共6条触发：①onTurnEnd：场上没有敌人持有「斗争标记」→获得1架无人机；②onAttack：别的队友攻击持有「斗争标记」的敌人→实际消耗1架无人机→获得1层「意志」；无人机协同攻击一次，并返还1发火种（上限3）；每消耗1架无人机，自身获得1层「冰原护盾」（上限3层，每层吸收12%生命上限，持续2自然回合，获得新层时刷新全部层数持续时间）；③onStackReach：目标「无人机锁定」≥3→施加「担惊受怕」2回合；行动延后30%；「无人机锁定」−3；④onAttack：队友攻击持有「可爆火种」的敌人且权阶≥Ⅱ→引爆「可爆火种」：每层30%攻击力火伤；+1层可燃；层数清零（每单位回合1次）；⑤onStackReach：自身「无人机」≥3→暴击率+10%，1自然回合；⑥onTurnEnd：有敌人持有「斗争标记」且权阶≥Ⅱ→获得1架无人机（与①互补，合起来=每回合必定+1）；⑦onTurnStart：场上存在持有「斗争标记」的敌人→自身获得1层「冰原护盾」（保底来源，不依赖无人机消耗）。无人机攻击：60%攻击力火属性附加伤害；她生命<30%时追加0.18（合计0.78）；施加「惊慌」（防御−20%，2回合）；+1层可燃；若目标持有「可爆火种」则为其+1层（上限3）；对目标叠1层「无人机锁定」（2回合）；3层→「担惊受怕」（行动延后30%、防御−30%，2回合）。",
+      "optimization": {
+        "source": "优化稿/瓦列里娅-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      },
+      "cost": {
+        "energy": 0
+      },
+      "gain": {
+        "energy": 0
+      },
+      "targetType": "partyAll",
+      "scalingBase": "hp"
+    },
+    "optimized_enhanced_resonance_5": {
+      "id": "skill-char-valeria-optimized_enhanced_resonance_5",
+      "kind": "enhanced_resonance",
+      "name": "斗争标记·燎原",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "hits": [
+        {
+          "multiplier": 3,
+          "target": "main",
+          "element": "fire"
+        }
+      ],
+      "description": "权阶Ⅵ 解锁的强化元素共鸣。消耗1发火种，对持有「斗争标记」的敌方单体造成300%攻击力火属性伤害，并立即触发一次协同攻击（本次协同不消耗无人机、不占用队友攻击次数，且不推进「斗争标记」的协同次数）。若目标未持有「斗争标记」，则改为施加「斗争标记」并造成220%攻击力火属性伤害。",
+      "rawText": "权阶Ⅵ 解锁的强化元素共鸣。消耗1发火种，对持有「斗争标记」的敌方单体造成300%攻击力火属性伤害，并立即触发一次协同攻击（本次协同不消耗无人机、不占用队友攻击次数，且不推进「斗争标记」的协同次数）。若目标未持有「斗争标记」，则改为施加「斗争标记」并造成220%攻击力火属性伤害。",
+      "optimization": {
+        "source": "优化稿/瓦列里娅-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "optimized_inherent1_6": {
+      "id": "skill-char-valeria-optimized_inherent1_6",
+      "kind": "inherent1",
+      "name": "辉光管的节拍",
+      "targetType": "partyAll",
+      "scalingBase": "atk",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "hits": [],
+      "description": "「无人机」数量≥3时，她的暴击率+10%。",
+      "rawText": "「无人机」数量≥3时，她的暴击率+10%。",
+      "optimization": {
+        "source": "优化稿/瓦列里娅-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "optimized_inherent2_7": {
+      "id": "skill-char-valeria-optimized_inherent2_7",
+      "kind": "inherent2",
+      "name": "不灭的意志",
+      "targetType": "partyAll",
+      "scalingBase": "hp",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "hits": [],
+      "description": "生命值低于30%时，所有「无人机」攻击伤害+30%。生命值低于50%时，自身受到的伤害−20%。",
+      "rawText": "生命值低于30%时，所有「无人机」攻击伤害+30%。生命值低于50%时，自身受到的伤害−20%。",
+      "optimization": {
+        "source": "优化稿/瓦列里娅-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    }
+  },
+  "eidolons": [
+    {
+      "rank": 1,
+      "name": "冰原的星火",
+      "_note": "「开局 3 架」写成战斗开始时的 gainStack（cap 6 与 droneCap +1 对齐），不再需要 `droneStart` 这个只存不读的旋钮。",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "droneCap",
+          "value": 1
+        },
+        {
+          "type": "gainStack",
+          "stack": "无人机",
+          "amount": 3,
+          "cap": 6
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "辉光管的誓言",
+      "_note": "解锁「可爆火种」的**引爆**（由 `knobAtLeast:explosiveKindlingDetonate` 读）；同时把天赋①改为「每回合必定 +1 无人机」（天赋⑥，只在有标记时补一条，与①互补）。",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "explosiveKindlingDetonate",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "辉光校准",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 12
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "赤潮的意志",
+      "_note": "两个旋钮都只是**闸门**：`panicDefDown` 打开「惊慌额外 −5%」（天赋里的 modifyStat），`dmgBonusFire` 打开「每消耗 1 架无人机 → 全队火伤 +3%」（天赋里挂 buff-red-tide-will）。",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "panicDefDown",
+          "value": 0.05
+        },
+        {
+          "type": "modifyStat",
+          "stat": "dmgBonusFire",
+          "value": 0.03,
+          "cap": 3,
+          "duration": 2
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "燎原将起",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 14
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "name": "燎原的黎明",
+      "_note": "`droneRefundChance` 由 `chanceCheck.chanceKnob` 读取（50% 返还），`droneExtraCombust` 由无人机攻击的 `extraStacksKnob` 读取（与燎原的 1/1/2 层相加）。",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "droneRefundChance",
+          "value": 0.5
+        },
+        {
+          "type": "modifyStat",
+          "stat": "droneExtraCombust",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "signatureWeapon": "weap-liaoyuanlu",
+  "gearSet": "gear-bingyuan-fenghuo",
+  "lore": {
+    "quote": "整片冰原都是我的眼睛，你们只管往前。",
+    "narrativeSkills": [
+      "冰原星火"
+    ],
+    "secrets": [],
+    "speechStyle": "话不多、句子短；下命令时不用问句；被叫「吉祥物」会沉默两秒然后换个话题",
+    "relationships": {}
+  }
+}

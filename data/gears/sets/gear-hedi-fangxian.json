@@ -1,0 +1,23 @@
+{
+  "id": "gear-hedi-fangxian",
+  "name": "河堤防线",
+  "rarity": 5,
+  "_note": "罗兰达专属套装。2/4 件逐字取自 `罗兰达-角色档案.md`。",
+  "tiers": [
+    {
+      "pieces": 2,
+      "description": "装备者的生命上限提高 12%",
+      "effects": [
+        { "type": "modifyStat", "stat": "hpPct", "value": 0.12, "target": "self" }
+      ]
+    },
+    {
+      "pieces": 4,
+      "description": "装备者反击造成的伤害提高 25%",
+      "effects": [
+        { "type": "modifyStat", "stat": "counterDamageBonus", "value": 0.25, "target": "self" }
+      ]
+    }
+  ],
+  "description": "罗兰达 · 生存/反击向；4 件套的反击加伤与权阶Ⅱ 的 `counterDamageBonus` 同一条旋钮。"
+}

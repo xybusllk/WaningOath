@@ -1,0 +1,21 @@
+{
+  "id": "buff-rolanda-guard-buff",
+  "name": "黑林急救·全军鼓舞",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 0,
+  "mods": [],
+  "elemMods": [
+    { "kind": "DmgAmp", "element": "Physical", "op": "Add", "value": 0.10, "source": "急救注射剂触发：全伤害 +10%" },
+    { "kind": "DmgAmp", "element": "Ice", "op": "Add", "value": 0.10, "source": "急救注射剂触发：全伤害 +10%" },
+    { "kind": "DmgAmp", "element": "Fire", "op": "Add", "value": 0.10, "source": "急救注射剂触发：全伤害 +10%" },
+    { "kind": "DmgAmp", "element": "Lightning", "op": "Add", "value": 0.10, "source": "急救注射剂触发：全伤害 +10%" },
+    { "kind": "DmgAmp", "element": "Wind", "op": "Add", "value": 0.10, "source": "急救注射剂触发：全伤害 +10%" },
+    { "kind": "DmgAmp", "element": "Resonance", "op": "Add", "value": 0.10, "source": "急救注射剂触发：全伤害 +10%" }
+  ],
+  "description": "黑林特制急救注射剂触发后，全队获得 10% 全伤害提高（本场持续）。",
+  "note": "DmgAmp 同时进增伤区与穿透区，符合“全伤害提高”的稀有乘区口径。",
+  "exclusiveTo": []
+}

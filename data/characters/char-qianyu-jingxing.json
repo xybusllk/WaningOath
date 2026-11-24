@@ -1,0 +1,399 @@
+{
+  "id": "char-qianyu-jingxing",
+  "name": "千语镜星",
+  "title": "镜中设施总监",
+  "rarity": 4,
+  "element": "resonance",
+  "path": "support",
+  "anchorRow": "frailSupport",
+  "weaponType": "dao",
+  "faction": [
+    "CCRF"
+  ],
+  "birthday": "06-17",
+  "genderVariant": false,
+  "_comment": "07 §5（唯一权威）。全作第一位 4★；面板走 tiers.json 的 frailSupport（脆皮辅助 4星）行，突破按辅助档 生命 +3.5% / 能量恢复效率 +3.5% × 4。镜印有两套载体：千语镜星自己用资源计数（gainStack「镜印」，cap 6，供终结技按层结算），三位星遥形态各拿一份 buff-mirror-mark（同名独立、各 cap 6，用 exclusiveTo 锁定）。⚠️ 未落数据的条款：①「队伍中有星遥三形态时元素共鸣免消耗共鸣指数」——条件表没有『队伍构成』谓词，暂按正常 −1 落盘（不发明未登记条件）；② 静止镜像的『被摧毁 / 到期』两个分支（320% 爆炸、复制增益、一号位立即行动、到期回自身血）与终结技的『镜面之刃』——需要新的钩子上下文（最后一击来源 / onExpire 效果）或新原子，且 path=support 被校验 18 禁止携带 heal 原子，留待 M2；③ 天赋③ 的『每一位星遥各一份』由 applyBuff × partyAll + 状态 exclusiveTo 实现。④ 权阶Ⅵ 的 +300 攻击按作者裁决保留并标 M2（104 庚7）。",
+  "base": {
+    "atk": 240,
+    "hp": 2600,
+    "def": 100,
+    "speed": 102,
+    "critRate": 0.05,
+    "critDmg": 1.5,
+    "energyMax": 110,
+    "energyOverflowCap": 20,
+    "threat": 50
+  },
+  "growth": {
+    "panelGrowth": 1.01,
+    "breakthroughBonus": {
+      "hpPct": 0.035,
+      "energyRegen": 0.035
+    }
+  },
+  "skills": {
+    "basic": {
+      "id": "skill-jingmian-gongzhen",
+      "kind": "basic",
+      "name": "镜面共振",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "basic",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "resonanceIndex": 1,
+        "energy": 30
+      },
+      "onCast": [
+        {
+          "type": "gainStack",
+          "stack": "镜印",
+          "amount": 1,
+          "cap": 6,
+          "target": "self"
+        },
+        {
+          "type": "applyBuff",
+          "buffId": "buff-mirror-mark",
+          "stacks": 1,
+          "duration": 0,
+          "target": "partyAll",
+          "_note": "天赋③ 层数共享：她获得的镜印同步给队内每一位星遥形态（各一份独立、各上限 6）。非星遥队友由 buff-mirror-mark 的 exclusiveTo 在 ApplyStatus 里跳过。"
+        }
+      ],
+      "hits": [
+        {
+          "multiplier": 0.1,
+          "target": "main",
+          "element": "resonance"
+        }
+      ],
+      "description": "造成10%攻击力的共振属性伤害；命中时获得1层「镜印」（上限6）；回复10点能量；+1共鸣指数。",
+      "rawText": "造成10%攻击力的共振属性伤害；命中时获得1层「镜印」（上限6）；回复10点能量；+1共鸣指数。",
+      "optimization": {
+        "source": "优化稿/千语镜星-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "resonance": {
+      "id": "skill-xiangwei-jingxiang",
+      "kind": "resonance",
+      "name": "相位镜像",
+      "targetType": "self",
+      "scalingBase": "hp",
+      "scalingArray": "resonance",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 1
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 35
+      },
+      "onCast": [
+        {
+          "type": "cleanse",
+          "types": [
+            "all"
+          ],
+          "count": 1,
+          "random": true,
+          "target": "self"
+        },
+        {
+          "type": "gainStack",
+          "stack": "镜印",
+          "amount": 1,
+          "cap": 6,
+          "target": "self"
+        },
+        {
+          "type": "applyBuff",
+          "buffId": "buff-mirror-mark",
+          "stacks": 1,
+          "duration": 0,
+          "target": "partyAll"
+        },
+        {
+          "type": "summon",
+          "summonId": "summon-static-mirror",
+          "duration": 1,
+          "hpPctOfCaster": 0.5,
+          "hpBase": "current",
+          "threatBonus": 20,
+          "tickSource": "source",
+          "target": "self",
+          "_note": "07 的『持续 1 回合、按生成者行动次数计时』由技能级 duration 覆盖 summon-static-mirror.json 里的 duration 3（该文件按指示不改）。生命取她当前生命的 50%，仇恨 +20。"
+        },
+        {
+          "type": "applyBuff",
+          "buffId": "buff-mirror-phase",
+          "stacks": 1,
+          "duration": 1,
+          "target": "self"
+        }
+      ],
+      "description": "清除自身1个随机负面状态；获得1层「镜印」；在原地留下一个持续1回合的「静止镜像」（召唤物，继承50%当前生命，仇恨+20，无法攻击）；本体获得90%伤害减免；+20能量；-1共鸣指数（若队伍中有千语星遥任一形态则免除）。镜像被摧毁时：对最后一击敌人造成320%攻击力共振伤害，复制最近被伤害敌人1个随机增益以50%强度赋予自身和一号位2回合，并使一号位立即行动。镜像自然消失时：为自身回复等同于镜像剩余生命值的生命。",
+      "rawText": "清除自身1个随机负面状态；获得1层「镜印」；在原地留下一个持续1回合的「静止镜像」（召唤物，继承50%当前生命，仇恨+20，无法攻击）；本体获得90%伤害减免；+20能量；-1共鸣指数（若队伍中有千语星遥任一形态则免除）。镜像被摧毁时：对最后一击敌人造成320%攻击力共振伤害，复制最近被伤害敌人1个随机增益以50%强度赋予自身和一号位2回合，并使一号位立即行动。镜像自然消失时：为自身回复等同于镜像剩余生命值的生命。",
+      "optimization": {
+        "source": "优化稿/千语镜星-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "talent": {
+      "id": "skill-juedui-tongbu",
+      "kind": "talent",
+      "name": "绝对同步率",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "triggers": [
+        {
+          "hook": "onTurnStart",
+          "scope": "self",
+          "oncePerBattle": 1,
+          "effects": [
+            {
+              "type": "changeResonanceCap",
+              "delta": 2,
+              "_note": "天赋①：千语镜星在场时全队共鸣指数上限 +2（5→7；权阶Ⅱ 再 +1 →8）。当前引擎的 onBattleStart 派发不带 actor（scope 全部匹配失败），故挂自身首个回合开始、每场一次；语义仍是『在场时』。"
+            }
+          ]
+        },
+        {
+          "hook": "onAttack",
+          "scope": "allyOther",
+          "condition": "actorStatusAtLeast:镜印:1",
+          "effects": [
+            {
+              "type": "additionalDamage",
+              "element": "resonance",
+              "multiplier": 0.3,
+              "perStack": "镜印",
+              "scalingBase": "atk",
+              "target": "mainTarget",
+              "canCrit": true,
+              "accumulateAnomaly": false,
+              "ignoreAdditionalDamage": true,
+              "exclusiveTo": [
+                "char-qianyu-xingyao",
+                "char-xingyao-star-oath",
+                "char-xingyao-darknight"
+              ],
+              "_note": "天赋④ 专拐：星遥形态每有 1 层镜印，其冰属性 / 元素绽放伤害追加她攻击力 ×30%（权阶Ⅳ 提高为 50%/层）。条件表没有『冰属性 / 绽放伤害』谓词，暂按持镜印的星遥形态的任意攻击近似（靠 exclusiveTo + actorStatusAtLeast:镜印:1 门控）。层数读她自己的「镜印」资源——与星遥身上的同名 buff 同步增长，但她的终结技只清自己的层数，清空后两者会分叉（待 M2 / 引擎支持读友方状态层数）。不视为追加攻击（不触发 onFollowUp）、不积蓄共振异常。"
+            }
+          ]
+        }
+      ],
+      "description": "全队共鸣指数上限+2；队伍中有千语星遥任一形态时，元素共鸣不消耗共鸣指数；自身获得的「镜印」同步共享给星遥形态（各独立上限6层）；星遥形态每层「镜印」使其冰属性或元素绽放伤害追加千语镜星攻击力30%的共振附加伤害（不视为追加攻击，不积蓄共振异常）。",
+      "rawText": "全队共鸣指数上限+2；队伍中有千语星遥任一形态时，元素共鸣不消耗共鸣指数；自身获得的「镜印」同步共享给星遥形态（各独立上限6层）；星遥形态每层「镜印」使其冰属性或元素绽放伤害追加千语镜星攻击力30%的共振附加伤害（不视为追加攻击，不积蓄共振异常）。",
+      "optimization": {
+        "source": "优化稿/千语镜星-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      },
+      "cost": {
+        "energy": 0
+      },
+      "gain": {
+        "energy": 0
+      },
+      "targetType": "partyAll"
+    },
+    "ultimate": {
+      "id": "skill-qianjing-guiyi",
+      "kind": "ultimate",
+      "name": "千镜归一",
+      "targetType": "aoe",
+      "scalingBase": "atk",
+      "scalingArray": "ultimate",
+      "cost": {
+        "energy": 110
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 0
+      },
+      "onCast": [
+        {
+          "type": "conditional",
+          "condition": "stackAtLeast:镜印:1",
+          "then": [
+            {
+              "type": "additionalDamage",
+              "element": "resonance",
+              "multiplier": 0.05,
+              "perStack": "镜印",
+              "scalingBase": "atk",
+              "target": "allEnemies",
+              "countsAsUltimateDamage": true,
+              "accumulateAnomaly": false,
+              "canCrit": true,
+              "_note": "380% + 5%×N 的『5%/层』部分（N = 释放瞬间的镜印层数）。用 conditional 排除 0 层（additionalDamage 的 perStack 会 Math.Max(1,N) 把 0 层兜成 1 层）。effect 层不吃技能等级曲线（只有 hits 吃 LevelMult）——M2 若要严格同倍率需并入终结技 hits。"
+            }
+          ]
+        },
+        {
+          "type": "spendStack",
+          "stack": "镜印",
+          "amount": 99,
+          "target": "self",
+          "_note": "消耗当前全部镜印（cap 6；套装 4 件后 7）。amount 99 = 清空；须排在 +5%/层 结算之后。"
+        }
+      ],
+      "hits": [
+        {
+          "multiplier": 3.8,
+          "target": "all",
+          "element": "resonance"
+        }
+      ],
+      "description": "消耗当前全部「镜印」层数N；对敌方全体造成380%+5%×N攻击力的共振属性伤害；生成N把「镜面之刃」，持续3回合。镜面之刃：普攻/元素共鸣/队友元素共鸣/队友终结技时发射，对目标造成80%攻击力共振伤害（视为终结技伤害），+5能量。",
+      "rawText": "消耗当前全部「镜印」层数N；对敌方全体造成380%+5%×N攻击力的共振属性伤害；生成N把「镜面之刃」，持续3回合。镜面之刃：普攻/元素共鸣/队友元素共鸣/队友终结技时发射，对目标造成80%攻击力共振伤害（视为终结技伤害），+5能量。",
+      "optimization": {
+        "source": "优化稿/千语镜星-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    }
+  },
+  "eidolons": [
+    {
+      "rank": 1,
+      "name": "晨镜映你",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "basicEnergyGain",
+          "value": 5,
+          "_note": "普攻能量 10→15"
+        },
+        {
+          "type": "modifyStat",
+          "stat": "resonanceEnergyGain",
+          "value": 5,
+          "_note": "元素共鸣能量 20→25"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "同调映影",
+      "effects": [
+        {
+          "type": "changeResonanceCap",
+          "delta": 1,
+          "_note": "天赋① 的增量 +2 → +3（5→8）；与天赋的 +2 合计 +3"
+        }
+      ],
+      "triggers": [
+        {
+          "hook": "onSummonDestroyed",
+          "scope": "self",
+          "effects": [
+            {
+              "type": "gainResonance",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "hook": "onSummonExpired",
+          "scope": "self",
+          "effects": [
+            {
+              "type": "gainResonance",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "档案描容",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 1,
+          "cap": 11
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "誓影同心",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "mirrorEchoPct",
+          "value": 0.5,
+          "_note": "天赋④ 的附加伤害倍率 30% → 50% / 层。按『提高为』理解为 set（30→50），不是 +20%。引擎实现点待 M2 —— 当前 additionalDamage 的 multiplier 0.30 是 0 权阶值。"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "镜海深耕",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 1,
+          "cap": 12
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "name": "我为君影",
+      "triggers": [
+        {
+          "hook": "onUltimateCast",
+          "scope": "self",
+          "effects": [
+            {
+              "type": "modifyStat",
+              "stat": "critRate",
+              "value": 0.2,
+              "target": "self",
+              "duration": 2,
+              "_note": "07 只给『终结技释放后自身暴击率 +20%』、未写持续；按同句 +300 攻击的 2 回合取，待作者确认 / M2。"
+            },
+            {
+              "type": "modifyStat",
+              "stat": "atk",
+              "value": 300,
+              "target": "partyAll",
+              "duration": 2,
+              "_note": "07 §5.3 权阶Ⅵ：终结技额外使我方全体攻击力 +300 点，持续 2 回合。作者裁决保留，标待 M2 实测（104 庚7）；+300 对 3,000 攻击 ≈ +10%。"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "signatureWeapon": "weap-mingjing-jianxin",
+  "gearSet": "gear-jingmian-liuying",
+  "lore": {
+    "quote": "你照哪儿，我就映哪儿——所以别怕，我一直都在。",
+    "narrativeSkills": [
+      "镜像同调"
+    ],
+    "secrets": [
+      "CCRF 名义上的设施总监，无需权限等级；实际是千语星遥的小跟班",
+      "原收容分级：裂变级–P–A（『原』= 收容已撤销）",
+      "生日 06-17 是被千语星遥感化转正之日，她把这一天当作自己的生日",
+      "原始外貌未知（镜像同调只能用一次，且已对星遥使用）"
+    ],
+    "speechStyle": "对外是执照齐全的设施总监腔，对内立刻变成黏人的跟屁虫；句子短、爱用『我映着你』这类镜子比喻",
+    "relationships": {
+      "千语星遥": "她外貌的来源；实际是她的小跟班。三人的同貌真相在主线内不得解释",
+      "千语星遥·群星誓约": "同貌；真相在主线内不得解释",
+      "千语星遥·至暗长夜": "同貌；真相在主线内不得解释"
+    }
+  }
+}

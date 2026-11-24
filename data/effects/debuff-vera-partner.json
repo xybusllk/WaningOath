@@ -1,0 +1,16 @@
+{
+  "id": "debuff-vera-partner",
+  "name": "伙伴，果真如此？",
+  "kind": "debuff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 3,
+  "mods": [
+    { "kind": "Atk", "op": "Pct", "value": -0.20, "source": "伙伴，果真如此？：对薇拉的伤害降低 20%（近似为攻击 −20%）" }
+  ],
+  "elemMods": [],
+  "description": "被薇拉普攻标记的目标，对薇拉造成的伤害降低 20%，持续 3 回合；若该目标击中薇拉则失去此效果。⚠️ 引擎没有「对特定角色的伤害降低」词条，数据用攻击 −20% 近似。",
+  "note": "归属：`原始角色设定\\薇拉·约克.txt` 普攻。实现近似：目标对所有人都 −20% 攻击，不只是对薇拉。",
+  "exclusiveTo": []
+}

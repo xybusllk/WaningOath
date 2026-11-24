@@ -1,0 +1,14 @@
+{
+  "id": "debuff-explosive-kindling",
+  "name": "可爆火种",
+  "kind": "debuff",
+  "stackCap": 3,
+  "stackable": true,
+  "durationUnit": "round",
+  "duration": 0,
+  "mods": [],
+  "elemMods": [],
+  "description": "瓦列里娅「传递星火」钉在敌人身上的那一点火。**纯计数状态**（`mods: []`）——它自己不改变任何属性，只在被引爆时按层数结算。",
+  "note": "⚠️ **上限 3 层**（作者裁决：以「机制汇总」那一节为准，天赋里写的 5 层作废）。⚠️ **场上同时只能存在一个** ⇒ 施加它的那条效果带 `unique: true`（见 `EffectDef.Unique`）。⚠️ **施加的那一刻**驱散该目标 1 个增益（不是持续驱散、也不是引爆时驱散）—— 那正是她被叫做「火驱散」的原因。⚠️ `duration: 0` = 永久挂着直到被引爆或转移（档案没给持续回合）。⚠️ **她自己引爆不了**：引爆只由「队友攻击」触发（权阶Ⅱ），所以本状态的引爆挂在她的天赋里、钩子 `onAttack` + `scope: allyOther`。归属：`原始角色设定\\瓦列里娅.txt`。",
+  "exclusiveTo": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "stage-main-s7",
+  "name": "序章 S7 · 犬型异常",
+  "kind": "main",
+
+  "party": ["char-shouyueren", "char-qianyu-xingyao"],
+  "enemies": ["anom-ccrf-017"],
+
+  "maxRound": 15,
+  "fixedPanel": true,
+  "presetLevel": 80,
+  "skillLevel": 1,
+
+  "initialEnergyFull": true,
+
+  "environment": { "all": 1.0, "anomaly": 1.0, "disorder": 1.0 },
+
+  "reward": {
+    "note": "04 §5.1：主线关卡首通每关 20 协议原码 + 经验道具 + 授信额度；重复挑战不可刷取（重刷只给经验）。经验道具与授信额度的具体数值 03/04 未给，先留 0，不发明数字。",
+    "repeatable": false,
+    "firstClear": { "protocolCode": 20, "credit": 0, "items": {} },
+    "repeat": { "protocolCode": 0, "credit": 0, "items": {} }
+  }
+}

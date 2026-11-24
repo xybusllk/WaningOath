@@ -1,0 +1,17 @@
+{
+  "id": "buff-rolanda-taunt",
+  "name": "嘲讽",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 2,
+  "taunt": true,
+  "mods": [
+    { "kind": "Threat", "op": "Add", "value": 50, "source": "区域封锁：自身仇恨提升至 100" }
+  ],
+  "elemMods": [],
+  "description": "罗兰达「区域封锁」：自身仇恨提升至 100；持有时敌方单体攻击优先选择罗兰达，持续 2 自然回合。",
+  "note": "引擎用 StatusDef.Taunt 改写单体攻击的候选目标集合，而不是只加权重。",
+  "exclusiveTo": []
+}

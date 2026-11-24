@@ -1,0 +1,19 @@
+{
+  "id": "buff-prairie-banner-10",
+  "name": "燎原·军旗",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 3,
+  "appliesTo": "partyAll",
+  "mods": [
+    { "kind": "Atk", "op": "Pct", "value": 0.0, "source": "占位：本状态只走 elemMods" }
+  ],
+  "elemMods": [
+    { "kind": "DmgBonus", "element": "fire", "op": "Add", "value": 0.10, "source": "燎原 · 全队火属性伤害 +10%" }
+  ],
+  "description": "2 发火种的燎原带来的士气：**全队火属性伤害 +10%**，持续 3 自然回合。",
+  "note": "⚠️ 这是**光环**（`appliesTo: partyAll`）：挂在**瓦列里娅身上**、按她的行动次数计时、效果覆盖我方全体 —— 而不是给每个队友各挂一份（那样计时依据就错了，`01 §1.3`）。⚠️ `mods` 里那条 0 值占位是为了绕开「状态至少要有一条词条」的观感问题，**实际生效的是 `elemMods` 的按属性增伤**。⚠️ 与 `buff-prairie-fire-*` 分开：那一个挂在她自己身上带无人机旋钮，这一个管全队。归属：`原始角色设定\\瓦列里娅.txt`。",
+  "exclusiveTo": []
+}

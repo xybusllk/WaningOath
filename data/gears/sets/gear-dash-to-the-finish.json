@@ -1,0 +1,16 @@
+{
+  "id": "gear-dash-to-the-finish",
+  "name": "疾驰到终点",
+  "rarity": 5,
+  "_note": "爱丽丝的专属套装。2/4 件效果逐字取自 07 §9.6（我提议 · 原稿未给）。4 件给「誓言上限 +3」与权阶Ⅳ 动的是同一根旋钮（上限体系），刻意不新开乘数。",
+  "tiers": [
+    { "pieces": 2, "description": "风属性伤害提高 10%",
+      "effects": [ { "type": "modifyStat", "stat": "dmgBonusWind", "value": 0.10, "target": "self" } ] },
+    { "pieces": 4, "description": "「誓言」上限 +3；共生灵在场期间，装备者与共生灵的风属性伤害 +12%",
+      "effects": [
+        { "type": "modifyStat", "stat": "oathCap", "delta": 3, "target": "self" },
+        { "type": "modifyStat", "stat": "dmgBonusWind", "value": 0.12, "target": "self", "condition": "summonAlive" }
+      ] }
+  ],
+  "description": "爱丽丝 · 生命倍率主C；共生灵在場期间加成。"
+}

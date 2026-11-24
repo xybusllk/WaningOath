@@ -1,0 +1,14 @@
+{
+  "id": "debuff-ice-vuln",
+  "name": "冰属性易伤",
+  "kind": "debuff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "turn",
+  "duration": 2,
+  "mods": [],
+  "elemMods": [
+    { "kind": "Vuln", "element": "Ice", "op": "Add", "value": 0.15, "source": "星辰有联结" }
+  ],
+  "description": "千语星遥天赋：目标冰属性易伤 +15%，持续 2 回合。离谒伤害按冰结算，因此同样吃这一条（01 §2.1）。"
+}

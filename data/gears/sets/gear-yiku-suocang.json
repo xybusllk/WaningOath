@@ -1,0 +1,16 @@
+{
+  "id": "gear-yiku-suocang",
+  "name": "忆库所藏",
+  "rarity": 5,
+  "_note": "千语星遥的专属套装。2/4 件效果逐字取自 02 §6.5 与 07 §2.5。",
+  "tiers": [
+    { "pieces": 2, "description": "冰属性伤害提高 10%",
+      "effects": [ { "type": "modifyStat", "stat": "dmgBonusIce", "value": 0.10, "target": "self" } ] },
+    { "pieces": 4, "description": "追加攻击伤害提高 25%；释放追加攻击后我方全体暴击伤害 +15%，持续 2 回合（自身行动计数）",
+      "effects": [
+        { "type": "modifyStat", "stat": "followUpDamage", "value": 0.25, "target": "self" },
+        { "type": "modifyStat", "stat": "critDmg", "value": 0.15, "target": "partyAll", "duration": 2, "triggerHook": "onFollowUp" }
+      ] }
+  ],
+  "description": "千语星遥 · 冰属性副C。"
+}

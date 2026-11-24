@@ -1,0 +1,19 @@
+{
+  "_comment": "剧情表白名单。**这张表同时是服务端 story/clear 的白名单**（06 §2.2 · 100 戊10）：原实现接受任意 storyId 字符串，每个新字符串都算一次首通 ⇒ 可无限刷原码。数值全部照抄 03 §4.1 与 04 §3.1，没有发明任何数字。",
+  "version": 1,
+  "stories": [
+    {
+      "id": "prologue",
+      "name": "序章 · 如约而至",
+      "kind": "main",
+      "anchorStage": "stage-main-s7",
+      "reward": {
+        "protocolCode": 160,
+        "credit": 0,
+        "items": { "internLog": 30 }
+      },
+      "repeatable": false,
+      "note": "03 §4.1「序章通关奖励：160 协议原码 + 实习日志 ×30」/ 04 §3.1 的 S9 结算行。⚠️ 它与 stage-main-s7 的**主线关卡首通 20 原码是两笔**：20 是「每关首通」，160 是「序章这一章通关」。anchorStage 记录的是「通关哪一关之后算这一章结束」。"
+    }
+  ]
+}

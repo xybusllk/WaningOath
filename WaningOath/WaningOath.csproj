@@ -1,0 +1,17 @@
+<Project Sdk="Godot.NET.Sdk/4.7.1">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>WaningOath</RootNamespace>
+    <AssemblyName>WaningOath</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- 客户端与服务器共用同一份战斗内核（06 §8.1 的收益 1） -->
+    <ProjectReference Include="..\WaningOath.Core\WaningOath.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,16 @@
+{
+  "id": "buff-verdict-crit",
+  "name": "绝罚·暴伤",
+  "kind": "buff",
+  "stackCap": 4,
+  "stackable": true,
+  "durationUnit": "round",
+  "duration": 3,
+  "mods": [
+    { "kind": "CritDmg", "op": "Add", "value": 0.15, "source": "每处决 1 人：暴击伤害 +15%（上限 +60%）" }
+  ],
+  "elemMods": [],
+  "description": "「绝罚」每处决 1 人，卡尔尼菲琪亚暴击伤害 +15%，最多叠 4 层（+60%），持续 3 回合。",
+  "note": "⚠️ 原稿未写持续回合，取 3 回合。归属：`原始角色设定\\卡尔尼菲琪亚.txt` 终结技。",
+  "exclusiveTo": []
+}

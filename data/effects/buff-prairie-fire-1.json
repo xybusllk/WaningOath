@@ -1,0 +1,18 @@
+{
+  "id": "buff-prairie-fire-1",
+  "name": "燎原",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 2,
+  "mods": [],
+  "elemMods": [],
+  "knobs": {
+    "droneDamageBonus": 0.20,
+    "droneExtraCombust": 1
+  },
+  "description": "1 发火种的燎原：无人机攻击**不消耗**无人机、伤害 +20%、额外叠 1 层可燃，持续 2 自然回合。",
+  "note": "⚠️ **三档各是一个独立状态**（`buff-prairie-fire-1` / `-2` / `-3`），但**名字都叫「燎原」** —— 终结技的三档是互斥分支（由 `stackExactly:` 保证），同时只会挂上一个；而「燎原期间不消耗无人机」这条判定读的是**名字**（`notStatus:燎原`），所以三档必须同名。⚠️ 两个旋钮的消费点：`droneDamageBonus` 由伤害原子的 `EffectDef.Knob` 读，`droneExtraCombust` 由无人机攻击里那段「额外叠可燃」的条件读。⚠️ 之所以做成三个状态而不是「一个状态 + 参数」：`applyBuff` 只能带 `stacks` / `duration`，**带不了这一档的数值** —— 硬塞进一个状态就会变成「谁最后生效听谁的」。⚠️ 「全队火属性伤害 +10% / +20%」在 2 / 3 档上，走的是**挂在队友身上的一个光环状态**（不是挂在她自己身上），见角色的终结技数据。归属：`原始角色设定\\瓦列里娅.txt`。",
+  "exclusiveTo": []
+}

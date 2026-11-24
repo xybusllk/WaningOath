@@ -1,0 +1,15 @@
+{
+  "id": "buff-starlink",
+  "name": "星辰有联结",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "turn",
+  "duration": 2,
+  "mods": [
+    { "kind": "CritRate", "op": "Add", "value": 0.10, "source": "星辰有联结" },
+    { "kind": "CritDmg", "op": "Add", "value": 0.20, "source": "星辰有联结" }
+  ],
+  "elemMods": [],
+  "description": "千语星遥天赋：我方全体暴击率 +10% / 暴击伤害 +20%，持续 2 回合。作用对象是「我方全体」（与「记忆里的欢宴」同口径，100 #23 甲15）。"
+}

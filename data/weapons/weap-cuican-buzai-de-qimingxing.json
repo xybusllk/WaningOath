@@ -1,0 +1,29 @@
+{
+  "id": "weap-cuican-buzai-de-qimingxing",
+  "name": "璀璨不再的启明星",
+  "rarity": 5,
+  "weaponType": "dao",
+  "owner": "char-xingyao-star-oath",
+
+  "mainStat": { "kind": "CritRate", "op": "Pct", "value": 0.20, "note": "保留原稿主属性（101 §4.3）" },
+  "subStat": { "kind": "Hp", "op": "Add", "value": 1200, "note": "她是生命倍率主C，副属性给固定生命最契合（101 §2 · 02 §10）" },
+
+  "effect": {
+    "appliesWhen": { "weaponType": "dao" },
+    "initialOverrideRank": 1,
+    "constant": { "selfHpCostPct": 0.10 },
+    "trigger": { "hook": "onUltimateCast", "duration": 0, "target": "self", "note": "101 §4.3：释放共鸣解放时。⚠️ 原文没写持续回合 ⇒ 按永久（本场）处理" },
+    "tiers": [
+      { "rank": 1, "hpMaxBonus": 0.20, "critDmgBonus": 0.26, "iceDmgBonus": 0.50 },
+      { "rank": 2, "hpMaxBonus": 0.22, "critDmgBonus": 0.30, "iceDmgBonus": 0.55 },
+      { "rank": 3, "hpMaxBonus": 0.25, "critDmgBonus": 0.33, "iceDmgBonus": 0.60 },
+      { "rank": 4, "hpMaxBonus": 0.27, "critDmgBonus": 0.37, "iceDmgBonus": 0.65 },
+      { "rank": 5, "hpMaxBonus": 0.30, "critDmgBonus": 0.40, "iceDmgBonus": 0.70 }
+    ],
+    "description": "装备者（仅单刀类）释放**共鸣解放**时：**消耗自身最大生命值 10%（最多降至 1 点）**；使自身**生命上限 +20/22/25/27/30%**、**暴击伤害 +26/30/33/37/40%**、**冰属性伤害 +50/55/60/65/70%**。五段依次对应权限覆写 1~5 阶。"
+  },
+
+  "growth": { "mainAndSubGrowWithLevel": true, "levelFactor": 2.195, "effectGrowsWithOverrideOnly": true },
+  "note": "⚠️ **本武器是 `100` 乙14 的当事武器之一**：`07 §3.4` 转写时把原稿的生命上限与冰伤五段**抄丢了**，本表按 `101 §4.3` 补回。**新增的只有暴击伤害那 5 段** —— 由原副属性「暴击伤害 +40%」搬入并拆成五段（5 阶 = 原稿的 40%）。⚠️ 初始权限覆写原稿未给，取 **1 阶**。⚠️ 武器系统整体属 M7，本文件当前只作声明与 M3 校验输入，不进战斗。",
+  "flavor": "刀锋倒映不出任何东西。她说那是因为它已经被磨得只剩回忆了。"
+}

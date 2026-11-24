@@ -1,0 +1,19 @@
+{
+  "id": "weap-zhishi-dandao",
+  "name": "制式单刀",
+  "rarity": 3,
+  "weaponType": "dao",
+  "mainStat": {
+    "kind": "Atk",
+    "op": "Pct",
+    "value": 0.12,
+    "note": "3★ 满级值（占位档）"
+  },
+  "growth": {
+    "mainAndSubGrowWithLevel": true,
+    "levelFactor": 2.195,
+    "effectGrowsWithOverrideOnly": true
+  },
+  "note": "抽卡 3★ 池的制式武器占位；3★ 按 101 §0.1 只有主属性一个部件。",
+  "flavor": "一把没有铭文的制式单刀。"
+}

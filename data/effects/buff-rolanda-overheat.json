@@ -1,0 +1,14 @@
+{
+  "id": "buff-rolanda-overheat",
+  "name": "过热",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 2,
+  "mods": [],
+  "elemMods": [],
+  "description": "罗兰达终结技后的过热：接下来 2 个自然回合内无法获得「转速」；权阶Ⅵ 取消。",
+  "note": "由普攻的 gainStack 条件 notStatus:过热 与描述共同表达；终结技自身不消耗转速。",
+  "exclusiveTo": []
+}

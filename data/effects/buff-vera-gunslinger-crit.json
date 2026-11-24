@@ -1,0 +1,17 @@
+{
+  "id": "buff-vera-gunslinger-crit",
+  "name": "扳机扣在下一个明天",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 3,
+  "mods": [
+    { "kind": "CritRate", "op": "Add", "value": 0.95, "source": "权阶Ⅵ：火枪手期间暴击率锁定 100%（近似 +95%）" },
+    { "kind": "CritDmg", "op": "Pct", "value": 0.50, "source": "权阶Ⅵ：火枪手期间暴击伤害 +50%" }
+  ],
+  "elemMods": [],
+  "description": "权阶Ⅵ：火枪手状态下暴击率锁定 100%、暴击伤害 +50%。",
+  "note": "⚠️ 「锁定 100%」用 +95% 近似（基础 5%）。归属：`原始角色设定\\薇拉·约克.txt` 权阶Ⅵ。",
+  "exclusiveTo": []
+}

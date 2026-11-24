@@ -1,0 +1,680 @@
+{
+  "id": "prologue",
+  "title": "序章·如约而至",
+  "generatedAt": "2026-10-22T01:55:43.194Z",
+  "source": "剧情文本/序章 如约而至.txt",
+  "beats": [
+    {
+      "index": 1,
+      "scene": "S0",
+      "speaker": "——",
+      "text": "（黑屏。只有一道少女的声音。似从很远的地方传来，又近得像贴着耳畔。）",
+      "portrait": ""
+    },
+    {
+      "index": 2,
+      "scene": "S0",
+      "speaker": "？？？",
+      "text": "欢迎，无名的守望者。",
+      "portrait": ""
+    },
+    {
+      "index": 3,
+      "scene": "S0",
+      "speaker": "？？？",
+      "text": "这里，亦为终焉，也为起始。",
+      "portrait": ""
+    },
+    {
+      "index": 4,
+      "scene": "S1",
+      "speaker": "——",
+      "text": "（画面渐亮。Site 14 后山，晨雾弥漫。一个银发身影仰躺在倾斜的草地上，湖蓝色的眼睛缓缓睁开。）",
+      "portrait": ""
+    },
+    {
+      "index": 5,
+      "scene": "S1",
+      "speaker": "守约人",
+      "text": "……唔。",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 6,
+      "scene": "S1",
+      "speaker": "——",
+      "text": "（他撑着地面坐起来，脑袋像被塞进了一团暴风。视线晃了晃，缓过来时，最先落进眼里的是一双血红色的眼睛。）",
+      "portrait": ""
+    },
+    {
+      "index": 7,
+      "scene": "S1",
+      "speaker": "——",
+      "text": "（面前站着一个黑红色哥特裙装的少女，银白长发垂至腰际，领口的红色蝴蝶结像一滴未干的血。她没在看他——视线越过他，落在更远的地方，像在核对一个早已约定的时刻。晨雾在她身边分开，像绕开了一件并不存在的东西。）",
+      "portrait": ""
+    },
+    {
+      "index": 8,
+      "scene": "S2",
+      "speaker": "守约人",
+      "text": "你……是谁？我为什么在这里？",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 9,
+      "scene": "S2",
+      "speaker": "？？？",
+      "text": "这个问题，我想先反过来问。你记得自己是谁吗？",
+      "portrait": ""
+    },
+    {
+      "index": 10,
+      "scene": "S2",
+      "speaker": "守约人",
+      "text": "……不记得。什么都……不记得了。",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 11,
+      "scene": "S2",
+      "speaker": "？？？",
+      "text": "果然如此。那么——欢迎来到 Site 14，无名的守望者。",
+      "portrait": ""
+    },
+    {
+      "index": 12,
+      "scene": "S2",
+      "speaker": "守约人",
+      "text": "守望者……？",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 13,
+      "scene": "S2",
+      "speaker": "？？？",
+      "text": "你是「守约人」。一个被某种约定绑到这个世界来的人。虽然你忘了那约定，但约定还认得你。",
+      "portrait": ""
+    },
+    {
+      "index": 14,
+      "scene": "S3",
+      "speaker": "——",
+      "text": "（少女的身形慢慢消散在了空气中。她仿佛还想说什么，但没说出口，只是一个微笑，和一个“相信你”的嘴型。）",
+      "portrait": ""
+    },
+    {
+      "index": 15,
+      "scene": "S3",
+      "speaker": "守约人",
+      "text": "……那是……？",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 16,
+      "scene": "S3",
+      "speaker": "——",
+      "text": "（风穿过草地。刚才站着人的地方，只剩下一小片被压平的草。）",
+      "portrait": ""
+    },
+    {
+      "index": 17,
+      "scene": "S3",
+      "speaker": "——",
+      "text": "（远处传来跑动的脚步声，和金属相互碰撞的声音。）",
+      "portrait": ""
+    },
+    {
+      "index": 18,
+      "scene": "S4",
+      "speaker": "警惕的设施警卫队长",
+      "text": "看那边！那边有个人！快通知总监！",
+      "portrait": ""
+    },
+    {
+      "index": 19,
+      "scene": "S4",
+      "speaker": "冷静的设施警卫",
+      "text": "好，队长，我马上通知！（接起内部通讯）总监！这里是 C-1 警卫队！我们在后山发现不明人员，麻烦您过来一趟！",
+      "portrait": ""
+    },
+    {
+      "index": 20,
+      "scene": "S4",
+      "speaker": "守约人",
+      "text": "（疑惑地问）你们是……？",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 21,
+      "scene": "S4",
+      "speaker": "警卫队长",
+      "text": "我们是 CCRF·Site 14 设施警卫队。你是什么人？！",
+      "portrait": ""
+    },
+    {
+      "index": 22,
+      "scene": "S4",
+      "speaker": "守约人",
+      "text": "（迷茫地）我……？我也不记得了。",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 23,
+      "scene": "S5",
+      "speaker": "？？？",
+      "text": "把枪放下。",
+      "portrait": ""
+    },
+    {
+      "index": 24,
+      "scene": "S5",
+      "speaker": "警卫队长、警卫队员",
+      "text": "是！总监！",
+      "portrait": ""
+    },
+    {
+      "index": 25,
+      "scene": "S5",
+      "speaker": "千语星遥",
+      "text": "我是 CCRF·Site 14 的设施总监，千语星遥。敢问阁下尊姓大名？",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 26,
+      "scene": "S5",
+      "speaker": "守约人",
+      "text": "名字……？我不太记得了。我只记得我是「守约人」。",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 27,
+      "scene": "S5",
+      "speaker": "千语星遥",
+      "text": "「守约人」……？（示意警卫退下）你们继续巡逻，这里交给我。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 28,
+      "scene": "S5",
+      "speaker": "守约人",
+      "text": "你认识我？说起来，刚才有个穿红衣服的人跟我说了几句话……嗯，现在想来也想不太起来她说过什么了。不过她长得好像跟你挺像的。",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 29,
+      "scene": "S5",
+      "speaker": "千语星遥",
+      "text": "唔，怎么说呢——我认识的不是你这个人，而是你的名字。有人很早以前跟我说过：‘如果有一天，一个无名无姓、没有记忆的守约人在你附近出现，记得请好好待他。’",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 30,
+      "scene": "S5",
+      "speaker": "千语星遥",
+      "text": "至于你说的那个跟我长得像的人……可能是你的幻觉吧？监控里并没有其他人来过这里。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 31,
+      "scene": "S5",
+      "speaker": "——",
+      "text": "（她顿了一下。目光像是落在什么他看不见的东西上。）",
+      "portrait": ""
+    },
+    {
+      "index": 32,
+      "scene": "S5",
+      "speaker": "千语星遥",
+      "text": "……算了。这片草地我也读过。什么也没有。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 33,
+      "scene": "S5",
+      "speaker": "守约人",
+      "text": "读过？",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 34,
+      "scene": "S5",
+      "speaker": "千语星遥",
+      "text": "哦，别在意。走吧，边走边说——你脚下这个世界，现在乱得很。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 35,
+      "scene": "S5",
+      "speaker": "——",
+      "text": "（她转身朝山坡下走去，示意守约人跟上。两人穿过渐疏的树丛，远处露出了灰色的水泥建筑群——那是 Site 14 的设施群。）",
+      "portrait": ""
+    },
+    {
+      "index": 36,
+      "scene": "S6",
+      "speaker": "千语星遥",
+      "text": "先说大背景吧。大概三年前，一种被当时叫做‘无名元素’的物质在全球泄露——我们后来把它定名为「弥尘」。它把人类文明折腾得不成样子。动物会变异，物品会有各种异常效应，到处乱成一锅粥。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 37,
+      "scene": "S6",
+      "speaker": "守约人",
+      "text": "……异常？",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 38,
+      "scene": "S6",
+      "speaker": "千语星遥",
+      "text": "对，异常。现在世界上剩下来的几个势力：残存政府搞了个 UNEG，整天喊着要把异常统统消灭；我们 CCRF 觉得，与其消灭，不如研究、控制，甚至利用。理念不同嘛，一来二去就成了对家。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 39,
+      "scene": "S6",
+      "speaker": "守约人",
+      "text": "CCRF……我好像听过。",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 40,
+      "scene": "S6",
+      "speaker": "千语星遥",
+      "text": "哦？看来记忆不是完全清零。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 41,
+      "scene": "S6",
+      "speaker": "——",
+      "text": "（她忽然停下步子，抬手示意他别动。）",
+      "portrait": ""
+    },
+    {
+      "index": 42,
+      "scene": "S6B",
+      "speaker": "——",
+      "text": "（前方的路边，一扇锈死的铁栅门半开着。门边站着一只四足的东西——体表覆着一层黑色、半透明的结晶，结晶顺着骨骼生长，像一具从里面长出来的铠甲。它没有动。它甚至没有看他们。）",
+      "portrait": ""
+    },
+    {
+      "index": 43,
+      "scene": "S6B",
+      "speaker": "千语星遥",
+      "text": "……唔。这就有点奇怪了。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 44,
+      "scene": "S6B",
+      "speaker": "守约人",
+      "text": "那是……什么？",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 45,
+      "scene": "S6B",
+      "speaker": "千语星遥",
+      "text": "「候门」。野外都叫它犬型异常，编号 CCRF-017。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 46,
+      "scene": "S6B",
+      "speaker": "千语星遥",
+      "text": "这东西的规矩很简单：你不碰它，它就不理你。它会一直站在那个门口，不吃、不动、不回应——一直站到那扇门后面的人回来为止。或者，永远。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 47,
+      "scene": "S6B",
+      "speaker": "千语星遥",
+      "text": "记住一件事：这一路上，你可以看它，可以数它身上的结晶，唯独别碰它。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 48,
+      "scene": "S6B",
+      "speaker": "守约人",
+      "text": "如果碰了呢？",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 49,
+      "scene": "S6B",
+      "speaker": "千语星遥",
+      "text": "那它这辈子，就只认你一个了。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 50,
+      "scene": "S6B",
+      "speaker": "——",
+      "text": "（星遥先走。她目不斜视，步伐不快不慢，像走过一段再平常不过的路。）",
+      "portrait": ""
+    },
+    {
+      "index": 51,
+      "scene": "S6B",
+      "speaker": "——",
+      "text": "（守约人跟在后面。经过那扇铁栅门时，他和那东西之间只剩下不到一步。）",
+      "portrait": ""
+    },
+    {
+      "index": 52,
+      "scene": "S6B",
+      "speaker": "——",
+      "text": "（结晶层下面有纹路。细密的、连续的纹路，沿着骨骼走向生长，像一条走熟了的路。）",
+      "portrait": ""
+    },
+    {
+      "index": 53,
+      "scene": "S6B",
+      "speaker": "——",
+      "text": "（他不知道自己为什么会去看那些纹路。）",
+      "portrait": ""
+    },
+    {
+      "index": 54,
+      "scene": "S6B",
+      "speaker": "——",
+      "text": "（他只知道，下一瞬间，刀已经出鞘了。）",
+      "portrait": ""
+    },
+    {
+      "index": 55,
+      "scene": "S6B",
+      "speaker": "——",
+      "text": "（刀刃磕在结晶上，发出敲击石头的声音。结晶表面连一道痕都没有留下。）",
+      "portrait": ""
+    },
+    {
+      "index": 56,
+      "scene": "S6B",
+      "speaker": "——",
+      "text": "（它没有反击。它只是，抬起了头。）",
+      "portrait": ""
+    },
+    {
+      "index": 57,
+      "scene": "S6B",
+      "speaker": "——",
+      "text": "（那双赤红色的眼睛，第一次真正对上了他。）",
+      "portrait": ""
+    },
+    {
+      "index": 58,
+      "scene": "S6B",
+      "speaker": "千语星遥",
+      "text": "……你碰它了。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 59,
+      "scene": "S6B",
+      "speaker": "守约人",
+      "text": "我……",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 60,
+      "scene": "S6B",
+      "speaker": "千语星遥",
+      "text": "（叹了口气）行吧。这下它认识你了。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 61,
+      "scene": "S6B",
+      "speaker": "——",
+      "text": "（那东西缓缓地、平稳地转过身来，面朝守约人。它不再守着那扇门了。）",
+      "portrait": ""
+    },
+    {
+      "index": 62,
+      "scene": "S6B",
+      "speaker": "千语星遥",
+      "text": "它现在不会走了。除非我们把它结束掉——一次结束掉。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 63,
+      "scene": "S6B",
+      "speaker": "千语星遥",
+      "text": "这种事，绕开它就行了。你已经把最简单的那条路走掉了。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 64,
+      "scene": "S6B",
+      "speaker": "千语星遥",
+      "text": "……算了。试试手吧，新人。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 65,
+      "scene": "S6B",
+      "speaker": "千语星遥",
+      "text": "听着——你打不死它。它的结晶不吃刀。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 66,
+      "scene": "S6B",
+      "speaker": "千语星遥",
+      "text": "但你要是能攒够力气，一次把它整个掀翻，那它就只是个死物了。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 67,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "别磨。你只有一次机会。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 68,
+      "scene": "S7",
+      "speaker": "——",
+      "text": "（结晶碎裂，散在地上，像一地没化的黑冰。里面那些纹路，断了。）",
+      "portrait": ""
+    },
+    {
+      "index": 69,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "（啪啪鼓掌）哇哦。失忆了还这么厉害，我都有点嫉妒了。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 70,
+      "scene": "S7",
+      "speaker": "守约人",
+      "text": "……它本来不会动的。",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 71,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "对。它本来不会动的。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 72,
+      "scene": "S7",
+      "speaker": "守约人",
+      "text": "我……不知道为什么。好像天生就会用这把刀。",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 73,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "那就先别纠结了。身体还记得的东西，往往就是最真实的答案。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 74,
+      "scene": "S7",
+      "speaker": "——",
+      "text": "（她蹲下来，看了看那扇铁栅门。）",
+      "portrait": ""
+    },
+    {
+      "index": 75,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "这是 C 区七号竖井的备勤通道。平时锁着，没人走。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 76,
+      "scene": "S7",
+      "speaker": "守约人",
+      "text": "那它为什么站在这儿？",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 77,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "候门只守两样东西：走过那扇门的人，或者那扇门本身。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 78,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "门平时锁着——所以它不是在守门。它是在等人。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 79,
+      "scene": "S7",
+      "speaker": "——",
+      "text": "（她伸手把那扇半开的铁栅门推了推，又停住。）",
+      "portrait": ""
+    },
+    {
+      "index": 80,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "……而它等的那扇门，不该是开着的。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 81,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "（站起来，拍了拍手上的灰）我先喊人去检查一下 C 区收容单元。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 82,
+      "scene": "S7",
+      "speaker": "——",
+      "text": "（她朝坡下招了招手，示意跟上。走出一段路后，她像忽然想起什么。）",
+      "portrait": ""
+    },
+    {
+      "index": 83,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "对了，刚才没说完——Site 14 是我管的站点。往南走半天，有个中立交易区叫「暴风眼」。末日里少有的一片净土，什么人都能去，什么都能买。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 84,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "但野外还是得小心掠夺者。那群人可不像我这样讲道理。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 85,
+      "scene": "S7",
+      "speaker": "守约人",
+      "text": "你一下子跟我说这么多，不怕我其实是敌人？",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 86,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "（停下步子，回头看了他一眼）怕什么。你要是敌人，刚才就不会躺在我后山了。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 87,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "再说了——",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 88,
+      "scene": "S7",
+      "speaker": "——",
+      "text": "（琥珀色的眼睛里带着一点认真。）",
+      "portrait": ""
+    },
+    {
+      "index": 89,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "你是「守约人」。会如约而至的人，不会那么坏。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 90,
+      "scene": "S7",
+      "speaker": "——",
+      "text": "（她从口袋里掏出一张蓝白配色的 ID 卡，递到守约人面前。卡片上没有姓名，只有一行空格，空格前印着「欢迎」二字。）",
+      "portrait": ""
+    },
+    {
+      "index": 91,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "你的临时通行证。等你想起真正的名字，或者，决定一个属于自己的名字之前，就先用「守约人」这个代号吧。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 92,
+      "scene": "S7",
+      "speaker": "守约人",
+      "text": "……我记住了。",
+      "portrait": "protagonist"
+    },
+    {
+      "index": 93,
+      "scene": "S7",
+      "speaker": "——",
+      "text": "（他低头看了看手中的 ID 卡，又看向少女轻快的背影。晨光落在她银白的头发上，像为这个混沌的世界镀上一层短暂的温柔。）",
+      "portrait": ""
+    },
+    {
+      "index": 94,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "走吧，食堂在这边。今天刚好有烤肉，我请客——就当是替那份约定预付的。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 95,
+      "scene": "S7",
+      "speaker": "千语星遥",
+      "text": "（回头）对了，从今天起你归我管。别乱跑，也别再碰不该碰的东西。",
+      "portrait": "xingyao"
+    },
+    {
+      "index": 96,
+      "scene": "S7",
+      "speaker": "——",
+      "text": "（他迈开步子，跟了上去。）",
+      "portrait": ""
+    }
+  ]
+}

@@ -1,0 +1,550 @@
+{
+  "id": "char-karni",
+  "name": "卡尔尼菲琪亚",
+  "title": "仲裁执行单元·刽子手",
+  "rarity": 5,
+  "element": "physical",
+  "path": "dps",
+  "anchorRow": "dps",
+  "weaponType": "sword",
+  "faction": [
+    "CCRF"
+  ],
+  "birthday": "03-15",
+  "genderVariant": false,
+  "base": {
+    "atk": 300,
+    "hp": 3600,
+    "def": 100,
+    "speed": 105,
+    "critRate": 0.05,
+    "critDmg": 1.5,
+    "energyMax": 120,
+    "energyOverflowCap": 0,
+    "threat": 50
+  },
+  "growth": {
+    "panelGrowth": 1.01,
+    "breakthroughBonus": {
+      "atk": 0.05
+    }
+  },
+  "_comment": "07 追加角色。物理主C（处决型）。能量 120。核心机制：裁决（3 层/生命阈值进入可处决）+「打开保险」把下一次行动替换为处决 + 终结技逐个处决扫射。基础普攻只对已带裁决的目标 +1 层；权阶Ⅰ改为无条件 +1。",
+  "skills": {
+    "basic": {
+      "id": "skill-karni-accuse",
+      "kind": "basic",
+      "name": "指控",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "basic",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "resonanceIndex": 1,
+        "energy": 25
+      },
+      "hits": [
+        {
+          "multiplier": 1,
+          "target": "main",
+          "element": "physical",
+          "accumulateAnomaly": true,
+          "onHit": [
+            {
+              "type": "conditional",
+              "condition": "knobAtLeast:basicMarkUnconditional:1",
+              "then": [
+                {
+                  "type": "applyDebuff",
+                  "debuffId": "debuff-verdict",
+                  "stacks": 1,
+                  "target": "mainTarget",
+                  "stackCounter": "perAttack"
+                }
+              ]
+            },
+            {
+              "type": "conditional",
+              "condition": "knobBelow:basicMarkUnconditional:1 AND targetStatusAtLeast:裁决:1",
+              "then": [
+                {
+                  "type": "applyDebuff",
+                  "debuffId": "debuff-verdict",
+                  "stacks": 1,
+                  "target": "mainTarget",
+                  "stackCounter": "perAttack"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "description": "100% 物理伤害；基础只对已带裁决的目标 +1 层裁决；权阶Ⅰ 改为无条件 +1 层裁决。",
+      "rawText": "100% 物理伤害；基础只对已带裁决的目标 +1 层裁决；权阶Ⅰ 改为无条件 +1 层裁决。",
+      "optimization": {
+        "source": "优化稿/卡尔尼菲琪亚-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "resonance": {
+      "id": "skill-karni-convict",
+      "kind": "resonance",
+      "name": "定罪",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "resonance",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 1
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 40
+      },
+      "hits": [
+        {
+          "multiplier": 3.2,
+          "target": "main",
+          "element": "physical",
+          "accumulateAnomaly": true,
+          "onHit": [
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-verdict",
+              "stacks": 2,
+              "target": "mainTarget",
+              "stackCounter": "perAttack"
+            }
+          ]
+        }
+      ],
+      "description": "320% 物理伤害；施加 2 层裁决（上限 3）。",
+      "rawText": "320% 物理伤害；施加 2 层裁决（上限 3）。",
+      "optimization": {
+        "source": "优化稿/卡尔尼菲琪亚-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "bloom": {
+      "id": "skill-karni-execute",
+      "kind": "bloom",
+      "name": "处决",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "resonanceIndex": 1,
+        "energy": 19.9
+      },
+      "onCast": [
+        {
+          "type": "decayStatus",
+          "statusId": "buff-execution-ready",
+          "amount": 1,
+          "target": "self"
+        }
+      ],
+      "hits": [
+        {
+          "multiplier": 4,
+          "lostHpMultiplier": 2,
+          "lostHpCap": 1.5,
+          "target": "main",
+          "element": "physical",
+          "canCrit": true,
+          "onHit": [
+            {
+              "type": "conditional",
+              "condition": "targetIsMinion AND targetHpBelowKnob:executeHpPct",
+              "then": [
+                {
+                  "type": "execute",
+                  "target": "mainTarget"
+                }
+              ]
+            },
+            {
+              "type": "conditional",
+              "condition": "targetIsElitePlus",
+              "then": [
+                {
+                  "type": "additionalDamage",
+                  "multiplier": 0.1,
+                  "perTargetStatus": "裁决",
+                  "scalingBase": "atk",
+                  "element": "physical",
+                  "target": "mainTarget",
+                  "canCrit": true
+                }
+              ]
+            },
+            {
+              "type": "conditional",
+              "condition": "targetIsElitePlus AND knobAtLeast:eliteMarkBonus:1",
+              "then": [
+                {
+                  "type": "additionalDamage",
+                  "multiplier": 0.1,
+                  "perTargetStatus": "裁决",
+                  "scalingBase": "atk",
+                  "element": "physical",
+                  "target": "mainTarget",
+                  "canCrit": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "description": "400% + 已损失生命% × 2% 物理伤害，追加上限 +150%；杂兵且生命低于处决线 → 直接处决；精英及以上每层裁决 +10% 攻击力附加伤害（权阶Ⅲ 再 +10%）。",
+      "rawText": "400% + 已损失生命% × 2% 物理伤害，追加上限 +150%；杂兵且生命低于处决线 → 直接处决；精英及以上每层裁决 +10% 攻击力附加伤害（权阶Ⅲ 再 +10%）。",
+      "optimization": {
+        "source": "优化稿/卡尔尼菲琪亚-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "ultimate": {
+      "id": "skill-karni-absolution",
+      "kind": "ultimate",
+      "name": "绝罚",
+      "targetType": "aoe",
+      "scalingBase": "atk",
+      "scalingArray": "ultimate",
+      "cost": {
+        "energy": 120,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 0
+      },
+      "onCast": [
+        {
+          "type": "applyDebuff",
+          "debuffId": "debuff-verdict",
+          "stacks": 1,
+          "target": "allEnemies"
+        },
+        {
+          "type": "conditional",
+          "condition": "knobAtLeast:verdictExtraMark:1",
+          "then": [
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-verdict",
+              "stacks": 1,
+              "target": "allEnemies"
+            }
+          ]
+        },
+        {
+          "type": "dealDamage",
+          "multiplier": 1,
+          "scalingBase": "atk",
+          "element": "physical",
+          "target": "allEnemies",
+          "canCrit": true
+        },
+        {
+          "type": "executionSweep",
+          "skillKey": "bloom",
+          "sweepStatus": "裁决",
+          "sweepStatusAtLeast": 3,
+          "sweepHpBelow": 0.25,
+          "sweepHpBelowKnob": "executeHpPct",
+          "sweepAllTargetsKnob": "executeAll",
+          "suppressExtraTurns": true,
+          "onEach": [
+            {
+              "type": "applyBuff",
+              "buffId": "buff-verdict-crit",
+              "stacks": 1,
+              "duration": 3,
+              "target": "self"
+            }
+          ],
+          "onAny": [
+            {
+              "type": "conditional",
+              "condition": "knobAtLeast:orderStrong:1",
+              "then": [
+                {
+                  "type": "applyBuff",
+                  "buffId": "buff-order-strong",
+                  "stacks": 1,
+                  "duration": 2,
+                  "target": "partyAll"
+                }
+              ],
+              "onFail": [
+                {
+                  "type": "applyBuff",
+                  "buffId": "buff-order",
+                  "stacks": 1,
+                  "duration": 2,
+                  "target": "partyAll"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "description": "消耗 120 能量；全体 +1 层裁决（权阶Ⅵ +2）+ 880% 物理伤害；随后对每个裁决 ≥3 或生命 ≤ 处决线的敌人执行一次「处决」；每处决 1 人暴伤 +15%（上限 4 层）；至少 1 人时全队「秩序」。",
+      "rawText": "消耗 120 能量；全体 +1 层裁决（权阶Ⅵ +2）+ 880% 物理伤害；随后对每个裁决 ≥3 或生命 ≤ 处决线的敌人执行一次「处决」；每处决 1 人暴伤 +15%（上限 4 层）；至少 1 人时全队「秩序」。",
+      "optimization": {
+        "source": "优化稿/卡尔尼菲琪亚-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      },
+      "hits": [
+        {
+          "multiplier": 8.8,
+          "target": "all",
+          "element": "physical"
+        }
+      ]
+    },
+    "talent": {
+      "id": "skill-karni-safety-off",
+      "kind": "talent",
+      "name": "打开保险",
+      "targetType": "self",
+      "scalingArray": "none",
+      "triggers": [
+        {
+          "hook": "onHit",
+          "scope": "self",
+          "condition": "targetStatusAtLeast:裁决:3",
+          "effects": [
+            {
+              "type": "applyBuff",
+              "buffId": "buff-execution-ready",
+              "stacks": 1,
+              "duration": 0,
+              "target": "self",
+              "stackCounter": "perAttack"
+            }
+          ]
+        },
+        {
+          "hook": "onHit",
+          "scope": "self",
+          "condition": "targetHpBelowKnob:executeHpPct",
+          "effects": [
+            {
+              "type": "applyBuff",
+              "buffId": "buff-execution-ready",
+              "stacks": 1,
+              "duration": 0,
+              "target": "self",
+              "stackCounter": "perAttack"
+            }
+          ]
+        },
+        {
+          "hook": "onDamageTaken",
+          "scope": "self",
+          "condition": "knobAtLeast:counterMark:1",
+          "oncePerTurn": 2,
+          "effects": [
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-verdict",
+              "stacks": 1,
+              "target": "mainTarget",
+              "stackCounter": "perAttack"
+            }
+          ]
+        },
+        {
+          "hook": "onKill",
+          "scope": "self",
+          "skillKind": "bloom",
+          "effects": [
+            {
+              "type": "extraTurn",
+              "target": "self"
+            },
+            {
+              "type": "conditional",
+              "condition": "knobAtLeast:executeEnergy:1",
+              "then": [
+                {
+                  "type": "conditional",
+                  "condition": "targetIsElitePlus",
+                  "then": [
+                    {
+                      "type": "gainEnergy",
+                      "amount": 30,
+                      "target": "self"
+                    }
+                  ],
+                  "onFail": [
+                    {
+                      "type": "gainEnergy",
+                      "amount": 15,
+                      "target": "self"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "hook": "onSkillCast",
+          "scope": "self",
+          "skillKind": "bloom",
+          "effects": [
+            {
+              "type": "decayStatus",
+              "statusId": "buff-execution-ready",
+              "amount": 1,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "description": "任意敌人进入可处决状态（裁决 ≥3 或生命 ≤ 处决线）时，给卡尔挂 buff-execution-ready（ForcedSkill: bloom，目标 lowestHpEnemy）；「处决」不消耗行动（视为插入的一次额外行动，不占用她本回合的常规行动）；权阶Ⅱ 敌人攻击她时反击 1 层裁决（每单位回合 2 次）；处决击杀 → 额外回合，并回复 15% 生命上限；权阶Ⅴ 起普怪 +15 / 精英 +30 能量。",
+      "rawText": "任意敌人进入可处决状态（裁决 ≥3 或生命 ≤ 处决线）时，给卡尔挂 buff-execution-ready（ForcedSkill: bloom，目标 lowestHpEnemy）；「处决」不消耗行动（视为插入的一次额外行动，不占用她本回合的常规行动）；权阶Ⅱ 敌人攻击她时反击 1 层裁决（每单位回合 2 次）；处决击杀 → 额外回合，并回复 15% 生命上限；权阶Ⅴ 起普怪 +15 / 精英 +30 能量。",
+      "optimization": {
+        "source": "优化稿/卡尔尼菲琪亚-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      },
+      "cost": {
+        "energy": 0
+      },
+      "gain": {
+        "energy": 0
+      },
+      "scalingBase": "hp"
+    }
+  },
+  "eidolons": [
+    {
+      "rank": 1,
+      "name": "累计前科",
+      "_note": "普攻无条件 +1 裁决；由 basic 的两条 knob 条件实现。",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "basicMarkUnconditional",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "同态复仇",
+      "_note": "敌人攻击她时反击 1 层裁决，由天赋 onDamageTaken 的 counterMark 条件实现。",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "counterMark",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "群体制裁",
+      "shared": true,
+      "_note": "斩杀线 35% + 精英每层额外 +10%。",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 12
+        },
+        {
+          "type": "modifyStat",
+          "stat": "executeHpPct",
+          "value": 0.35
+        },
+        {
+          "type": "modifyStat",
+          "stat": "eliteMarkBonus",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "诛邪立序",
+      "_note": "秩序强化为 +15% 物理 / −10% 受伤。",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "orderStrong",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "罪业归赎",
+      "shared": true,
+      "_note": "处决击杀回能：普怪 +15 / 精英 +30。",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 14
+        },
+        {
+          "type": "modifyStat",
+          "stat": "executeEnergy",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "name": "三仪绝罚",
+      "_note": "终结技额外 1 层裁决、处决线 50%、处决目标全体、额外回合上限 2（上限旋钮当前未读）。",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "verdictExtraMark",
+          "value": 1
+        },
+        {
+          "type": "modifyStat",
+          "stat": "executeHpPct",
+          "value": 0.5
+        },
+        {
+          "type": "modifyStat",
+          "stat": "executeAll",
+          "value": 1
+        },
+        {
+          "type": "modifyStat",
+          "stat": "extraTurnCap",
+          "value": 2
+        }
+      ]
+    }
+  ],
+  "signatureWeapon": "weap-torquemada",
+  "gearSet": "gear-zuize-tianping",
+  "lore": {
+    "quote": "天平只报数，不读卷宗。",
+    "narrativeSkills": [
+      "天平",
+      "弹道回溯"
+    ],
+    "fieldSkills": [],
+    "secrets": [],
+    "speechStyle": "简短、克制，像在宣读结论；提到格斗游戏时会突然破功。",
+    "relationships": {}
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "buff-order",
+  "name": "秩序",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 2,
+  "appliesTo": "partyAll",
+  "mods": [],
+  "elemMods": [
+    { "kind": "DmgBonus", "element": "physical", "op": "Add", "value": 0.10, "source": "秩序：全队物理伤害 +10%" }
+  ],
+  "description": "「绝罚」处决至少 1 人后，全队物理伤害 +10%，持续 2 回合。",
+  "note": "权阶Ⅳ 强化版见 `buff-order-strong`。归属：`原始角色设定\\卡尔尼菲琪亚.txt` 终结技。",
+  "exclusiveTo": []
+}

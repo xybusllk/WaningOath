@@ -1,0 +1,13 @@
+{
+  "id": "gear-gongli-xulie",
+  "name": "公理序列",
+  "rarity": 5,
+  "_note": "林靖远的专属套装（07 §7.5 · 我提议 · 原稿未给）。刻意做成模态无关 —— 他是双模态角色，套装只加成一种属性等于强迫玩家只玩一个模态。",
+  "tiers": [
+    { "pieces": 2, "description": "攻击力 +12%",
+      "effects": [ { "type": "modifyStat", "stat": "atkPct", "value": 0.12, "target": "self" } ] },
+    { "pieces": 4, "description": "对携带任意属性异常的敌人造成的伤害 +15%（物理 / 雷 通用；与「伤害加深」词条分别计算）",
+      "effects": [ { "type": "modifyStat", "stat": "damageVsAnomalyCarrier", "value": 0.15, "target": "self" } ] }
+  ],
+  "description": "林靖远 · 双模态。"
+}

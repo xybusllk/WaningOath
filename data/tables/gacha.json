@@ -1,0 +1,107 @@
+{
+  "_comment": "服务端权威的卡池配置（06 §2.4：抽卡必须放服务器）。客户端只拿概率与保底数字用于展示，出货由服务端决定。",
+  "version": 1,
+  "cost": {
+    "protocolCodePerPull": 160
+  },
+  "_costSource": "03 §4.2：一抽 160 协议原码（常驻与限定同价），十连 1,600。",
+  "rates": {
+    "five": 0.006,
+    "four": 0.051,
+    "softPityStart": 55,
+    "softPityStep": 0,
+    "hardPity": 80,
+    "fourPityHits": 10
+  },
+  "_ratesSource": "02 §10：GACHA_RATE_5 = 0.006 · GACHA_RATE_4 = 0.051 · GACHA_SOFT_PITY = 55 · GACHA_HARD_PITY = 80 · GACHA_PITY4_HITS = 10。",
+  "_softPityStep": "**已用 `Sim gacha --sim 200000` 校准**（`02 §10` 原先标「待校准」、首版 0.06）。实测：步长 0.000 → 1/63.1 抽 · 0.002 → 1/59.7 · 0.005 → 1/57.0 · 0.02 → 1/51.8 · 0.06 → 1/49.4。目标 1/62.5 ⇒ **0.000 最接近**。⚠️ 结论是反直觉的：**目标 62.5 抽靠「几乎不做软保底」达到** —— 硬保底 80 + 基础 0.6% 本身就给出 E = Σ(0.994^k) ≈ 63.7，任何软保底都只会把期望往下拉。想同时保留软保底的**手感**与 62.5 的**均值**，就得同时下调基础概率（两个旋钮），那是一次需要作者拍板的设计改动。",
+  "pools": {
+    "standard": {
+      "name": "常驻权限许可",
+      "pityKey": "standardPity",
+      "guaranteedKey": null,
+      "five": [
+        "char-shouyueren",
+        "char-qianyu-xingyao",
+        "char-xingyao-star-oath",
+        "char-xingyao-darknight",
+        "char-hoshimi-aino",
+        "char-lin-jingyuan",
+        "char-belrand",
+        "char-alice",
+        "char-valeria",
+        "char-vera",
+        "char-karni",
+        "char-rolanda"
+      ],
+      "four": [
+        "char-qianyu-jingxing"
+      ],
+      "threeWeapons": [
+        "weap-zhishi-dandao",
+        "weap-zhishi-changjian",
+        "weap-zhishi-shushuyi",
+        "weap-zhishi-geqiang"
+      ],
+      "_note": "常驻池名单属管理员可改项（100 丁4：降级为 🟢，服务端做成配置项即可）。名单为空时 rollGacha 必须**报错**而不是静默降级（100 戊4）。"
+    },
+    "limited": {
+      "name": "限定权限许可",
+      "pityKey": "limitedPity",
+      "guaranteedKey": "guaranteedLimited",
+      "five": [
+        "char-shouyueren",
+        "char-qianyu-xingyao",
+        "char-xingyao-star-oath",
+        "char-xingyao-darknight",
+        "char-hoshimi-aino",
+        "char-lin-jingyuan",
+        "char-belrand",
+        "char-alice",
+        "char-valeria",
+        "char-vera",
+        "char-karni",
+        "char-rolanda"
+      ],
+      "four": [
+        "char-qianyu-jingxing"
+      ],
+      "threeWeapons": [
+        "weap-zhishi-dandao",
+        "weap-zhishi-changjian",
+        "weap-zhishi-shushuyi",
+        "weap-zhishi-geqiang"
+      ],
+      "_note": "限定池之间共享 limitedPity（02 §4 的设计要点）。"
+    },
+    "weapon": {
+      "name": "权限覆写许可",
+      "pityKey": "weaponPity",
+      "guaranteedKey": "guaranteedWeapon",
+      "five": [
+        "weap-hengdao-yuanchu",
+        "weap-buluo-xingchen",
+        "weap-cuican-buzai-de-qimingxing",
+        "weap-youya-beige",
+        "weap-liaoyuanlu",
+        "weap-svadilfari",
+        "weap-wind-and-you",
+        "weap-chenxing-yongtantiao",
+        "weap-gongtong-peiqiang",
+        "weap-changxia-yusheng",
+        "weap-torquemada",
+        "weap-haful-shouwangzhe"
+      ],
+      "four": [
+        "weap-mingjing-jianxin"
+      ],
+      "threeWeapons": [
+        "weap-zhishi-dandao",
+        "weap-zhishi-changjian",
+        "weap-zhishi-shushuyi",
+        "weap-zhishi-geqiang"
+      ],
+      "_note": "武器池五星兜底到四星池是**禁止**的（100 戊4：会产出「五星的四星武器」）。"
+    }
+  }
+}

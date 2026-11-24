@@ -1,0 +1,28 @@
+{
+  "id": "weap-hengdao-yuanchu",
+  "name": "横刀·原初",
+  "rarity": 5,
+  "weaponType": "dao",
+  "owner": "char-shouyueren",
+
+  "mainStat": { "kind": "Atk", "op": "Pct", "value": 0.30, "note": "5★ 满级值（101 §1）" },
+  "subStat": { "kind": "Atk", "op": "Add", "value": 520, "note": "5★ 满级固定值（02 §10 的 WEAPON_SUB_ATK）" },
+
+  "effect": {
+    "appliesWhen": { "weaponType": "dao" },
+    "initialOverrideRank": 5,
+    "trigger": { "hook": "onUltimateCast", "duration": 2, "target": "self", "note": "101 §4.1：释放终结技后持续 2 回合" },
+    "tiers": [
+      { "rank": 1, "critRateBonus": 0.18, "critDmgBonus": 0.35, "windDmgBonus": 0.20 },
+      { "rank": 2, "critRateBonus": 0.20, "critDmgBonus": 0.40, "windDmgBonus": 0.23 },
+      { "rank": 3, "critRateBonus": 0.21, "critDmgBonus": 0.44, "windDmgBonus": 0.26 },
+      { "rank": 4, "critRateBonus": 0.23, "critDmgBonus": 0.47, "windDmgBonus": 0.28 },
+      { "rank": 5, "critRateBonus": 0.25, "critDmgBonus": 0.50, "windDmgBonus": 0.30 }
+    ],
+    "description": "装备者（仅单刀类）释放**终结技**后：**暴击率 +18/20/21/23/25%**、**暴击伤害 +35/40/44/47/50%**、**风属性伤害 +20/23/26/28/30%**，持续 2 回合。五段依次对应权限覆写 1~5 阶。"
+  },
+
+  "growth": { "mainAndSubGrowWithLevel": true, "levelFactor": 2.195, "effectGrowsWithOverrideOnly": true },
+  "note": "⚠️ **初始权限覆写 = 5 阶**：`角色设定\\守约人.txt` 写明本武器初始覆写 5，故不消耗覆写许可（101 §4.1）。⚠️ 原稿只给了**覆写 5 阶**的值，1~4 阶由 5 阶向后倒推 —— 倒推值是**我的提议**，`100` 乙14 / 丁7 记录在案，作者可改。⚠️ 原稿的副属性「暴击率 +25%」是百分比、不能当副属性（新模型下副属性必须是固定值），已**移入特效**（101 §5 的「甲」路线）。⚠️ 武器系统整体属 M7，本文件当前只作声明与 M3 校验输入，不进战斗。",
+  "flavor": "一柄没有任何铭文的单刀，刀身是哑光的深灰。它的「原初」二字只写在配发记录上——而那页记录本身也是空白的。"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "weap-wind-and-you",
+  "name": "风与你的约定",
+  "rarity": 5,
+  "weaponType": "gun",
+  "owner": "char-alice",
+
+  "mainStat": { "kind": "Hp", "op": "Pct", "value": 0.60, "note": "5★ 满级值。101 §0.1：这是唯一一条单列高档的主属性" },
+  "subStat": { "kind": "Hp", "op": "Add", "value": 1200, "note": "5★ 满级固定值（101 §2 的五星副属性池上限）" },
+
+  "effect": {
+    "appliesWhen": { "weaponType": "gun" },
+    "initialOverrideRank": 1,
+    "trigger": { "hook": "onSkillCast", "duration": 0, "target": "self", "note": "101 §4.9：召唤共生灵后（召唤由技能的 onCast 完成，故挂 onSkillCast）" },
+    "tiers": [
+      { "rank": 1, "symbiontWindDamageBonus": 0.20 },
+      { "rank": 2, "symbiontWindDamageBonus": 0.22 },
+      { "rank": 3, "symbiontWindDamageBonus": 0.25 },
+      { "rank": 4, "symbiontWindDamageBonus": 0.28 },
+      { "rank": 5, "symbiontWindDamageBonus": 0.30 }
+    ],
+    "description": "装备者**召唤共生灵**后，**共生灵的风属性伤害提高 20 / 22 / 25 / 28 / 30%**（五段依次对应权限覆写 1~5 阶）。"
+  },
+
+  "growth": { "mainAndSubGrowWithLevel": true, "levelFactor": 2.195, "effectGrowsWithOverrideOnly": true },
+  "note": "⚠️ **原稿只写了主/副属性、漏了特效**，五段数值由作者本轮补写（`100` #93）。⚠️ 原稿的「生命 +30% / +1,000」与 `101 §0.1` 的池冲突，已对齐到 **60% / 1,200**。⚠️ 初始权限覆写档位原稿未给，本表取 **1 阶**（`07 §9.8` 待补项 1）。⚠️ 武器系统整体属 M7，本文件当前只作声明与 M3 校验输入，不进战斗。",
+  "flavor": "与她的赛车服、以及一个挂在颈下的「分身吊坠」相配的那把枪；档案里她手持的是一支被抹去编号的 HK416C。"
+}

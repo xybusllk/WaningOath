@@ -1,0 +1,14 @@
+{
+  "id": "buff-duanxian-xunhen",
+  "name": "断线寻痕",
+  "kind": "buff",
+  "stackCap": 3,
+  "stackable": true,
+  "durationUnit": "turn",
+  "duration": 2,
+  "mods": [
+    { "kind": "CritDmg", "op": "Add", "value": 0.10, "source": "断线寻痕" }
+  ],
+  "elemMods": [],
+  "description": "守约人天赋：自身暴击伤害 +10% / 层，最多 3 层。面板暴击伤害是「暴击总倍率」，故此处的 +10% 是直接把 1.50 抬到 1.60。"
+}

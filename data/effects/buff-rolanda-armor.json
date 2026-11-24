@@ -1,0 +1,16 @@
+{
+  "id": "buff-rolanda-armor",
+  "name": "陶瓷复合装甲",
+  "kind": "buff",
+  "stackCap": 3,
+  "stackable": true,
+  "durationUnit": "round",
+  "duration": 2,
+  "mods": [
+    { "kind": "DamageReduction", "op": "Add", "value": 0.12, "source": "每层陶瓷复合装甲：受到伤害 −12%" }
+  ],
+  "elemMods": [],
+  "description": "每层使自身受到伤害 −12%，最多 3 层（−36%）；与其他减伤取最高。每受到一次攻击 +1 层，获得新层时刷新全部层数的持续时间。",
+  "note": "DamageReduction 的多来源取最高由 ComputedStats 统一处理；同来源 3 层按层数相加。",
+  "exclusiveTo": []
+}

@@ -1,0 +1,14 @@
+{
+  "id": "buff-vera-enhanced-used",
+  "name": "强化终结技已用",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 0,
+  "mods": [],
+  "elemMods": [],
+  "description": "本次「火枪手」期间已释放过「为了，下一个明天」；到期时不再结算「狩猎印记」。",
+  "note": "纯标记状态。归属：`原始角色设定\\薇拉·约克.txt` 终结技。",
+  "exclusiveTo": []
+}

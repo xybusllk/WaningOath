@@ -1,0 +1,28 @@
+{
+  "id": "weap-haful-shouwangzhe",
+  "name": "哈弗尔守望者",
+  "rarity": 5,
+  "weaponType": "gun",
+  "owner": "char-rolanda",
+
+  "mainStat": { "kind": "Hp", "op": "Pct", "value": 0.60, "note": "5★ 满级值：生命上限 +60%" },
+  "subStat": { "kind": "Hp", "op": "Add", "value": 1200, "note": "5★ 满级固定值：生命 +1,200" },
+
+  "effect": {
+    "appliesWhen": { "weaponType": "gun" },
+    "initialOverrideRank": 1,
+    "trigger": { "hook": "onBattleStart", "duration": 0, "target": "partyAll", "note": "装备者在场时常驻；数据只能表达为开局挂载" },
+    "tiers": [
+      { "rank": 1, "damageReduction": 0.12 },
+      { "rank": 2, "damageReduction": 0.16 },
+      { "rank": 3, "damageReduction": 0.20 },
+      { "rank": 4, "damageReduction": 0.25 },
+      { "rank": 5, "damageReduction": 0.30 }
+    ],
+    "description": "装备者在场时，我方全体受到的物理伤害降低 12 / 16 / 20 / 25 / 30%（依次对应权限覆写 1~5 阶）；不与任何其他物理减伤叠加，取最高值。"
+  },
+
+  "growth": { "mainAndSubGrowWithLevel": true, "levelFactor": 2.195, "effectGrowsWithOverrideOnly": true },
+  "note": "⚠️ 原稿的「物理伤害降低」被引擎用通用 DamageReduction 表达，会连其他属性一起减；§13.9 已标为近似。初始覆写取 1 阶（原稿未写）。",
+  "flavor": "黑林精工出品的定制突击步枪；枪托上刻着一道被磨平的旧编号。"
+}

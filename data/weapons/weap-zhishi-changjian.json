@@ -1,0 +1,19 @@
+{
+  "id": "weap-zhishi-changjian",
+  "name": "制式长剑",
+  "rarity": 3,
+  "weaponType": "sword",
+  "mainStat": {
+    "kind": "Atk",
+    "op": "Pct",
+    "value": 0.12,
+    "note": "3★ 满级值（占位档）"
+  },
+  "growth": {
+    "mainAndSubGrowWithLevel": true,
+    "levelFactor": 2.195,
+    "effectGrowsWithOverrideOnly": true
+  },
+  "note": "抽卡 3★ 池的制式武器占位；3★ 按 101 §0.1 只有主属性一个部件。",
+  "flavor": "标准配发的制式长剑。"
+}

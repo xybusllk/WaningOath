@@ -1,0 +1,20 @@
+{
+  "id": "buff-vera-tomorrow",
+  "name": "今日是昨天的明天",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 3,
+  "appliesTo": "partyAll",
+  "mods": [
+    { "kind": "CritRate", "op": "Add", "value": 0.95, "source": "今日是昨天的明天：暴击率锁定 100%（近似为 +95%）" },
+    { "kind": "Speed", "op": "Pct", "value": 0.20, "source": "今日是昨天的明天：速度 +20%" },
+    { "kind": "CritDmg", "op": "Pct", "value": 0.20, "source": "今日是昨天的明天：暴击伤害 +20%" },
+    { "kind": "Atk", "op": "Pct", "value": 0.20, "source": "今日是昨天的明天：攻击力 +20%" }
+  ],
+  "elemMods": [],
+  "description": "我方全体：暴击率锁定 100%、速度 +20%、暴击伤害 +20%、攻击力 +20%，持续 3 回合。",
+  "note": "⚠️ 引擎没有「锁定为 100%」的词条，数据用暴击率 +95% 近似（基础 5%）；若角色已有额外暴击率会超过 100%。归属：`原始角色设定\\薇拉·约克.txt` 强化终结技。",
+  "exclusiveTo": []
+}

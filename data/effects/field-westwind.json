@@ -1,0 +1,16 @@
+{
+  "id": "field-westwind",
+  "name": "西风尽头的花香",
+  "kind": "field",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 2,
+  "mods": [],
+  "elemMods": [],
+  "onEnemyEnter": [
+    { "type": "applyDebuff", "debuffId": "debuff-westwind-flower", "stacks": 1, "duration": 2, "target": "allEnemies" }
+  ],
+  "description": "千语星遥·至暗长夜的独有领域（07 §4.3 / §4.4）。自身在领域内：伤害减免 30%、暴击率 +30%、暴击伤害 +80%、异常积蓄效率 +12.5%（直接加算；权阶Ⅵ → 32.5%）。任意敌方单位进入领域时：生命上限 −10%、受到的冰属性伤害 +20%；其中生命上限的 −10% 与战斗固有技能「血河不息」的 −20% 是叠加关系，合计 −30%（100 #18 甲11）。",
+  "note": "领域本体只做登记与计时（与 field-canxing / field-lava-terrain 同口径）。自身增益在终结技的 onCast 里用 modifyStat 挂（持续 2 回合，与领域同寿）；敌方进入领域的效果由 onEnemyEnter 引用 debuff-westwind-flower 表达（其生命上限一栏已合并为 −30%）。M1 的 deployField 尚未驱动 onEnemyEnter，属 M7 实现点。"
+}

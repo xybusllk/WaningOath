@@ -1,0 +1,398 @@
+{
+  "id": "char-xingyao-star-oath",
+  "name": "千语星遥·群星誓约",
+  "title": "泯妄·黯夜启明",
+  "rarity": 5,
+  "elements": [
+    "physical",
+    "ice"
+  ],
+  "path": "dps",
+  "anchorRow": "hpDps",
+  "weaponType": "dao",
+  "faction": [
+    "CCRF"
+  ],
+  "birthday": "07-13",
+  "genderVariant": false,
+  "_comment": "07 §3。生命倍率主C，物理/冰双属性；**没有能量系统**（100 #53 丙4），唯一资源是「星忆」。07 的终结技「消耗 12 层」与「星忆上限 10」在 0 权阶互斥，这里按可玩性取消耗 10（R1 的落盘口径），权阶Ⅰ 仍写 10 保持幂等。",
+  "base": {
+    "atk": 260,
+    "hp": 5200,
+    "def": 100,
+    "speed": 100,
+    "critRate": 0.05,
+    "critDmg": 1.5,
+    "energyMax": 0,
+    "energyOverflowCap": 0,
+    "threat": 50
+  },
+  "growth": {
+    "panelGrowth": 1.01,
+    "breakthroughBonus": {
+      "hp": 0.05
+    }
+  },
+  "skills": {
+    "basic": {
+      "id": "skill-cuican-zhixing",
+      "kind": "basic",
+      "name": "璀璨之星",
+      "targetType": "single",
+      "scalingBase": "hp",
+      "scalingArray": "basic",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "resonanceIndex": 1,
+        "energy": 0
+      },
+      "hits": [
+        {
+          "multiplier": 0.08,
+          "target": "main",
+          "element": "physical"
+        }
+      ],
+      "description": "8%最大生命值物理属性伤害；+1共鸣指数",
+      "rawText": "8%最大生命值物理属性伤害；+1共鸣指数",
+      "optimization": {
+        "source": "优化稿/千语星遥·群星誓约-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "resonance": {
+      "id": "skill-gonglv-jiefang",
+      "kind": "resonance",
+      "name": "璀璨之星·功率解放",
+      "targetType": "aoe",
+      "scalingBase": "hp",
+      "scalingArray": "resonance",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 1
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 0
+      },
+      "onCast": [
+        {
+          "type": "selfHpCost",
+          "pctMaxHp": 0.05,
+          "target": "self"
+        },
+        {
+          "type": "gainStack",
+          "stack": "starMem",
+          "amount": 1,
+          "cap": 10,
+          "target": "self"
+        }
+      ],
+      "hits": [
+        {
+          "multiplier": 0.05,
+          "target": "all",
+          "element": "physical"
+        }
+      ],
+      "description": "消耗当前生命5%；敌方全体16%最大生命值物理属性伤害；−1共鸣指数；获得1层「星忆」（上限10）",
+      "rawText": "消耗当前生命5%；敌方全体16%最大生命值物理属性伤害；−1共鸣指数；获得1层「星忆」（上限10）",
+      "optimization": {
+        "source": "优化稿/千语星遥·群星誓约-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "talent": {
+      "id": "skill-yushi-wuzheng",
+      "kind": "talent",
+      "name": "与世无争",
+      "scalingArray": "none",
+      "triggers": [
+        {
+          "hook": "onTurnStart",
+          "scope": "self",
+          "effects": [
+            {
+              "type": "heal",
+              "pctMaxHp": 0.2,
+              "target": "self"
+            },
+            {
+              "type": "gainStack",
+              "stack": "starMem",
+              "amount": 1,
+              "cap": 10,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "description": "若自身一回合内未被选为攻击目标，则自身回合开始时回复20%最大生命值，并获得1层「星忆」",
+      "rawText": "若自身一回合内未被选为攻击目标，则自身回合开始时回复20%最大生命值，并获得1层「星忆」",
+      "optimization": {
+        "source": "优化稿/千语星遥·群星誓约-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      },
+      "cost": {
+        "energy": 0
+      },
+      "gain": {
+        "energy": 0
+      },
+      "targetType": "partyAll",
+      "scalingBase": "hp"
+    },
+    "ultimate": {
+      "id": "skill-biqunxing-geng-shanliang",
+      "kind": "ultimate",
+      "name": "比群星更闪耀的",
+      "targetType": "self",
+      "scalingBase": "hp",
+      "scalingArray": "none",
+      "cost": {
+        "energy": 0,
+        "stack": "starMem",
+        "stackAmount": 10
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 0
+      },
+      "onCast": [
+        {
+          "type": "cleanse",
+          "types": [
+            "all"
+          ],
+          "count": 99,
+          "target": "self"
+        },
+        {
+          "type": "applyBuff",
+          "buffId": "buff-canxing",
+          "stacks": 1,
+          "duration": 5,
+          "target": "self",
+          "tickSource": "self"
+        },
+        {
+          "type": "deployField",
+          "fieldId": "field-canxing",
+          "duration": 5
+        },
+        {
+          "type": "extraTurn",
+          "target": "self"
+        }
+      ],
+      "description": "消耗12层「星忆」；展开领域「灿星」，自身获得强化元素共鸣「追忆-新星爆发」与强化普攻「追忆-白矮坍堕」，并立即解除所有负面状态；领域内自身暴击率+20%/暴击伤害+40%，我方全体均可为自身叠加「星忆」，除自己外的我方单位每次行动叠1层；随后立即行动；终结技状态持续5次行动，期间所有增益效果不会损耗；5次行动完成后对敌方全体造成45%最大生命值冰属性伤害；若第5次行动后仍持有「星忆」，每层消耗并额外对随机敌方单体造成10次8%最大生命值冰属性伤害（优先弹射未被本次额外攻击打击过的目标）；上述两段均为终结技伤害；攻击完成后退出终结技状态，并使自身行动延后10%",
+      "rawText": "消耗12层「星忆」；展开领域「灿星」，自身获得强化元素共鸣「追忆-新星爆发」与强化普攻「追忆-白矮坍堕」，并立即解除所有负面状态；领域内自身暴击率+20%/暴击伤害+40%，我方全体均可为自身叠加「星忆」，除自己外的我方单位每次行动叠1层；随后立即行动；终结技状态持续5次行动，期间所有增益效果不会损耗；5次行动完成后对敌方全体造成45%最大生命值冰属性伤害；若第5次行动后仍持有「星忆」，每层消耗并额外对随机敌方单体造成10次8%最大生命值冰属性伤害（优先弹射未被本次额外攻击打击过的目标）；上述两段均为终结技伤害；攻击完成后退出终结技状态，并使自身行动延后10%",
+      "optimization": {
+        "source": "优化稿/千语星遥·群星誓约-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      },
+      "hits": [
+        {
+          "multiplier": 0.2,
+          "target": "all",
+          "element": "physical"
+        }
+      ]
+    },
+    "enhancedBasic": {
+      "id": "skill-baiwo-tanduo",
+      "kind": "enhanced_basic",
+      "name": "追忆-白矮坍堕",
+      "targetType": "blast",
+      "scalingBase": "hp",
+      "scalingArray": "basic",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0,
+        "requires": "usedUltimate"
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 0
+      },
+      "hits": [
+        {
+          "multiplier": 0.35,
+          "target": "main",
+          "element": "ice"
+        },
+        {
+          "multiplier": 0.297,
+          "target": "adjacent",
+          "element": "ice"
+        }
+      ],
+      "description": "单体35%+相邻30%最大生命值冰属性伤害；每命中1名敌人获得1层「星忆」（一次行动最多3层，可溢出，最多10层）；等级系数与「璀璨之星」共用；不回复共鸣指数",
+      "rawText": "单体35%+相邻30%最大生命值冰属性伤害；每命中1名敌人获得1层「星忆」（一次行动最多3层，可溢出，最多10层）；等级系数与「璀璨之星」共用；不回复共鸣指数",
+      "optimization": {
+        "source": "优化稿/千语星遥·群星誓约-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "enhancedResonance": {
+      "id": "skill-xinxing-baofa",
+      "kind": "enhanced_resonance",
+      "name": "追忆-新星爆发",
+      "targetType": "single",
+      "scalingBase": "hp",
+      "scalingArray": "resonance",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0,
+        "stack": "starMem",
+        "stackAmount": 3,
+        "requires": "usedUltimate"
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 0
+      },
+      "hits": [
+        {
+          "multiplier": 0.25,
+          "target": "random",
+          "times": 5,
+          "element": "ice"
+        }
+      ],
+      "onCast": [
+        {
+          "type": "conditional",
+          "condition": "stackAtLeast:starMem:5",
+          "then": [
+            {
+              "type": "dealDamage",
+              "multiplier": 0.35,
+              "scalingBase": "hp",
+              "element": "ice",
+              "target": "allEnemies",
+              "countsAsUltimateDamage": true
+            }
+          ]
+        }
+      ],
+      "description": "消耗「星忆」（最多3层，上限5层），每层对随机敌方单体造成5次25%最大生命值冰属性伤害；若消耗5层，额外对敌方全体造成35%最大生命值冰属性伤害；等级系数与「璀璨之星·功率解放」共用；不消耗共鸣指数",
+      "rawText": "消耗「星忆」（最多3层，上限5层），每层对随机敌方单体造成5次25%最大生命值冰属性伤害；若消耗5层，额外对敌方全体造成35%最大生命值冰属性伤害；等级系数与「璀璨之星·功率解放」共用；不消耗共鸣指数",
+      "optimization": {
+        "source": "优化稿/千语星遥·群星誓约-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    }
+  },
+  "eidolons": [
+    {
+      "rank": 1,
+      "name": "接指令，允许超限",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "starMemCost",
+          "value": -2
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "星星们，会记得你",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "healToStarMem",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "它们......在发光吗？",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 12
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "群星，照映明日！",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "resPen",
+          "value": 0.15,
+          "target": "partyAll"
+        },
+        {
+          "type": "modifyStat",
+          "stat": "defDown",
+          "value": 0.1,
+          "target": "allEnemies"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "我们......能成功吗？",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 14
+        },
+        {
+          "type": "gainResonance",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "name": "此夜，星海澈明！",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "ultimateDuration",
+          "value": 3
+        },
+        {
+          "type": "modifyStat",
+          "stat": "starMemCap",
+          "value": 99
+        }
+      ]
+    }
+  ],
+  "signatureWeapon": "weap-cuican-buzai-de-qimingxing",
+  "gearSet": "gear-canxing-suoxiang",
+  "lore": {
+    "quote": "基金会将记住并感谢您的付出与牺牲",
+    "narrativeSkills": [
+      "溯忆",
+      "忆库"
+    ],
+    "secrets": [
+      "群星计划第 14 席",
+      "权限 4-4-3",
+      "最终任务：拖到 Alpha 核弹头引爆"
+    ],
+    "speechStyle": "与常态星遥同源但更沉重：平静、公式化、克制，日常吐槽感几乎消失",
+    "relationships": {
+      "千语星遥": "同一角色的不同形态",
+      "千语镜星": "同貌，真相在主线内不得解释"
+    }
+  }
+}

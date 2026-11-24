@@ -1,0 +1,33 @@
+{
+  "id": "weap-svadilfari",
+  "name": "斯瓦迪尔法利之焰剑",
+  "rarity": 5,
+  "weaponType": "sword",
+  "owner": "char-belrand",
+
+  "mainStat": { "kind": "Atk", "op": "Pct", "value": 0.30, "note": "5★ 满级值（101 §0.1）" },
+  "subStat": { "kind": "Atk", "op": "Add", "value": 520, "note": "5★ 满级固定值（02 §10 的 WEAPON_SUB_ATK）" },
+
+  "effect": {
+    "appliesWhen": { "weaponType": "sword" },
+    "initialOverrideRank": 1,
+    "triggers": [
+      { "hook": "onAnomalyTrigger", "duration": 0, "target": "self", "keys": ["extraCombustChance"],
+        "note": "101 §4.8 前半：**施加「可燃」时**有 35~55% 基础概率额外施加 1 层 —— 所以它的时机是「施加异常」，不是「引爆」" },
+      { "hook": "onCombustDetonate", "duration": 0, "target": "self", "keys": ["detonateDamageBonus"],
+        "note": "101 §4.8 后半：**引爆「可燃」（爆燃）时**伤害提高 8~16%" }
+    ],
+    "tiers": [
+      { "rank": 1, "extraCombustChance": 0.35, "detonateDamageBonus": 0.08 },
+      { "rank": 2, "extraCombustChance": 0.40, "detonateDamageBonus": 0.10 },
+      { "rank": 3, "extraCombustChance": 0.45, "detonateDamageBonus": 0.12 },
+      { "rank": 4, "extraCombustChance": 0.50, "detonateDamageBonus": 0.14 },
+      { "rank": 5, "extraCombustChance": 0.55, "detonateDamageBonus": 0.16 }
+    ],
+    "description": "装备者**施加「可燃」**时，有 35/40/45/50/55% **基础概率**额外施加 1 层「可燃」；装备者**引爆「可燃」（爆燃）**时，伤害提高 +8/10/12/14/16%。五段依次对应权限覆写 1~5 阶。"
+  },
+
+  "growth": { "mainAndSubGrowWithLevel": true, "levelFactor": 2.195, "effectGrowsWithOverrideOnly": true },
+  "note": "三段结构（101 §0.1）：主属性 = 百分比 · 副属性 = 固定值 · 特效 = 五段、只随权限覆写成长。⚠️ 初始权限覆写档位原稿未给，本表取 1 阶（最保守，见 07 §8.8 的待补项）。⚠️ 武器系统整体属 M7，本文件当前只作声明与 M3 校验输入，不进战斗。",
+  "flavor": "剑身是黑色熔岩，间杂红色岩浆纹路，剑刃是永流不息的红色岩浆，剑格处嵌着一颗火焰之心；剑身极宽，约四十厘米。（表现层需要动态循环材质，见 07 §8.7）"
+}

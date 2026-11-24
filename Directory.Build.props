@@ -1,0 +1,25 @@
+<Project>
+
+  <!--
+    WaningOath - 全解决方案共用的构建规则
+
+    这里放"所有 C# 工程都该遵守"的东西。Godot 客户端工程由 Godot.NET.Sdk 自己
+    管理编译设置（它还要生成 glue 代码），因此按工程名排除，不套用本文件。
+  -->
+  <PropertyGroup Condition="'$(MSBuildProjectName)' != 'WaningOath'">
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- 06 §8.3 顺序纪律第 2 条：每个里程碑结束必须 "dotnet build 零警告零错误"。
+         把警告升级为错误，这条纪律才是真的门禁，而不是靠人盯着看。 -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+
+    <!-- Core 的确定性纪律（06 §8.1）要求整数/定点运算，浮点只用于概率与展示。
+         暂不全局禁用浮点，但把它记在这里作为提醒。 -->
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,31 @@
+{
+  "id": "weap-changxia-yusheng",
+  "name": "长夏余生",
+  "rarity": 5,
+  "weaponType": "gun",
+  "owner": "char-vera",
+
+  "mainStat": { "kind": "EnergyRegen", "op": "Pct", "value": 0.15, "note": "原稿：装备者的能量恢复效率提高 15%" },
+  "subStat": { "kind": "Atk", "op": "Add", "value": 520, "note": "原稿：攻击力固定 +520" },
+
+  "effect": {
+    "appliesWhen": { "weaponType": "gun" },
+    "initialOverrideRank": 1,
+    "triggers": [
+      { "hook": "onHit", "keys": ["energyOnHit"], "duration": 0, "target": "self", "note": "造成普攻伤害或物理伤害时固定额外回复 10 点能量（数据用 onHit + energyOnHit 近似）" },
+      { "hook": "onUltimateCast", "keys": ["critDmg"], "duration": 3, "target": "self", "note": "释放终结技后暴击伤害提高，持续 3 回合" }
+    ],
+    "tiers": [
+      { "rank": 1, "energyOnHit": 10, "critDmg": 0.50 },
+      { "rank": 2, "energyOnHit": 10, "critDmg": 0.60 },
+      { "rank": 3, "energyOnHit": 10, "critDmg": 0.70 },
+      { "rank": 4, "energyOnHit": 10, "critDmg": 0.85 },
+      { "rank": 5, "energyOnHit": 10, "critDmg": 1.00 }
+    ],
+    "description": "装备者（仅配枪）造成普攻伤害或物理属性伤害时，额外回复 10 点能量；释放终结技时暴击伤害提高 50/60/70/85/100%，持续 3 回合。五段依次对应权限覆写 1~5 阶。"
+  },
+
+  "growth": { "mainAndSubGrowWithLevel": true, "levelFactor": 2.195, "effectGrowsWithOverrideOnly": true },
+  "note": "⚠️ 原稿只说「造成普攻伤害或物理属性伤害」；数据用 onHit（任意命中）近似，实际会比对普攻/物理宽。⚠️ 初始覆写 1 阶（原稿未给初始档）。归属：`原始角色设定\\薇拉·约克.txt`。",
+  "flavor": "一杆被伪装成 1728 年式步枪的栓动步枪。枪托内侧刻着两行小字，只认得出「长夏」与「明天」。"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "summon-ember-dragon",
+  "name": "余烬天龙",
+  "kind": "summon",
+  "summonKind": "symbiont",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 0,
+  "mods": [],
+  "elemMods": [],
+  "skills": {
+    "symbiontSkill": {
+      "id": "skill-vera-ember-dragon-wail",
+      "kind": "symbiont_skill",
+      "name": "听啊，那死亡之兆的哀鸣",
+      "targetType": "blast",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "cost": { "energy": 0, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "hits": [
+        { "multiplier": 1.80, "target": "main", "element": "lightning", "accumulateAnomaly": true },
+        { "multiplier": 1.80, "target": "adjacent", "element": "lightning", "accumulateAnomaly": true }
+      ],
+      "description": "「余烬天龙」对敌方单体及其相邻目标造成自身 180% 攻击力的雷属性伤害（溅射同伤）。",
+      "rawText": "共生灵技「听啊，那死亡之兆的哀鸣」（扩散）｜180% 攻击力雷属性伤害，溅射同伤"
+    },
+    "symbiontTalent": {
+      "id": "skill-vera-death-refuses",
+      "kind": "symbiont_talent",
+      "name": "看啊，那死亡拒绝的诅咒",
+      "targetType": "self",
+      "scalingArray": "none",
+      "triggers": [],
+      "description": "「余烬天龙」在场时，薇拉受到的伤害由它三倍承担，且薇拉不会陷入无法战斗状态；它消失时回复薇拉 30% 生命上限，并对随机敌方 4 个单体造成薇拉 140% 攻击力的雷属性伤害。实现：`SummonGuardian` + 角色 `onSummonExpired/Destroyed` 触发器。",
+      "rawText": "共生灵天赋「看啊，那死亡拒绝的诅咒」（辅助）"
+    }
+  },
+  "description": "薇拉的共生灵。生命 = 薇拉生命上限的 300%、攻击 = 她的 100%、继承暴击率 / 暴击伤害；不会自然消失，仅会被强化终结技引爆或生命归零。",
+  "note": "⚠️ 承伤 3 倍、不死、暴击继承由 `SummonGuardian` / `SummonInheritCrit` / `SummonAtkPctOfCaster` 实现；消失时的治疗与 4 段弹射写在角色天赋的 `onSummonExpired` / `onSummonDestroyed` 触发器里。归属：`原始角色设定\\薇拉·约克.txt`。",
+  "exclusiveTo": []
+}

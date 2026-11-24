@@ -1,0 +1,15 @@
+{
+  "id": "buff-rolanda-guard-self",
+  "name": "黑林急救·自身",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 0,
+  "lethalGuardHealPct": 0.8,
+  "mods": [],
+  "elemMods": [],
+  "description": "罗兰达受到致命伤害时，免疫本次伤害并恢复自身生命上限 80%；每场一次。",
+  "note": "由 Combat.TryLethalGuard 读取 StatusDef.LethalGuardHealPct；每名单位 LethalGuardUsed 每场一次。",
+  "exclusiveTo": ["char-rolanda"]
+}

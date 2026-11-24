@@ -1,0 +1,16 @@
+{
+  "id": "gear-xingxie-bujixian",
+  "name": "星屑补给线",
+  "rarity": 5,
+  "_note": "星见爱乃的专属套装（07 §6.5 · 我提议 · 原稿未给）。",
+  "tiers": [
+    { "pieces": 2, "description": "生命上限 +12%",
+      "effects": [ { "type": "modifyStat", "stat": "hpPct", "value": 0.12, "target": "self" } ] },
+    { "pieces": 4, "description": "治疗量加成 +15%；领域「星光音乐会」持续期间我方全体能量恢复效率 +10%",
+      "effects": [
+        { "type": "modifyStat", "stat": "healBonus", "value": 0.15, "target": "self" },
+        { "type": "modifyStat", "stat": "energyRegen", "value": 0.10, "target": "partyAll", "condition": "fieldActive:field-starlight-concert" }
+      ] }
+  ],
+  "description": "星见爱乃 · 生命倍率生存位。"
+}

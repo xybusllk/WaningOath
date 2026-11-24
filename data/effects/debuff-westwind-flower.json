@@ -1,0 +1,17 @@
+{
+  "id": "debuff-westwind-flower",
+  "name": "西风尽头的花香 · 领域压制",
+  "kind": "debuff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "turn",
+  "duration": 2,
+  "mods": [
+    { "kind": "Hp", "op": "Pct", "value": -0.30, "source": "西风尽头的花香 + 血河不息" }
+  ],
+  "elemMods": [
+    { "kind": "Vuln", "element": "Ice", "op": "Add", "value": 0.20, "source": "西风尽头的花香" }
+  ],
+  "description": "敌方单位进入「西风尽头的花香」时获得：生命上限 −10%（领域）与战斗固有技能「血河不息」的 −20% **叠加**，合计生命上限 −30%（100 #18 甲11；「减伤取最高」的通则不适用于生命上限降低）；同时受到的冰属性伤害 +20%（离谒伤害按冰结算，因此同样吃这一条，01 §2.1）。领域持续 2 回合。",
+  "note": "生命上限降低走独立的 Hp Pct 词条，**不是** damageReduction —— 这是 100 #18 甲11 的硬要求。"
+}

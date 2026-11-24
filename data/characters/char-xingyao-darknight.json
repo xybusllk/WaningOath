@@ -1,0 +1,601 @@
+{
+  "id": "char-xingyao-darknight",
+  "name": "千语星遥·至暗长夜",
+  "title": "异妄·彼岸旅人",
+  "rarity": 5,
+  "element": "liye",
+  "path": "dps",
+  "anchorRow": "hpDps",
+  "weaponType": "dao",
+  "faction": [
+    "CCRF"
+  ],
+  "birthday": "未知",
+  "genderVariant": false,
+  "_comment": "07 §4（L383–L520）落盘。生命倍率主C，离谒 = 冰的变体（吃冰增伤、走冰异常、可与冰紊乱）。资源「归溟」用 stack 资源表达（guiming），因此**没有**建 buff-guiming.json。派生计数「waltz」= 已释放的「终幕圆舞曲」次数（上限 2），由「穿心幽泉」消耗。归溟上限：0~Ⅲ 权阶按 6 写进 gainStack.cap；权阶Ⅳ 的 9 用 eidolon.modifyStat guimingCap=9 做声明（静态 cap 需要引擎支持动态上限才真正生效）。「永寂交响诗」的 2/4/6 档用 onCast 的 conditional 叠加在基准 hit 0.98 上近似（hits[].condition 目前只在 randomUnhit 生效，不能把分档写在 hits 上）。权阶Ⅵ 的 294%+9%/层、免费终结技只能写在 description 与两个声明性 knob 里。两个战斗被动（花海之下 / 血河不息）的条件语法未登记（无 allyCount / fieldActive 条件），只写在 talent.description。",
+  "base": {
+    "atk": 260,
+    "hp": 5200,
+    "def": 100,
+    "speed": 100,
+    "critRate": 0.05,
+    "critDmg": 1.5,
+    "energyMax": 200,
+    "energyOverflowCap": 0,
+    "threat": 50
+  },
+  "growth": {
+    "panelGrowth": 1.01,
+    "breakthroughBonus": {
+      "hp": 0.05
+    }
+  },
+  "skills": {
+    "basic": {
+      "id": "skill-manzhushahua-de-qingwen",
+      "kind": "basic",
+      "name": "曼珠沙华的轻吻",
+      "targetType": "single",
+      "scalingBase": "hp",
+      "scalingArray": "basic",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "resonanceIndex": 1,
+        "energy": 15
+      },
+      "hits": [
+        {
+          "multiplier": 0.15,
+          "target": "main",
+          "element": "liye"
+        }
+      ],
+      "onCast": [
+        {
+          "type": "gainStack",
+          "stack": "guiming",
+          "amount": 1,
+          "cap": 6,
+          "target": "self"
+        }
+      ],
+      "description": "造成15%生命上限离谒伤害；获得1层「归溟」；+15能量；+1共鸣指数",
+      "rawText": "造成15%生命上限离谒伤害；获得1层「归溟」；+15能量；+1共鸣指数",
+      "optimization": {
+        "source": "优化稿/千语星遥·至暗长夜-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "resonance": {
+      "id": "skill-zhongmu-yuanwuqu",
+      "kind": "resonance",
+      "name": "终幕圆舞曲",
+      "targetType": "aoe",
+      "scalingBase": "hp",
+      "scalingArray": "resonance",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 1
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 30
+      },
+      "onCast": [
+        {
+          "type": "gainStack",
+          "stack": "waltz",
+          "amount": 1,
+          "cap": 2,
+          "target": "self"
+        }
+      ],
+      "hits": [
+        {
+          "multiplier": 0.35,
+          "target": "all",
+          "element": "liye"
+        }
+      ],
+      "description": "对敌方全体造成35%生命上限离谒伤害；消耗1共鸣指数；+30能量；获得1层「归溟」",
+      "rawText": "对敌方全体造成35%生命上限离谒伤害；消耗1共鸣指数；+30能量；获得1层「归溟」",
+      "optimization": {
+        "source": "优化稿/千语星遥·至暗长夜-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "bloom": {
+      "id": "skill-chuanxin-youquan",
+      "kind": "bloom",
+      "name": "穿心幽泉",
+      "targetType": "single",
+      "scalingBase": "hp",
+      "scalingArray": "resonance",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0,
+        "requires": "stackAtLeast:waltz:2"
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 30
+      },
+      "onCast": [
+        {
+          "type": "spendStack",
+          "stack": "waltz",
+          "amount": 2,
+          "target": "self"
+        },
+        {
+          "type": "gainStack",
+          "stack": "guiming",
+          "amount": 2,
+          "cap": 6,
+          "target": "self"
+        }
+      ],
+      "hits": [
+        {
+          "multiplier": 0.45,
+          "target": "main",
+          "element": "liye"
+        }
+      ],
+      "description": "造成45%生命上限离谒伤害；立即获得3层「归溟」；+30能量",
+      "rawText": "造成45%生命上限离谒伤害；立即获得3层「归溟」；+30能量",
+      "optimization": {
+        "source": "优化稿/千语星遥·至暗长夜-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "talent": {
+      "id": "skill-lunhui-de-bian",
+      "kind": "talent",
+      "name": "轮回的彼岸",
+      "scalingBase": "hp",
+      "scalingArray": "none",
+      "triggers": [
+        {
+          "hook": "onDisorder",
+          "scope": "self",
+          "effects": [
+            {
+              "type": "gainStack",
+              "stack": "guiming",
+              "amount": 2,
+              "cap": 6,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "description": "释放「终幕圆舞曲」两次后可释放一次「穿心幽泉」；「归溟」达到2/4/6层时，普攻被强化为「永寂交响诗」，单次强化只能释放一次；倍率按触发时的层数分档；权阶0~Ⅲ扣光层数，权阶Ⅳ起只扣2/4/6层并保留余数；当任意属性与离谒属性触发属性紊乱时，自身获得2层「归溟」",
+      "rawText": "释放「终幕圆舞曲」两次后可释放一次「穿心幽泉」；「归溟」达到2/4/6层时，普攻被强化为「永寂交响诗」，单次强化只能释放一次；倍率按触发时的层数分档；权阶0~Ⅲ扣光层数，权阶Ⅳ起只扣2/4/6层并保留余数；当任意属性与离谒属性触发属性紊乱时，自身获得2层「归溟」",
+      "optimization": {
+        "source": "优化稿/千语星遥·至暗长夜-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      },
+      "cost": {
+        "energy": 0
+      },
+      "gain": {
+        "energy": 0
+      },
+      "targetType": "single"
+    },
+    "enhancedBasic": {
+      "id": "skill-yongji-jiaoxiangshi",
+      "kind": "enhanced_basic",
+      "name": "永寂交响诗",
+      "targetType": "aoe",
+      "scalingBase": "hp",
+      "scalingArray": "basic",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0,
+        "requires": "stackAtLeast:guiming:2"
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 40
+      },
+      "hits": [
+        {
+          "multiplier": 1.2,
+          "target": "all",
+          "element": "liye"
+        }
+      ],
+      "onCast": [
+        {
+          "type": "conditional",
+          "condition": "stackAtLeast:guiming:6",
+          "then": [
+            {
+              "type": "dealDamage",
+              "multiplier": 0.49,
+              "scalingBase": "hp",
+              "element": "liye",
+              "target": "allEnemies"
+            }
+          ]
+        },
+        {
+          "type": "conditional",
+          "condition": "stackAtLeast:guiming:7",
+          "then": [
+            {
+              "type": "dealDamage",
+              "multiplier": 0.74,
+              "scalingBase": "hp",
+              "element": "liye",
+              "target": "allEnemies"
+            }
+          ]
+        },
+        {
+          "type": "conditional",
+          "condition": "stackExactly:guiming:2",
+          "then": [
+            {
+              "type": "dealDamage",
+              "multiplier": 0.2,
+              "scalingBase": "hp",
+              "element": "liye",
+              "target": "mainTarget"
+            },
+            {
+              "type": "spendStack",
+              "stack": "guiming",
+              "amount": 2,
+              "target": "self"
+            },
+            {
+              "type": "gainStack",
+              "stack": "guiming",
+              "amount": 2,
+              "cap": 6,
+              "target": "self"
+            },
+            {
+              "type": "gainEnergy",
+              "amount": 20,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "type": "conditional",
+          "condition": "stackExactly:guiming:4",
+          "then": [
+            {
+              "type": "dealDamage",
+              "multiplier": 0.2,
+              "scalingBase": "hp",
+              "element": "liye",
+              "target": "mainTarget"
+            },
+            {
+              "type": "spendStack",
+              "stack": "guiming",
+              "amount": 4,
+              "target": "self"
+            },
+            {
+              "type": "gainStack",
+              "stack": "guiming",
+              "amount": 2,
+              "cap": 6,
+              "target": "self"
+            },
+            {
+              "type": "gainEnergy",
+              "amount": 20,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "type": "conditional",
+          "condition": "stackExactly:guiming:6",
+          "then": [
+            {
+              "type": "dealDamage",
+              "multiplier": 0.2,
+              "scalingBase": "hp",
+              "element": "liye",
+              "target": "mainTarget"
+            },
+            {
+              "type": "spendStack",
+              "stack": "guiming",
+              "amount": 6,
+              "target": "self"
+            },
+            {
+              "type": "gainStack",
+              "stack": "guiming",
+              "amount": 2,
+              "cap": 6,
+              "target": "self"
+            },
+            {
+              "type": "gainEnergy",
+              "amount": 20,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "type": "conditional",
+          "condition": "stackAtLeast:guiming:7",
+          "then": [
+            {
+              "type": "spendStack",
+              "stack": "guiming",
+              "amount": 99,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "description": "触发时「归溟」2层：120%生命上限离谒伤害，自动释放一次「穿心幽泉」；4层：120%生命上限离谒伤害，自动释放一次「穿心幽泉」；6层：180%生命上限离谒伤害，自动释放一次「穿心幽泉」；>6层（权阶Ⅳ后）：275%生命上限离谒伤害（权阶Ⅵ下改按294%基准+每消耗1层+9%），不自动释放「穿心幽泉」；不回复共鸣指数；额外+40能量",
+      "rawText": "触发时「归溟」2层：120%生命上限离谒伤害，自动释放一次「穿心幽泉」；4层：120%生命上限离谒伤害，自动释放一次「穿心幽泉」；6层：180%生命上限离谒伤害，自动释放一次「穿心幽泉」；>6层（权阶Ⅳ后）：275%生命上限离谒伤害（权阶Ⅵ下改按294%基准+每消耗1层+9%），不自动释放「穿心幽泉」；不回复共鸣指数；额外+40能量",
+      "optimization": {
+        "source": "优化稿/千语星遥·至暗长夜-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "ultimate": {
+      "id": "skill-xifeng-jintou-huaxiang-yongyi",
+      "kind": "ultimate",
+      "name": "西风尽头，花香永溢",
+      "targetType": "aoe",
+      "scalingBase": "hp",
+      "scalingArray": "ultimate",
+      "cost": {
+        "energy": 150,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 10
+      },
+      "hits": [
+        {
+          "multiplier": 0.48,
+          "target": "all",
+          "element": "liye"
+        }
+      ],
+      "onCast": [
+        {
+          "type": "gainStack",
+          "stack": "guiming",
+          "amount": 3,
+          "cap": 6,
+          "target": "self"
+        },
+        {
+          "type": "deployField",
+          "fieldId": "field-westwind",
+          "duration": 2
+        },
+        {
+          "type": "applyDebuff",
+          "debuffId": "debuff-westwind-flower",
+          "stacks": 1,
+          "duration": 2,
+          "target": "allEnemies"
+        },
+        {
+          "type": "modifyStat",
+          "stat": "critRate",
+          "value": 0.3,
+          "duration": 2,
+          "target": "self"
+        },
+        {
+          "type": "modifyStat",
+          "stat": "critDmg",
+          "value": 0.8,
+          "duration": 2,
+          "target": "self"
+        },
+        {
+          "type": "modifyStat",
+          "stat": "damageReduction",
+          "value": 0.3,
+          "duration": 2,
+          "target": "self"
+        },
+        {
+          "type": "modifyStat",
+          "stat": "anomalyBuildUp",
+          "value": 0.125,
+          "duration": 2,
+          "target": "self"
+        }
+      ],
+      "description": "对敌方全体造成48%生命上限离谒伤害；立即获得3层「归溟」；展开领域「西风尽头的花香」持续2回合；自身在领域内：伤害减免30%、暴击率+30%、暴击伤害+80%、异常积蓄效率+15%（直接加算）；任意敌方单位进入领域时：生命上限-10%、受到的冰属性伤害+20%；当处在领域内的任意敌方目标受到伤害时恢复10点能量",
+      "rawText": "对敌方全体造成48%生命上限离谒伤害；立即获得3层「归溟」；展开领域「西风尽头的花香」持续2回合；自身在领域内：伤害减免30%、暴击率+30%、暴击伤害+80%、异常积蓄效率+15%（直接加算）；任意敌方单位进入领域时：生命上限-10%、受到的冰属性伤害+20%；当处在领域内的任意敌方目标受到伤害时恢复10点能量",
+      "optimization": {
+        "source": "优化稿/千语星遥·至暗长夜-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "optimized_inherent1_7": {
+      "id": "skill-char-xingyao-darknight-optimized_inherent1_7",
+      "kind": "inherent1",
+      "name": "「花海之下，我们互相道别」",
+      "targetType": "partyAll",
+      "scalingBase": "atk",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "hits": [],
+      "description": "当场上的我方目标仅剩自己时，暴击率+35%、暴击伤害+60%",
+      "rawText": "当场上的我方目标仅剩自己时，暴击率+35%、暴击伤害+60%",
+      "optimization": {
+        "source": "优化稿/千语星遥·至暗长夜-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "optimized_inherent2_8": {
+      "id": "skill-char-xingyao-darknight-optimized_inherent2_8",
+      "kind": "inherent2",
+      "name": "「血河不息，我们以血融歌」",
+      "targetType": "aoe",
+      "scalingBase": "hp",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "hits": [],
+      "description": "在自身独有领域「西风尽头的花香」中，敌方目标生命上限-20%；每减少敌方1,000点生命上限，自身暴击伤害+5%，最多+50%",
+      "rawText": "在自身独有领域「西风尽头的花香」中，敌方目标生命上限-20%；每减少敌方1,000点生命上限，自身暴击伤害+5%，最多+50%",
+      "optimization": {
+        "source": "优化稿/千语星遥·至暗长夜-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    }
+  },
+  "eidolons": [
+    {
+      "rank": 1,
+      "name": "西风不候满弦",
+      "effects": [
+        {
+          "type": "changeEnergyCost",
+          "setTo": 150
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "行囊先藏魂两缕",
+      "triggers": [
+        {
+          "hook": "onBattleStart",
+          "scope": "self",
+          "effects": [
+            {
+              "type": "gainStack",
+              "stack": "guiming",
+              "amount": 2,
+              "cap": 6,
+              "target": "self"
+            }
+          ]
+        },
+        {
+          "hook": "onSkillCast",
+          "scope": "self",
+          "skillKind": "enhanced_basic",
+          "oncePerBattle": 1,
+          "effects": [
+            {
+              "type": "gainStack",
+              "stack": "guiming",
+              "amount": 2,
+              "cap": 6,
+              "target": "self"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "血河初涨浸罗裙",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 12
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "魂匣扩容纳百怨",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "guimingCap",
+          "value": 9
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "花海漫溯掩归途",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 14
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "name": "终焉自启无需召",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "anomalyBuildUp",
+          "value": 0.2
+        },
+        {
+          "type": "modifyStat",
+          "stat": "enhancedBasicHighMultiplier",
+          "value": 2.94
+        },
+        {
+          "type": "modifyStat",
+          "stat": "enhancedBasicPerStackMultiplier",
+          "value": 0.09
+        }
+      ]
+    }
+  ],
+  "signatureWeapon": "weap-youya-beige",
+  "gearSet": "gear-bianhua-huaxiang",
+  "lore": {
+    "quote": "千年血河映彼岸，孤寂空灵铸终焉。我会在终焉的彼端，等你如约而至～",
+    "narrativeSkills": [
+      "西风尽头，我们终将重逢"
+    ],
+    "secrets": [
+      "CCRF 标注：裂变级–A–W（已与个体同化、具武器化潜力的高扩散威胁异常）",
+      "所属：CCRF(？)",
+      "瞳色：血红色",
+      "生日：未知",
+      "立绘：无（序章用剪影表现，正式立绘待补 · 100 #51 / 丁8）",
+      "禁则：不得揭示真实身份、与常态星遥的关系、「约定」的具体内容；「三人为何同貌」在主线内不得解释（100 #70③）"
+    ],
+    "speechStyle": "温柔而残忍的从容；把杀戮说成邀约，句尾常带「～」",
+    "relationships": {
+      "守约人": "序章第一位与他对话的存在，说完后消散，只留微笑与「相信你」的口型",
+      "千语星遥": "同貌；真相在主线内不得解释"
+    }
+  }
+}

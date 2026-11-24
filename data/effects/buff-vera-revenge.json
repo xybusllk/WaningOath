@@ -1,0 +1,23 @@
+{
+  "id": "buff-vera-revenge",
+  "name": "猎手的回礼",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 3,
+  "mods": [],
+  "elemMods": [
+    { "kind": "DmgAmp", "element": "physical", "op": "Add", "value": 0.40, "source": "猎手的回礼：伤害加深 +40%（近似为全目标）" },
+    { "kind": "DmgAmp", "element": "ice", "op": "Add", "value": 0.40, "source": "猎手的回礼：伤害加深 +40%（近似为全目标）" },
+    { "kind": "DmgAmp", "element": "fire", "op": "Add", "value": 0.40, "source": "猎手的回礼：伤害加深 +40%（近似为全目标）" },
+    { "kind": "DmgAmp", "element": "lightning", "op": "Add", "value": 0.40, "source": "猎手的回礼：伤害加深 +40%（近似为全目标）" },
+    { "kind": "DmgAmp", "element": "wind", "op": "Add", "value": 0.40, "source": "猎手的回礼：伤害加深 +40%（近似为全目标）" },
+    { "kind": "DmgAmp", "element": "resonance", "op": "Add", "value": 0.40, "source": "猎手的回礼：伤害加深 +40%（近似为全目标）" },
+    { "kind": "DmgAmp", "element": "liye", "op": "Add", "value": 0.40, "source": "猎手的回礼：伤害加深 +40%（近似为全目标）" },
+    { "kind": "DmgAmp", "element": "aria", "op": "Add", "value": 0.40, "source": "猎手的回礼：伤害加深 +40%（近似为全目标）" }
+  ],
+  "description": "薇拉对击中她的标记目标追加 100% 攻击力雷伤，并获得 40% 伤害加深，持续 3 回合。⚠️ 引擎没有「只对某目标增伤」的词条，40% 实际作用于所有目标。",
+  "note": "归属：`原始角色设定\\薇拉·约克.txt` 普攻的受击分支。",
+  "exclusiveTo": []
+}

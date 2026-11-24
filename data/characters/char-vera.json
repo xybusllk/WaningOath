@@ -1,0 +1,274 @@
+{
+  "id": "char-vera",
+  "name": "薇拉·约克",
+  "title": "泯妄·昔日天龙",
+  "rarity": 5,
+  "elements": ["lightning", "physical"],
+  "path": "dps",
+  "anchorRow": "dps",
+  "weaponType": "gun",
+  "faction": ["CCRF"],
+  "birthday": "01-21",
+  "genderVariant": false,
+  "teamLimit": 2,
+
+  "base": {
+    "atk": 300, "hp": 3600, "def": 100, "speed": 100,
+    "critRate": 0.05, "critDmg": 1.50,
+    "energyMax": 100, "energyOverflowCap": 25,
+    "threat": 50
+  },
+  "growth": { "panelGrowth": 1.01, "breakthroughBonus": { "atk": 0.05 } },
+
+  "_comment": "07 追加角色。雷 / 物理**双属性**（不是双模态）。能量 100 + 溢出 25。倍率 = 1 级最终倍率（#62 方案 B）。两条核心机制：共生灵余烬天龙（SummonGuardian）与火枪手形态（enhancedBasic / enhancedUltimate + 状态到期结算）。teamLimit=2 = 孤胆英雄。",
+
+  "skills": {
+    "basic": {
+      "id": "skill-vera-partner-who",
+      "kind": "basic",
+      "name": "伙伴，会是谁呢？",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "basic",
+      "cost": { "energy": 0, "resonanceIndex": 0, "requires": "notStatus:火枪手" },
+      "gain": { "resonanceIndex": 1, "energy": 20 },
+      "hits": [
+        {
+          "multiplier": 1.20,
+          "target": "main",
+          "element": "lightning",
+          "accumulateAnomaly": true,
+          "onHit": [
+            { "type": "applyDebuff", "debuffId": "debuff-vera-partner", "stacks": 1, "duration": 3, "target": "mainTarget", "stackCounter": "perAttack" }
+          ]
+        }
+      ],
+      "description": "对指定敌方单体造成 120% 攻击力雷属性伤害，回复 20 能量；施加「伙伴，果真如此？」3 回合：目标对薇拉伤害 −20%（近似为攻击 −20%），若目标击中薇拉则失去效果，并触发追加雷伤与薇拉的伤害加深。",
+      "rawText": "普攻「伙伴，会是谁呢？」（单攻）｜+1 共鸣指数｜120% 雷伤｜+20 能量｜施加「伙伴，果真如此？」3 回合"
+    },
+
+    "resonance": {
+      "id": "skill-vera-death-doesnt-fly",
+      "kind": "resonance",
+      "name": "死亡并不会飞翔",
+      "targetType": "self",
+      "scalingBase": "atk",
+      "scalingArray": "resonance",
+      "cost": { "energy": 0, "resonanceIndex": 1, "requires": "notStatus:火枪手" },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "onCast": [
+        {
+          "type": "conditional",
+          "condition": "hasSummon:summon-ember-dragon",
+          "then": [
+            { "type": "heal", "pctMaxHp": 0.45, "target": "ownSummons" }
+          ]
+        },
+        {
+          "type": "summon", "summonId": "summon-ember-dragon",
+          "hpPctOfCaster": 3.0, "scalingBase": "max", "duration": 0, "target": "self",
+          "SummonAtkPctOfCaster": 1.0, "SummonInheritCrit": true, "SummonGuardian": true
+        },
+        { "type": "applyBuff", "buffId": "buff-vera-dragon-bond", "stacks": 1, "duration": 0, "target": "self" }
+      ],
+      "description": "−1 共鸣指数。召唤共生灵「余烬天龙」：生命 = 薇拉生命上限 300%、攻击 = 100%、继承暴击率 / 暴击伤害；薇拉生命上限 +30%、暴击率 +10%、暴击伤害 +30%。若天龙已在场，改为回复它 45% 薇拉生命上限。",
+      "rawText": "元素共鸣「死亡并不会飞翔」（召唤）｜−1 共鸣指数｜召唤余烬天龙"
+    },
+
+    "bloom": {
+      "id": "skill-vera-want-to-learn",
+      "kind": "bloom",
+      "name": "这个我想学！",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "cost": { "energy": 0, "resonanceIndex": 0, "requires": "notStatus:火枪手" },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "onCast": [
+        { "type": "copyBuff", "count": 1, "duration": 3, "target": "mainTarget" }
+      ],
+      "description": "复制指定敌我单体身上的 1 个随机增益，施加于自身，持续 3 回合。其他角色释放元素绽放时，薇拉响应获得「借你羽梢一瞬」（伤害加深 +15%，2 回合）。",
+      "rawText": "元素绽放「这个我想学！」（强化）｜复制目标 1 个随机增益 3 回合"
+    },
+
+    "ultimate": {
+      "id": "skill-vera-dragon-and-gunslinger",
+      "kind": "ultimate",
+      "name": "龙与火枪手",
+      "targetType": "self",
+      "scalingBase": "atk",
+      "scalingArray": "ultimate",
+      "cost": { "energy": 100, "resonanceIndex": 0, "requires": "notStatus:火枪手" },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "onCast": [
+        { "type": "applyBuff", "buffId": "buff-vera-gunslinger", "stacks": 1, "duration": 3, "target": "self" },
+        {
+          "type": "conditional",
+          "condition": "knobAtLeast:gunslingerCrit:1",
+          "then": [
+            { "type": "applyBuff", "buffId": "buff-vera-gunslinger-crit", "stacks": 1, "duration": 3, "target": "self" }
+          ]
+        }
+      ],
+      "description": "消耗 100 能量，进入「火枪手」状态 3 自然回合：锁定其余技能，攻击属性变为物理，获得强化普攻「狩猎，从不会止步」与强化终结技「为了，下一个明天」。3 回合后若未释放强化终结技，结算全部「狩猎印记」。",
+      "rawText": "终结技「龙与火枪手」（弹射）｜100 能量｜进入火枪手 3 回合"
+    },
+
+    "enhancedBasic": {
+      "id": "skill-vera-hunt-never-stops",
+      "kind": "enhanced_basic",
+      "name": "狩猎，从不会止步",
+      "targetType": "blast",
+      "scalingBase": "atk",
+      "scalingArray": "basic",
+      "cost": { "energy": 0, "resonanceIndex": 0, "requires": "statusAtLeast:火枪手:1" },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "hits": [
+        {
+          "multiplier": 3.60,
+          "target": "main",
+          "element": "physical",
+          "accumulateAnomaly": true,
+          "onHit": [
+            {
+              "type": "conditional",
+              "condition": "enemyCountGE:2 AND targetHpBelow:0.5",
+              "then": [
+                { "type": "gainStack", "stack": "狩猎印记", "amount": 1, "cap": 5, "target": "self" }
+              ]
+            }
+          ]
+        },
+        { "multiplier": 3.80, "target": "adjacent", "element": "physical", "accumulateAnomaly": true }
+      ],
+      "description": "「火枪手」形态专属，不获得共鸣指数。对主目标造成 360%、相邻目标 380% 攻击力物理伤害，回复 1 能量；若命中至少 2 个生命低于 50% 的敌人，获得 1 层「狩猎印记」（上限 5）。",
+      "rawText": "强化普攻「狩猎，从不会止步」（扩散）｜360% / 380% 物理｜+1 能量｜低血目标叠印记"
+    },
+
+    "enhancedUltimate": {
+      "id": "skill-vera-for-next-tomorrow",
+      "kind": "enhanced_ultimate",
+      "name": "为了，下一个明天",
+      "targetType": "aoe",
+      "scalingBase": "atk",
+      "scalingArray": "ultimate",
+      "cost": { "energy": 100, "resonanceIndex": 0, "requires": "statusAtLeast:火枪手:1" },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "onCast": [
+        { "type": "selfHpCost", "value": 0.40, "target": "self" },
+        { "type": "applyBuff", "buffId": "buff-vera-tomorrow", "stacks": 1, "duration": 3, "target": "partyAll" },
+        { "type": "applyDebuff", "debuffId": "debuff-vera-dark-night", "stacks": 1, "duration": 3, "target": "allEnemies" },
+        { "type": "applyBuff", "buffId": "buff-vera-enhanced-used", "stacks": 1, "duration": 0, "target": "self" },
+        { "type": "dealDamage", "multiplier": 11.32, "scalingBase": "atk", "element": "physical", "target": "allEnemies", "canCrit": true }
+      ],
+      "description": "消耗 100 能量与 40% 最大生命；我方全体获得「今日是昨天的明天」（暴击率锁定 100%、速度 / 暴伤 / 攻击 +20%），敌方全体获得「终将逝去的黯夜」（防御 −35%、全抗 −20%），持续 3 回合；随后造成 1132% 攻击力物理群伤。",
+      "rawText": "强化终结技「为了，下一个明天」（群攻）｜100 能量 + 40% 生命｜全队增益 + 敌方减益｜1132% 物理"
+    },
+
+    "talent": {
+      "id": "skill-vera-dragon-blood",
+      "kind": "talent",
+      "name": "龙裔，永不腐朽",
+      "targetType": "self",
+      "scalingArray": "none",
+      "triggers": [
+        {
+          "hook": "onDamageTaken",
+          "scope": "self",
+          "condition": "notStatus:火枪手",
+          "oncePerTurn": 1,
+          "oncePerTurnKnob": "talentCap",
+          "effects": [
+            { "type": "gainEnergy", "amount": 20, "target": "self" },
+            { "type": "heal", "pctMaxHp": 0.10, "target": "self" }
+          ]
+        },
+        {
+          "hook": "onDamageTaken",
+          "scope": "self",
+          "condition": "statusAtLeast:火枪手:1",
+          "oncePerTurn": 1,
+          "oncePerTurnKnob": "talentCap",
+          "effects": [
+            { "type": "modifyStat", "stat": "damageReduction", "value": 0.35, "target": "self", "duration": 1 }
+          ]
+        },
+        {
+          "hook": "onDamageTaken",
+          "scope": "self",
+          "condition": "targetStatusAtLeast:伙伴，果真如此？:1",
+          "effects": [
+            { "type": "additionalDamage", "multiplier": 1.00, "scalingBase": "atk", "element": "lightning", "target": "mainTarget", "canCrit": true },
+            { "type": "decayStatus", "statusId": "debuff-vera-partner", "amount": 1, "target": "mainTarget" },
+            { "type": "applyBuff", "buffId": "buff-vera-revenge", "stacks": 1, "duration": 3, "target": "self" }
+          ]
+        },
+        {
+          "hook": "onSkillCast",
+          "scope": "allyOther",
+          "skillKind": "bloom",
+          "effects": [
+            { "type": "applyBuff", "buffId": "buff-vera-borrowed-wing", "stacks": 1, "duration": 2, "target": "self", "stackCounter": "perAttack" }
+          ]
+        },
+        {
+          "hook": "onSkillCast",
+          "scope": "self",
+          "skillKind": "enhanced_basic",
+          "condition": "stackAtLeast:狩猎印记:5 AND statusRemainingBelow:火枪手:2",
+          "effects": [
+            { "type": "recastSelf" }
+          ]
+        },
+        {
+          "hook": "onSummonExpired",
+          "scope": "self",
+          "effects": [
+            { "type": "decayStatus", "statusId": "buff-vera-dragon-bond", "amount": 1, "target": "self" },
+            { "type": "heal", "pctMaxHp": 0.30, "target": "self" },
+            { "type": "dealDamage", "multiplier": 1.40, "scalingBase": "atk", "element": "lightning", "target": "randomEnemy", "hits": 4, "canCrit": true }
+          ]
+        },
+        {
+          "hook": "onSummonDestroyed",
+          "scope": "self",
+          "effects": [
+            { "type": "decayStatus", "statusId": "buff-vera-dragon-bond", "amount": 1, "target": "self" },
+            { "type": "heal", "pctMaxHp": 0.30, "target": "self" },
+            { "type": "dealDamage", "multiplier": 1.40, "scalingBase": "atk", "element": "lightning", "target": "randomEnemy", "hits": 4, "canCrit": true },
+            {
+              "type": "conditional",
+              "condition": "knobAtLeast:summonBounceBonus:1",
+              "then": [
+                { "type": "dealDamage", "multiplier": 1.40, "scalingBase": "atk", "element": "lightning", "target": "randomEnemy", "hits": 2, "canCrit": true }
+              ]
+            }
+          ]
+        }
+      ],
+      "description": "非火枪手：受到伤害后充能 20 并回复 10% 生命（每回合 1 次）。火枪手：首次受伤后获得 35% 减伤。标记目标击中薇拉时触发追加雷伤与 40% 伤害加深。天龙消失时回复 30% 生命并弹射。",
+      "rawText": "天赋「龙裔，永不腐朽」（防御）"
+    }
+  },
+
+  "eidolons": [
+    { "rank": 1, "name": "鳞隙里的呼吸", "effects": [ { "type": "modifyStat", "stat": "talentCap", "value": 2 } ] },
+    { "rank": 2, "name": "它一直跟在身后", "_note": "开局召唤天龙 + 消失弹射 +2 段。summon 在 onBattleStart 触发；弹射段数由天赋里的 knob 条件读取。", "effects": [ { "type": "modifyStat", "stat": "summonBounceBonus", "value": 2 } ], "triggers": [ { "hook": "onBattleStart", "scope": "self", "effects": [ { "type": "summon", "summonId": "summon-ember-dragon", "hpPctOfCaster": 3.0, "scalingBase": "max", "duration": 0, "target": "self", "SummonAtkPctOfCaster": 1.0, "SummonInheritCrit": true, "SummonGuardian": true }, { "type": "applyBuff", "buffId": "buff-vera-dragon-bond", "stacks": 1, "duration": 0, "target": "self" } ] } ] },
+    { "rank": 3, "name": "旧枪上油", "shared": true, "effects": [ { "type": "modifyStat", "stat": "skillLevel", "value": 2, "cap": 12 } ] },
+    { "rank": 4, "name": "枪口指在已逝的昔日", "_note": "天赋触发上限 3 次 + 全属性增伤转化（当前只登记旋钮，未改变伤害区）。", "effects": [ { "type": "modifyStat", "stat": "talentCap", "value": 3 }, { "type": "modifyStat", "stat": "allElemConversion", "value": 1 } ] },
+    { "rank": 5, "name": "昔日重燃", "shared": true, "effects": [ { "type": "modifyStat", "stat": "skillLevel", "value": 2, "cap": 14 } ] },
+    { "rank": 6, "name": "扳机扣在下一个明天", "_note": "火枪手期间暴击率锁定 100%、暴伤 +50%；由终结技的 knob 条件挂 buff-vera-gunslinger-crit。", "effects": [ { "type": "modifyStat", "stat": "gunslingerCrit", "value": 1 } ] }
+  ],
+
+  "signatureWeapon": "weap-changxia-yusheng",
+  "gearSet": "gear-changxia-yusheng",
+
+  "lore": {
+    "quote": "她总说，这把枪是旧时代送她的长夏；剩下那点余生，留给下一个明天。",
+    "narrativeSkills": ["不朽龙裔", "天陨之翼", "赝造天使"],
+    "fieldSkills": [],
+    "secrets": [],
+    "speechStyle": "温柔大姐姐的口吻，句子慢；开杀戒时会突然变轻快，像换了一个人。",
+    "relationships": { "千语星遥": "天陨之翼的「数据化」联动对象" }
+  }
+}

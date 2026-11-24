@@ -1,0 +1,15 @@
+{
+  "id": "buff-vera-borrowed-wing",
+  "name": "借你羽梢一瞬",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 2,
+  "doubleNextBloom": true,
+  "mods": [],
+  "elemMods": [],
+  "description": "队伍中其他角色释放元素绽放时，薇拉获得「借你羽梢一瞬」：下一次自身元素绽放复制的增益，持续时长与层数翻倍。",
+  "note": "⚠️ 「增益强度翻倍」用复制后的 `Stacks × 2` 近似；若原增益不可叠层，强度只会体现在时长上。归属：`原始角色设定\\薇拉·约克.txt` 元素绽放。",
+  "exclusiveTo": []
+}

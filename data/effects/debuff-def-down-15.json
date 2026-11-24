@@ -1,0 +1,14 @@
+{
+  "id": "debuff-def-down-15",
+  "name": "防御降低",
+  "kind": "debuff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "turn",
+  "duration": 2,
+  "mods": [
+    { "kind": "Def", "op": "Pct", "value": -0.15, "source": "星辰有联结" }
+  ],
+  "elemMods": [],
+  "description": "千语星遥天赋：目标防御 −15%，持续 2 回合。⚠️ 比率减伤是凸曲线，该条的实际增伤只有约 3.1%（对防御 600 的目标），不得按 −15% 标注强度（01 §2.2 关键裁定）。"
+}

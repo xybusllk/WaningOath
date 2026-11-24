@@ -1,0 +1,44 @@
+{
+  "id": "summon-nine-tailed-fox",
+  "name": "九尾狐",
+  "kind": "summon",
+  "summonKind": "symbiont",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "turn",
+  "duration": 2,
+  "mods": [],
+  "elemMods": [],
+  "skills": {
+    "symbiontSkill": {
+      "id": "skill-he-wangchang-nayang",
+      "kind": "symbiont_skill",
+      "name": "和往常那样",
+      "targetType": "coop",
+      "scalingBase": "hp",
+      "scalingArray": "none",
+      "cost": { "energy": 0, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "onCast": [
+        { "type": "coopAttack", "target": "partyAll" },
+        { "type": "applyBuff", "buffId": "buff-coop-blessing", "stacks": 1, "duration": 1, "target": "coopTarget" },
+        { "type": "dealDamage", "multiplier": 0.125, "scalingBase": "hp", "element": "wind", "hits": 1, "target": "mainTarget" },
+        { "type": "dealDamage", "multiplier": 0.085, "scalingBase": "hp", "element": "wind", "hits": 1, "target": "adjacentEnemies" },
+        { "type": "tickAnomalyNow", "element": "wind", "target": "allEnemies" }
+      ],
+      "description": "九尾狐行动时**选取包括爱丽丝在内的任意一位我方角色**协同攻击（由玩家选；Sim 默认选生命上限最高的输出位）：被选中者**无视条件发动一次元素共鸣**（若处于强化状态则放强化版）；随后九尾狐对**持有风蚀层数最多**的敌方单体造成等同它生命上限 12.5% 的风属性伤害、对其相邻目标造成 8.5%，并**敌方全体各结算一次当前已持有的风蚀伤害**。",
+      "rawText": "共生灵技能「和往常那样」（协同）"
+    },
+    "symbiontTalent": {
+      "id": "skill-ruchang-de-jiahu",
+      "kind": "symbiont_talent",
+      "name": "如常的加护",
+      "scalingArray": "none",
+      "triggers": [],
+      "description": "被九尾狐选中发动协同攻击的角色：**全属性伤害加深 10%**、**暴击率 +12.5%**，持续 1 回合。数据里由「和往常那样」的 `applyBuff buff-coop-blessing target coopTarget` 实现。",
+      "rawText": "共生灵天赋「如常的加护」（辅助）"
+    }
+  },
+  "description": "**共生灵**（`01 §1.5` 的召唤物子类 · `100` #90）。它就是「终点」聚合体的一个分身（`异常体设定\\CCRF_318.txt` 附录 2 里那根钢丝 + 一个小肉球做的吊坠）。生命 = 爱丽丝生命上限的 100%；**速度 0、不出现在行动轴上、不会自然行动**，只在「爱丽丝行动后」插入额外回合行动；其余属性继承爱丽丝释放一段终结技时的实战面板。",
+  "note": "⚠️ 它是**共生灵**不是普通召唤物 —— 与「静止镜像」的差别全在 `summonKind` 上：普通召唤物默认不产生任何指令，共生灵有共生灵技与共生灵天赋。它的【被摧毁 / 自然消失】两个分支都触发 `onSummonExpired`，而爱丽丝的二段终结技正挂在那个钩子上。"
+}

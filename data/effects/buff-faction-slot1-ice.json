@@ -1,0 +1,15 @@
+{
+  "id": "buff-faction-slot1-ice",
+  "name": "阵营判定 · 冰属性强化",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "turn",
+  "duration": 2,
+  "mods": [],
+  "elemMods": [
+    { "kind": "DmgBonus", "element": "Ice", "op": "Add", "value": 0.25, "source": "星海涌骇浪 · 阵营判定" }
+  ],
+  "description": "千语星遥元素共鸣：我方一号位（最左）若为 CCRF 阵营，则该角色**自己**冰属性伤害 +25%，持续 2 回合（100 #23 甲16：原文的「其」即指一号位角色自己）。",
+  "exclusiveTo": []
+}

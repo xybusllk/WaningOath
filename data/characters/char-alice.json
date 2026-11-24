@@ -1,0 +1,171 @@
+{
+  "id": "char-alice",
+  "name": "爱丽丝",
+  "title": "泯妄·驭风灵狐",
+  "rarity": 5,
+  "element": "wind",
+  "path": "dps",
+  "anchorRow": "hpDps",
+  "weaponType": "gun",
+  "faction": ["CCRF"],
+  "birthday": "07-26",
+  "genderVariant": false,
+
+  "_comment": "07 §9。她是 CCRF-318-1（异常体设定\\CCRF_318.txt 的衍生异常体 1）。全部技能为【生命上限%】倍率（生命倍率主C）。她没有能量系统（01 §4.2）。",
+
+  "base": {
+    "atk": 260, "hp": 5200, "def": 100, "speed": 100,
+    "critRate": 0.05, "critDmg": 1.50,
+    "energyMax": 0, "energyOverflowCap": 0,
+    "threat": 50
+  },
+  "growth": { "panelGrowth": 1.01, "breakthroughBonus": { "hp": 0.05 } },
+
+  "finalDamageVsCategory": { "anomaly": 0.10 },
+
+  "skills": {
+    "basic": {
+      "id": "skill-chufeng-qipao-de-shiyue",
+      "kind": "basic",
+      "name": "初风·起跑的誓约",
+      "targetType": "single",
+      "scalingBase": "hp",
+      "scalingArray": "basic",
+      "cost": { "energy": 0, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 1, "energy": 0 },
+      "hits": [
+        {
+          "multiplier": 0.0325,
+          "target": "main",
+          "element": "wind",
+          "onHit": [
+            { "type": "applyAnomalyStack", "element": "wind", "stacks": 1, "target": "mainTarget", "stackCounter": "perHit" },
+            { "type": "gainStack", "stack": "expectation", "amount": 1, "cap": 12, "target": "self" }
+          ]
+        }
+      ],
+      "description": "对指定敌方单体造成等同于她生命上限 3.25% 的风属性伤害，并施加 1 层「风蚀」；获得 1 层「期望」（上限 12）。+1 共鸣指数。",
+      "rawText": "普攻「初风·起跑的誓约」(单攻)｜+1共鸣指数｜3.25%生命上限风属性伤害并附加一层风蚀；获得一层「期望」，最多12层"
+    },
+
+    "resonance": {
+      "id": "skill-bingchi-feng-zhi-guiji",
+      "kind": "resonance",
+      "name": "并驰·风之轨迹",
+      "targetType": "aoe",
+      "scalingBase": "hp",
+      "scalingArray": "resonance",
+      "cost": { "energy": 0, "resonanceIndex": 1 },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "hits": [
+        {
+          "multiplier": 0.105,
+          "target": "all",
+          "element": "wind",
+          "onHit": [
+            { "type": "applyAnomalyStack", "element": "wind", "stacks": 2, "target": "mainTarget", "stackCounter": "perHit" },
+            { "type": "tickAnomalyNow", "element": "wind", "target": "mainTarget" }
+          ]
+        }
+      ],
+      "onCast": [
+        { "type": "gainStack", "stack": "expectation", "amount": 2, "cap": 12, "target": "self" }
+      ],
+      "description": "对敌方全体造成等同于她生命上限 10.5% 的风属性伤害，为全体施加 2 层「风蚀」，并按「加上这 2 层之后的总层数」立即结算一次风蚀伤害；获得 2 层「期望」。−1 共鸣指数。",
+      "rawText": "元素共鸣「并驰·风之轨迹」(群攻)｜-1共鸣指数｜10.5%生命上限风属性伤害，为敌方全体施加两层风蚀，并按被攻击目标加上本技能添加的两层风蚀后的总层数立即结算一次伤害；获得两层「期望」"
+    },
+
+    "enhancedResonance": {
+      "id": "skill-zhongdianxian-qian-shiyan-yicheng",
+      "kind": "enhanced_resonance",
+      "name": "终点线前，誓言已成",
+      "targetType": "aoe",
+      "scalingBase": "hp",
+      "scalingArray": "resonance",
+      "cost": { "energy": 0, "resonanceIndex": 0, "requires": "hasSummon:summon-nine-tailed-fox" },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "hits": [
+        {
+          "multiplier": 0.155,
+          "target": "all",
+          "element": "wind",
+          "onHit": [
+            { "type": "tickAnomalyNow", "element": "wind", "target": "mainTarget" }
+          ]
+        }
+      ],
+      "onCast": [
+        { "type": "gainStack", "stack": "oath", "amount": 1, "cap": 15, "target": "self" }
+      ],
+      "description": "对敌方全体造成等同于她生命上限 15.5% 的风属性伤害，获得 1 层「誓言」并立即结算一次风蚀伤害。**不消耗共鸣指数**；由「一段终结技持续期间」解锁（数据里用 `requires: hasSummon` 表达）。权阶Ⅴ 后它也会回复 1 点共鸣指数。",
+      "rawText": "强化元素共鸣「终点线前，誓言已成」(群攻)｜此技能不消耗共鸣指数｜15.5%生命上限风属性伤害，获得1层「誓言」并立即结算一次风蚀异常伤害"
+    },
+
+    "talent": {
+      "id": "skill-weijing-de-hanglu",
+      "kind": "talent",
+      "name": "未竟的航路",
+      "scalingArray": "none",
+      "triggers": [
+        {
+          "hook": "onHit",
+          "scope": "self",
+          "condition": "targetCategoryIs:anomaly",
+          "effects": [
+            { "type": "applyAnomalyStack", "element": "wind", "stacks": 1, "target": "mainTarget", "stackCounter": "perHit" },
+            { "type": "heal", "pctMaxHp": 0.10, "target": "self" }
+          ]
+        },
+        {
+          "hook": "onSummonExpired",
+          "scope": "self",
+          "effects": [
+            { "type": "applyBuff", "buffId": "buff-oath-verdict", "perStack": "oath", "duration": 1, "target": "self" },
+            { "type": "dealDamage", "multiplier": 0.175, "scalingBase": "hp", "element": "wind", "hits": 1, "target": "allEnemies", "countsAsUltimateDamage": true },
+            { "type": "tickAnomalyNow", "element": "wind", "countAsFullCap": true, "target": "allEnemies" },
+            { "type": "spendStack", "stack": "oath", "amount": 99, "target": "self" }
+          ]
+        }
+      ],
+      "description": "①「大家伙的遗赠」：对**异常类**单位造成伤害时额外附加 1 层「风化」，并回复她生命上限 10% 的生命。②「未竟的航路」：释放一段终结技后，「期望」**全部转化**为「誓言」（不残留），每层使二段终结技伤害加深 2.5%；释放二段后清空。③ **二段终结技**由「九尾狐消失」触发（= 一段终结技的 2 自然回合后）：全体 17.5% 生命上限风伤 + **无视实际层数按满层（20）结算一次风蚀**。",
+      "rawText": "「大家伙的遗赠」｜对异常类单位造成伤害时，额外附加一层「风化」，并回复等同于爱丽丝生命上限10%的生命值。天赋「未竟的航路」｜当爱丽丝释放一段终结技后，所有的「期望」将转化为「誓言」，「誓言」的上限为15层，每层「誓言」使二段终结技的伤害加深2.5%，释放二段终结技后清空「誓言」层数"
+    },
+
+    "ultimate": {
+      "id": "skill-zaidu-bingjian",
+      "kind": "ultimate",
+      "name": "再度并肩",
+      "targetType": "summon",
+      "scalingBase": "hp",
+      "scalingArray": "none",
+      "cost": { "energy": 0, "stack": "expectation", "stackAmount": 12 },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "onCast": [
+        { "type": "transferStack", "from": "expectation", "stack": "oath", "cap": 15 },
+        { "type": "summon", "summonId": "summon-nine-tailed-fox", "hpPctOfCaster": 1.0, "scalingBase": "max", "duration": 2, "target": "self" }
+      ],
+      "description": "**不消耗能量**；需要 **12 层「期望」**解锁（权阶Ⅰ → 10，数据里用 `cost.stack` 表达）。释放后把全部「期望」转化为「誓言」，并**召唤共生灵「九尾狐」**：生命 = 她生命上限的 100%、速度 0、不进行动轴、其余属性继承她释放时的实战面板；持续 2 回合，期间**她行动后九尾狐插入额外回合立即行动**，且**她的元素共鸣被强化**。",
+      "rawText": "一段终结技「再度并肩」(召唤)｜不需要能量。拥有12层及以上「期望」时解锁，召唤共生灵「九尾狐」加入战斗"
+    }
+  },
+
+  "eidolons": [
+    { "rank": 1, "name": "起跑线的微风", "effects": [ { "type": "modifyStat", "stat": "expectationRequired", "value": -2 } ] },
+    { "rank": 2, "name": "往日并肩的羁绊", "effects": [ { "type": "modifyStat", "stat": "coopFullLayerTick", "value": 1 } ] },
+    { "rank": 3, "name": "三挡疾风·赛道延展", "shared": true, "effects": [ { "type": "modifyStat", "stat": "skillLevel", "value": 2, "cap": 12 } ] },
+    { "rank": 4, "name": "领航员的决意", "effects": [ { "type": "modifyStat", "stat": "oathCap", "value": 5 }, { "type": "modifyStat", "stat": "expectationPerResonance", "value": 1 } ] },
+    { "rank": 5, "name": "五挡满速·风之极意", "shared": true, "effects": [ { "type": "modifyStat", "stat": "skillLevel", "value": 2, "cap": 14 }, { "type": "gainResonance", "amount": 1 } ] },
+    { "rank": 6, "name": "代你驶向的黎明", "effects": [ { "type": "anomalyCapOverride", "element": "wind", "cap": 30 } ] }
+  ],
+
+  "signatureWeapon": "weap-wind-and-you",
+  "gearSet": "gear-dash-to-the-finish",
+
+  "lore": {
+    "quote": "如果可以的话……真想让大家伙亲眼看看。",
+    "narrativeSkills": ["莫测狐影"],
+    "secrets": ["真实年龄未知", "档案编号 CCRF-318-1", "与「终点」聚合体的关系"],
+    "speechStyle": "软糯、明亮、常带「欸」「唔」；说到大家伙时会放轻声音",
+    "relationships": {}
+  }
+}

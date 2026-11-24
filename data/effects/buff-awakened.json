@@ -1,0 +1,17 @@
+{
+  "id": "buff-awakened",
+  "name": "完全苏醒",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 0,
+  "mods": [
+    { "kind": "Speed", "op": "Pct", "value": 0.25, "source": "完全苏醒（移速超过成年人的短跑速度）" },
+    { "kind": "DamageReduction", "op": "Add", "value": 0.20, "source": "外壳硬化（9mm 手枪弹无法穿透）" }
+  ],
+  "elemMods": [],
+  "description": "CCRF-502「铅灰傀儡」承受**三次集中打击**后的质变。档案：「一具 502 在承受三次集中打击后即可完成完全苏醒。」**移速 +25%**（档案：『苏醒后的 502 移速超过成年人的短跑速度』）、**受到的伤害降低 20%**（档案：『外壳硬化到 9mm 手枪弹无法穿透』）。",
+  "note": "⚠️ **质变与前三层是两件事**：`buff-compensation`「代偿」的每层 +10% 速度是**渐进**的（凹陷处物质流动），本状态是**第 3 层触发的质变** —— 所以它单列成一个状态，而不是把代偿的第 3 层写成 +35%。触发挂在 `anom-ccrf-502.json` 的 `onStackReach` 上（条件 `statusAtLeast:代偿:3`，`oncePerBattle: 1`）。⚠️ `durationUnit: round` + `duration: 0` = **永久、不递减**（`01 §1.3`；档案：『已苏醒的 502 不会停止活动』）。⚠️ 减伤 20% 落在 `02 §0 宪法 7` 的「常规 7~25%」之内。⚠️ **这两个数值（+25% / 20%）是本轮实装时定的，属待裁决项**（已记入 `100`）。归属：`异常体设定\\CCRF_502_铅灰傀儡.txt`。",
+  "exclusiveTo": []
+}

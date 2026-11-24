@@ -1,0 +1,15 @@
+{
+  "id": "buff-memory-feast",
+  "name": "记忆里的欢宴",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "turn",
+  "duration": 1,
+  "mods": [
+    { "kind": "CritRate", "op": "Add", "value": 0.10, "source": "记忆里的欢宴" },
+    { "kind": "CritDmg", "op": "Add", "value": 0.30, "source": "记忆里的欢宴" }
+  ],
+  "elemMods": [],
+  "description": "千语星遥终结技：我方全体暴击率 +10% / 暴击伤害 +30%，持续 1 回合（权阶Ⅵ → 3 回合）。"
+}

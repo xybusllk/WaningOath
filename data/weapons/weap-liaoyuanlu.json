@@ -1,0 +1,29 @@
+{
+  "id": "weap-liaoyuanlu",
+  "name": "燎原炉",
+  "rarity": 5,
+  "weaponType": "focus",
+  "owner": "char-valeria",
+
+  "mainStat": { "kind": "Atk", "op": "Pct", "value": 0.30, "note": "5★ 满级值。101 §1：5★ 攻击% 档 = 30%（与 07 已落盘的 30% 一致）" },
+  "subStat": { "kind": "Atk", "op": "Add", "value": 520, "note": "101 §1：5★ 固定攻击上限 520" },
+
+  "effect": {
+    "appliesWhen": { "weaponType": "focus" },
+    "initialOverrideRank": 1,
+    "constant": {},
+    "trigger": { "hook": "onFollowUp", "duration": 2, "target": "partyAll", "note": "作者口径：装备者**进行协同攻击后**，我方全队火属性伤害提高 —— 协同攻击在本作里走 `coopAttack`，落点是 `onFollowUp`" },
+    "tiers": [
+      { "rank": 1, "dmgBonusFire": 0.20 },
+      { "rank": 2, "dmgBonusFire": 0.22 },
+      { "rank": 3, "dmgBonusFire": 0.25 },
+      { "rank": 4, "dmgBonusFire": 0.28 },
+      { "rank": 5, "dmgBonusFire": 0.30 }
+    ],
+    "description": "装备者（仅施术仪）**进行协同攻击后**：我方全队**火属性伤害 +20 / 22 / 25 / 28 / 30%**，持续 2 自然回合。五段依次对应权限覆写 1~5 阶。"
+  },
+
+  "growth": { "mainAndSubGrowWithLevel": true, "levelFactor": 2.195, "effectGrowsWithOverrideOnly": true },
+  "note": "⚠️ 五星特效五段由**作者本轮给出**（原稿只给了名字与主/副属性）：『特效记为装备者进行协同攻击后，我方全队火属性伤害提高 20%/22%/25%/28%/30%』。⚠️ **全队生效**而不是只给自己 —— 与 `06 §8.3` 的「同阵营取最高、不叠加」口径一致，所以它挂成 `partyAll` 的光环。⚠️ 触发钩子取 `onFollowUp`：**判定依据是「协同攻击」这个动作，不是「某个角色」**（沿用 `weap-chenxing-yongtantiao` 把判定写成 `deployField` 而不是 `ultimate` 的同一条纪律）。⚠️ 「燎原炉」这个武器名与她的终结技「星火燎原」同源，但**两者没有机制耦合** —— 不要实现成「终结技期间才生效」。归属：`原始角色设定\\瓦列里娅.txt`。",
+  "flavor": "一台被拆了又装回去七次的旧式熔炉，外壳上焊满了历代纵队徽章。她说不清它到底算武器还是算纪念品。"
+}

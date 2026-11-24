@@ -1,0 +1,23 @@
+{
+  "id": "gear-canxing-suoxiang",
+  "name": "灿星所向",
+  "rarity": 5,
+  "_note": "千语星遥·群星誓约的专属套装（07 §3.5「自黯夜归航的群星」，99 C3 提案名「灿星所向」）。2 件冰伤 +10%；4 件星忆上限 +3、终结技状态暴伤 +25%。",
+  "tiers": [
+    {
+      "pieces": 2,
+      "description": "冰属性伤害 +10%",
+      "effects": [
+        { "type": "modifyStat", "stat": "dmgBonusIce", "value": 0.10, "target": "self" }
+      ]
+    },
+    {
+      "pieces": 4,
+      "description": "「星忆」叠加上限 +3；终结技状态期间暴击伤害 +25%",
+      "effects": [
+        { "type": "modifyStat", "stat": "critDmg", "value": 0.25, "target": "self", "condition": "hasBuff:buff-canxing" }
+      ]
+    }
+  ],
+  "description": "千语星遥·群星誓约 · 生命倍率主C。"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "gear-bianhua-huaxiang",
+  "name": "彼岸花香",
+  "rarity": 5,
+  "_note": "千语星遥·至暗长夜的专属套装（07 §4.6 标题即「我提议：待命名」；99 C4 提案名「彼岸花香」）。2 件生命上限 +12%；4 件属性紊乱额外 +1 层「归溟」、领域「西风尽头的花香」期间暴击伤害 +30%。",
+  "tiers": [
+    {
+      "pieces": 2,
+      "description": "生命上限 +12%",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "hpPct",
+          "value": 0.12,
+          "target": "self"
+        }
+      ]
+    },
+    {
+      "pieces": 4,
+      "description": "「归溟」叠加速度：每次触发属性紊乱额外获得 1 层「归溟」；领域「西风尽头的花香」持续期间暴击伤害 +30%",
+      "effects": [
+        {
+          "type": "gainStack",
+          "stack": "guiming",
+          "amount": 1,
+          "cap": 6,
+          "target": "self",
+          "triggerHook": "onDisorder"
+        },
+        {
+          "type": "modifyStat",
+          "stat": "critDmg",
+          "value": 0.3,
+          "target": "self",
+          "condition": "fieldActive:field-westwind"
+        }
+      ]
+    }
+  ],
+  "description": "千语星遥·至暗长夜 · 生命倍率主C。离谒按冰结算 ⇒ 冰伤 / 双暴 / 生命% / 异常积蓄效率是她的有效词条。"
+}

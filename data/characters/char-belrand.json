@@ -1,0 +1,151 @@
+{
+  "id": "char-belrand",
+  "name": "贝尔兰德",
+  "title": "荒原火山",
+  "rarity": 5,
+  "element": "fire",
+  "path": "dps",
+  "anchorRow": "dps",
+  "weaponType": "sword",
+  "faction": ["PILLAGER"],
+  "birthday": "11-27",
+  "genderVariant": false,
+
+  "base": {
+    "atk": 300, "hp": 3600, "def": 100, "speed": 100,
+    "critRate": 0.05, "critDmg": 1.50,
+    "energyMax": 120, "energyOverflowCap": 0,
+    "threat": 50
+  },
+  "growth": { "panelGrowth": 1.01, "breakthroughBonus": { "atk": 0.05 } },
+
+  "_comment": "08 §07 §8。全部数值由我填入（原稿通篇 X%），口径 = 01 §5.2 裁决 #62 方案 B：下面的倍率就是该技能 1 级的最终倍率。",
+
+  "skills": {
+    "basic": {
+      "id": "skill-fenshan-liaoyuan",
+      "kind": "basic",
+      "name": "焚山燎原",
+      "targetType": "blast",
+      "scalingBase": "atk",
+      "scalingArray": "basic",
+      "cost": { "energy": 0, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 1, "energy": 20 },
+      "hits": [
+        {
+          "multiplier": 0.55,
+          "target": "main",
+          "element": "fire",
+          "suppressCombustStackDamage": true,
+          "onHit": [
+            { "type": "applyAnomalyStack", "element": "fire", "stacks": 1, "chance": 1.0, "target": "mainTarget", "stackCounter": "perHit", "suppressCombustStackDamage": true }
+          ]
+        },
+        {
+          "multiplier": 0.55,
+          "target": "adjacent",
+          "element": "fire",
+          "suppressCombustStackDamage": true,
+          "onHit": [
+            { "type": "applyAnomalyStack", "element": "fire", "stacks": 1, "chance": 1.0, "target": "mainTarget", "stackCounter": "perHit", "suppressCombustStackDamage": true }
+          ]
+        }
+      ],
+      "description": "横扫相邻的两个敌人，各造成 55% 攻击力的火属性伤害。+1 共鸣指数，+20 能量；100% 基础概率为命中的每个敌人各施加 1 层「可燃」。",
+      "rawText": "普攻 · 焚山燎原｜回复 1 点共鸣指数｜同时击中相邻的两个敌人，造成 X% 攻击力的火属性伤害；命中回复 20 点能量；100% 基础概率为命中的敌人施加 1 层「可燃」"
+    },
+
+    "resonance": {
+      "id": "skill-liedi-rongliu",
+      "kind": "resonance",
+      "name": "裂地熔流",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "resonance",
+      "cost": { "energy": 0, "resonanceIndex": 1 },
+      "gain": { "resonanceIndex": 0, "energy": 20 },
+      "hits": [
+        {
+          "multiplier": 1.70,
+          "target": "main",
+          "element": "fire",
+          "suppressCombustStackDamage": true,
+          "onHit": [
+            { "type": "applyAnomalyStack", "element": "fire", "stacks": 2, "chance": 1.0, "target": "mainTarget", "stackCounter": "perHit", "suppressCombustStackDamage": true },
+            {
+              "type": "detonateCombust",
+              "element": "fire",
+              "target": "mainTarget",
+              "chancePerStack": 0.015,
+              "chanceCap": 0.30,
+              "multiplier": 0.25,
+              "forceStack": "ember",
+              "forceCount": 6,
+              "forceBonus": 0.40
+            }
+          ]
+        }
+      ],
+      "description": "对命中目标造成 170% 攻击力的火属性伤害，施加 2 层「可燃」，并触发「爆燃」判定。−1 共鸣指数，+20 能量。",
+      "rawText": "元素共鸣 · 裂地熔流｜消耗 1 点共鸣指数｜能量回复 20 点｜对命中目标造成 X% 攻击力的火属性伤害，并施加 2 层「可燃」；被命中的敌人有概率触发「爆燃」"
+    },
+
+    "ultimate": {
+      "id": "skill-zhushen-huanghun",
+      "kind": "ultimate",
+      "name": "诸神黄昏",
+      "targetType": "aoe",
+      "scalingBase": "atk",
+      "scalingArray": "ultimate",
+      "cost": { "energy": 120, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "hits": [
+        { "multiplier": 4.00, "target": "all", "element": "fire", "suppressCombustStackDamage": true }
+      ],
+      "onCast": [
+        { "type": "deployField", "fieldId": "field-lava-terrain", "duration": 2 }
+      ],
+      "description": "捶地升起火柱，对全体敌人造成 400% 攻击力的火属性伤害，并展开领域「岩浆地块」持续 2 自然回合。消耗 120 能量。",
+      "rawText": "终结技 · 诸神黄昏｜能量消耗 120 点｜对全体敌人造成 X% 攻击力的火属性伤害；随后展开「岩浆地块」领域，持续 2 自然回合"
+    },
+
+    "talent": {
+      "id": "skill-yeyu-bujin",
+      "kind": "talent",
+      "name": "野火不尽",
+      "scalingArray": "none",
+      "triggers": [
+        {
+          "hook": "onCombustDetonate",
+          "scope": "self",
+          "effects": [
+            { "type": "gainStack", "stack": "ember", "amount": 1, "cap": 6, "target": "self" },
+            { "type": "applyBuff", "buffId": "buff-ember", "stacks": 1, "target": "self" }
+          ]
+        }
+      ],
+      "description": "每次触发「爆燃」时获得 1 层「余火」，最多 6 层；每层使攻击力 +4%。「余火」满层时，下一次「爆燃」必定触发且伤害 +40%。",
+      "rawText": "天赋 · 野火不尽｜每次触发「爆燃」时获得 1 层「余火」，最多叠加 6 层，每层使攻击力提高 X%；「余火」满层时，下一次「爆燃」必定触发且伤害提高 Y%"
+    }
+  },
+
+  "eidolons": [
+    { "rank": 1, "name": "野火春风", "effects": [ { "type": "modifyStat", "stat": "burnDetonateChancePerStack", "value": 0.005 } ] },
+    { "rank": 2, "name": "无法无天", "effects": [ { "type": "modifyStat", "stat": "resonanceFree", "value": 1 } ] },
+    { "rank": 3, "name": "燎原之势", "shared": true, "effects": [ { "type": "modifyStat", "stat": "skillLevel", "value": 2, "cap": 12 } ] },
+    { "rank": 4, "name": "火上浇油", "effects": [ { "type": "modifyStat", "stat": "burnDurationRounds", "value": 1 }, { "type": "modifyStat", "stat": "burnDetonateChancePerStack", "value": 0.005 } ] },
+    { "rank": 5, "name": "裂石流金", "shared": true, "effects": [ { "type": "modifyStat", "stat": "skillLevel", "value": 2, "cap": 14 } ] },
+    { "rank": 6, "name": "焚舟破釜", "effects": [ { "type": "modifyStat", "stat": "burnStackCap", "value": 5 }, { "type": "modifyStat", "stat": "lavaFieldExtraRoll", "value": 1 } ] }
+  ],
+
+  "signatureWeapon": "weap-svadilfari",
+  "gearSet": "gear-slag-and-ember",
+
+  "lore": {
+    "quote": "烧到哪儿，哪儿就是我的路。",
+    "narrativeSkills": ["无敌黑军"],
+    "secrets": [],
+    "speechStyle": "嗓门大、笑得响、吵架从不认输；不矫情；讨厌被管，也讨厌管别人",
+    "relationships": {}
+  }
+}

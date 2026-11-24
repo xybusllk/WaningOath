@@ -1,0 +1,28 @@
+{
+  "id": "weap-torquemada",
+  "name": "托尔克马达之刃",
+  "rarity": 5,
+  "weaponType": "sword",
+  "owner": "char-karni",
+
+  "mainStat": { "kind": "CritDmg", "op": "Pct", "value": 0.40, "note": "原稿：暴击伤害 +40%" },
+  "subStat": { "kind": "Atk", "op": "Add", "value": 520, "note": "原稿：攻击力固定 +520" },
+
+  "effect": {
+    "appliesWhen": { "weaponType": "sword" },
+    "initialOverrideRank": 1,
+    "trigger": { "hook": "onHit", "duration": 1, "target": "self", "condition": "targetHpBelow:0.4", "note": "攻击生命低于 40% 的敌人时，伤害提高；条件由 WeaponTriggerDef.Condition 表达" },
+    "tiers": [
+      { "rank": 1, "dmgAmp": 0.20 },
+      { "rank": 2, "dmgAmp": 0.23 },
+      { "rank": 3, "dmgAmp": 0.26 },
+      { "rank": 4, "dmgAmp": 0.28 },
+      { "rank": 5, "dmgAmp": 0.30 }
+    ],
+    "description": "装备者（仅长剑）攻击生命低于 40% 的敌人时，伤害提高 20/23/26/28/30%。五段依次对应权限覆写 1~5 阶。"
+  },
+
+  "growth": { "mainAndSubGrowWithLevel": true, "levelFactor": 2.195, "effectGrowsWithOverrideOnly": true },
+  "note": "⚠️ 原稿「初始权限覆写：1 阶」照抄。⚠️ 特效用 `dmgAmp`（伤害加深）近似「伤害提高」；条件 targetHpBelow:0.4 由武器触发器读取。归属：`原始角色设定\\卡尔尼菲琪亚.txt`。",
+  "flavor": "单发反器材狙击枪与长剑的结合体。常态是剑；只有处决时，剑身才向两侧展开、像轨道一样贴合枪管。"
+}

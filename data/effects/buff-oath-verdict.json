@@ -1,0 +1,20 @@
+{
+  "id": "buff-oath-verdict",
+  "name": "誓言 · 贯彻终焉",
+  "kind": "buff",
+  "stackCap": 15,
+  "stackable": true,
+  "durationUnit": "turn",
+  "duration": 1,
+  "mods": [],
+  "elemMods": [
+    { "kind": "DmgAmp", "element": "Physical", "op": "Add", "value": 0.025, "source": "誓言" },
+    { "kind": "DmgAmp", "element": "Ice", "op": "Add", "value": 0.025, "source": "誓言" },
+    { "kind": "DmgAmp", "element": "Fire", "op": "Add", "value": 0.025, "source": "誓言" },
+    { "kind": "DmgAmp", "element": "Lightning", "op": "Add", "value": 0.025, "source": "誓言" },
+    { "kind": "DmgAmp", "element": "Wind", "op": "Add", "value": 0.025, "source": "誓言" },
+    { "kind": "DmgAmp", "element": "Resonance", "op": "Add", "value": 0.025, "source": "誓言" }
+  ],
+  "description": "爱丽丝天赋「未竟的航路」：**每层「誓言」使二段终结技的伤害加深 2.5%**（15 层 = +37.5%，权阶Ⅳ 上限 20 层 = +50%）。",
+  "note": "⚠️ **实现口径**：数据里由「九尾狐消失」的触发器在结算二段之前用 `applyBuff perStack: \"oath\"` 挂上（层数 = 当前誓言层数），结算完再清空誓言。`duration: 1` 是刻意的短暂时长 —— 『一次性乘区』不在原子集里，用 1 回合的增益近似，**结算完即随誓言一起清空**，不会漏给下一次伤害。"
+}

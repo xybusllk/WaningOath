@@ -1,0 +1,11 @@
+{
+  "id": "gear-changxia-yusheng",
+  "name": "长夏余烬",
+  "rarity": 5,
+  "_note": "薇拉·约克的专属套装【我提议 · 原稿未给】。名字取自「长夏余生」；效果只补她最缺的两项（充能、暴伤），不发明机制。",
+  "tiers": [
+    { "pieces": 2, "description": "能量恢复效率提高 10%", "effects": [ { "type": "modifyStat", "stat": "energyRegen", "value": 0.10, "target": "self" } ] },
+    { "pieces": 4, "description": "暴击伤害提高 20%", "effects": [ { "type": "modifyStat", "stat": "critDmg", "value": 0.20, "target": "self" } ] }
+  ],
+  "description": "薇拉·约克 · 雷/物理主C（余烬天龙 + 火枪手形态）。"
+}

@@ -1,0 +1,47 @@
+; WaningOath —— Godot 4.7.1 (.NET) 客户端工程
+;
+; M5：场景栈（标题 / 剧情 / 战斗 / 结算）在 Scripts\GameRoot.cs 里用代码搭出来，
+;     主场景只有 Main.tscn 一个空 Control（见该文件顶部的说明）。
+;
+; ── 分辨率（06 §5）──
+; 目标分辨率是**两个一等公民**：1920×1080（16:9）与 **1440×1080（4:3 拉伸）**。
+;   * stretch/mode = "canvas_items"：UI 按基准分辨率布局，再整体缩放到窗口。
+;   * stretch/aspect = "expand"：**明确不用 keep** —— keep 会为了保持比例加黑边，
+;     而作者的习惯是「4:3 拉伸」而不是「4:3 加黑边」。expand 让画布在两个比例下都铺满，
+;     多出来的横向空间由布局（Container）吃掉。
+;   * 因此布局纪律写死在代码里：**不用绝对像素定位**、行动条竖排靠左、
+;     卡牌宽度自适应、文本框 autowrap（06 §5.3）。
+;
+; 注意：C# 部分的编译由 Godot 的 .NET 宿主负责。从命令行构建整个解决方案请用
+; tools\env.cmd 载入环境后 dotnet build WaningOath.sln。
+
+config_version=5
+
+[application]
+
+config/name="未尽之誓"
+config/description="Waning Oath"
+config/features=PackedStringArray("4.7", "C#", "Forward Plus")
+run/main_scene="res://Main.tscn"
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/resizable=true
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/stretch/scale_mode="fractional"
+
+[dotnet]
+
+project/assembly_name="WaningOath"
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+
+[rendering]
+
+renderer/rendering_method="forward_plus"

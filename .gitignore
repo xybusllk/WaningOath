@@ -1,0 +1,88 @@
+# ---- 构建产物 ----
+bin/
+obj/
+*.user
+*.suo
+*.log
+.vs/
+.idea/
+
+# ---- Godot 生成物 ----
+WaningOath/.godot/
+WaningOath/.mono/
+WaningOath/android/
+WaningOath/export_presets.cfg
+
+# ---- 工作目录内的工具链与缓存（体积大、可重新获取，不纳入版本控制）----
+.dotnet/
+.dotnet-home/
+.nuget/
+.appdata/
+.cache/
+.tmp/
+redpandacpp/
+Godot4/
+node_modules/
+
+# ---- 本地存档缓存（服务器是唯一主副本，06 §1.1）----
+players/
+data/game/
+
+# ---- 系统 ----
+Thumbs.db
+desktop.ini
+
+sim-out/
+snapshots/
+backups/
+
+# ---- 未整理的素材与旧稿（含 AI 原图、白底备份）----
+素材备份/
+角色立绘/
+场景图片/
+
+# ---- 美术与字体：**不进库**（版权归属不明 / 第三方）----
+# 见 ASSETS.md。这里只挡二进制文件，同目录下的 README.txt 仍会被提交。
+WaningOath/Assets/Portraits/*.png
+WaningOath/Assets/Portraits/*.jpg
+WaningOath/Assets/Backgrounds/*.png
+WaningOath/Assets/Backgrounds/*.jpg
+WaningOath/Assets/Fonts/*.ttf
+WaningOath/Assets/Fonts/*.otf
+
+# ---- 与《未尽之誓》无关的姊妹工程（另有仓库）----
+dsh-balance-client/
+dsh-balance-model/
+
+# ---- 可由 iconforge 重新生成的接触表 / 渲染输出 ----
+iconforge/out-*/
+iconforge/out-elements*/
+iconforge/all-icons.html
+
+# ---- 美术取证图 / 暂存区 / 旧稿（含 AI 图与备份文件）----
+美术策划案/_audit/
+美术策划案/_staging-portraits-ascii/
+美术策划案/_backup-portraits-white-bg/
+generate/image/
+*.bak*
+
+# ---- 异常体立绘（AI 生成，权属不明）----
+异常体立绘/
+
+# ---- 内部资料：不进公开仓库 ----
+策划案/
+剧情策划案/
+剧情文本/
+剧情审核报告/
+美术策划案/
+异常体设定/
+原始角色设定/
+已有角色回读/
+数值平衡报告/
+iconforge/
+本地API调用网站/
+游戏简介.txt
+战斗系统设定.txt
+技能等级倍率修正数组.txt
+build-workspace-context.mjs
+tools/story-editor/

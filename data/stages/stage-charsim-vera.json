@@ -1,0 +1,10 @@
+{
+  "id": "stage-charsim-vera",
+  "name": "角色自检靶场 · 薇拉·约克",
+  "kind": "charsim",
+  "_note": "角色自检靶场，不是游戏内容。用于验证召唤/承伤/火枪手形态/印记结算。",
+  "party": ["char-vera", "char-shouyueren", "char-qianyu-xingyao", "char-belrand"],
+  "enemies": ["anom-ccrf-502"],
+  "maxRound": 15,
+  "reward": { "note": "自检靶场不发奖。", "repeatable": false, "staminaCost": 0, "unlockProtocolLevel": 0, "firstClear": {}, "repeat": {} }
+}

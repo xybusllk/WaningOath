@@ -1,0 +1,19 @@
+{
+  "id": "buff-order-strong",
+  "name": "秩序·诛邪立序",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 2,
+  "appliesTo": "partyAll",
+  "mods": [
+    { "kind": "DamageReduction", "op": "Add", "value": 0.10, "source": "诛邪立序：受到伤害 −10%" }
+  ],
+  "elemMods": [
+    { "kind": "DmgBonus", "element": "physical", "op": "Add", "value": 0.15, "source": "诛邪立序：全队物理伤害 +15%" }
+  ],
+  "description": "权阶Ⅳ 强化后的「秩序」：全队物理伤害 +15%、受到伤害 −10%，持续 2 回合。",
+  "note": "归属：`原始角色设定\\卡尔尼菲琪亚.txt` 权阶Ⅳ。",
+  "exclusiveTo": []
+}

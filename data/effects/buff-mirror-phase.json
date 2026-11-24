@@ -1,0 +1,16 @@
+{
+  "id": "buff-mirror-phase",
+  "name": "镜面相位",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "turn",
+  "duration": 1,
+  "mods": [
+    { "kind": "DamageReduction", "op": "Add", "value": 0.90, "source": "镜面相位（07 §5.2.2 ④）" }
+  ],
+  "elemMods": [],
+  "exclusiveTo": ["char-qianyu-jingxing"],
+  "description": "千语镜星「相位镜像」的本体状态：受到的伤害降低 90%，持续 1 回合。按 01 §2.2 减伤取最高、不叠加；只作用于本体，不作用于静止镜像（镜像没有减伤）。",
+  "note": "07 §5.2.2 ④：本体进入「镜面相位」，获得 90% 伤害减免。相位期间仍可被选中（【我提议】）。"
+}

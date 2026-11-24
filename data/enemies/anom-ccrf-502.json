@@ -1,0 +1,64 @@
+{
+  "id": "anom-ccrf-502",
+  "name": "铅灰傀儡",
+  "ccrfCode": "CCRF-502",
+
+  "tier": "elite",
+  "category": "anomaly",
+  "level": 90,
+
+  "base": {
+    "atk": 3200,
+    "hp": 130000,
+    "def": 600,
+    "speed": 85,
+    "critRate": 0.05,
+    "critDmg": 1.50,
+    "energyMax": 0,
+    "threat": 50
+  },
+
+  "resistAll": 0.0,
+  "resist": {},
+  "anomalyResist": {},
+
+  "aiProfile": "default",
+
+  "skills": [
+    {
+      "id": "skill-qianhui-huijing",
+      "kind": "basic",
+      "name": "回敬",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "cost": { "energy": 0, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "hits": [
+        { "multiplier": 1.00, "target": "main", "element": "physical" }
+      ],
+      "triggers": [
+        {
+          "hook": "onDamageTaken",
+          "scope": "self",
+          "oncePerTurn": 1,
+          "effects": [
+            { "type": "applyBuff", "buffId": "buff-compensation", "stacks": 1, "target": "self", "stackCounter": "perAttack" }
+          ]
+        },
+        {
+          "_note": "第 3 层「代偿」= 完全苏醒（质变）。conditions 读的是**状态层数**而不是资源计数 —— 见 05 §3.2 的 statusAtLeast。",
+          "hook": "onStackReach",
+          "scope": "self",
+          "condition": "statusAtLeast:代偿:3",
+          "oncePerBattle": 1,
+          "effects": [
+            { "type": "applyBuff", "buffId": "buff-awakened", "stacks": 1, "duration": 0, "target": "self" }
+          ]
+        }
+      ],
+      "description": "以完全相同的姿态回敬攻击者，造成 100% 攻击力的物理伤害。**受到集中打击时**（每单位回合最多 1 次）在凹陷处记下这一击，获得 1 层「代偿」。**满 3 层「代偿」时完成「完全苏醒」**（移速 +25%、受到的伤害降低 20%，永久）。",
+      "rawText": "「代偿」：502 受到足以在其外壳上留下凹陷的集中冲击时，凹陷处的铅灰物质会临时'流动'起来，将冲击方向、力度与角度完整记录；记录完成后，502 会以完全相同的方式与力度回敬攻击者。"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "debuff-vuln-30",
+  "name": "易伤 · 终结技附加",
+  "kind": "debuff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "turn",
+  "duration": 1,
+  "mods": [],
+  "elemMods": [
+    { "kind": "Vuln", "element": "Physical", "op": "Add", "value": 0.30, "source": "永不落幕的星辰" },
+    { "kind": "Vuln", "element": "Ice", "op": "Add", "value": 0.30, "source": "永不落幕的星辰" },
+    { "kind": "Vuln", "element": "Fire", "op": "Add", "value": 0.30, "source": "永不落幕的星辰" },
+    { "kind": "Vuln", "element": "Lightning", "op": "Add", "value": 0.30, "source": "永不落幕的星辰" },
+    { "kind": "Vuln", "element": "Wind", "op": "Add", "value": 0.30, "source": "永不落幕的星辰" },
+    { "kind": "Vuln", "element": "Resonance", "op": "Add", "value": 0.30, "source": "永不落幕的星辰" }
+  ],
+  "description": "千语星遥终结技：被命中的敌方目标附加 30% 易伤，持续 1 回合。八属性全覆盖（离谒 / 咏叹在取值时解析到冰 / 共振，故只需列六条）。"
+}

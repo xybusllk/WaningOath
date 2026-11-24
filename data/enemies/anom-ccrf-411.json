@@ -1,0 +1,77 @@
+{
+  "id": "anom-ccrf-411",
+  "name": "高塔凝视者",
+  "ccrfCode": "CCRF-411",
+
+  "tier": "boss",
+  "category": "anomaly",
+  "level": 90,
+
+  "base": {
+    "atk": 5500,
+    "hp": 300000,
+    "def": 1000,
+    "speed": 70,
+    "critRate": 0.05,
+    "critDmg": 1.50,
+    "energyMax": 120,
+    "threat": 100
+  },
+
+  "resistAll": 0.0,
+  "resist": {},
+  "anomalyResist": {},
+
+  "aiProfile": "default",
+
+  "skills": [
+    {
+      "id": "skill-411-guancezhuimian",
+      "kind": "skill",
+      "name": "观测锥面",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "cost": { "energy": 0, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 0, "energy": 30 },
+      "hits": [
+        {
+          "multiplier": 0.80,
+          "target": "main",
+          "element": "physical",
+          "onHit": [
+            { "type": "applyDebuff", "debuffId": "debuff-gaze", "stacks": 1, "duration": 3, "target": "mainTarget", "stackCounter": "perHit" }
+          ]
+        }
+      ],
+      "triggers": [
+        {
+          "_note": "破绽：任何**非攻击行动**（治疗 / 护盾 / 纯增益 —— 本作目前没有独立的『换人 / 防御』指令）使该行动者自己的「注目」衰减 1 层。作用对象是**行动者**，所以条件读 actorStatusAtLeast、效果打 mainTarget（触发时 Target 就是行动者，见 Runner 第 6 步）。",
+          "hook": "onNonAttackAction",
+          "scope": "enemy",
+          "condition": "actorStatusAtLeast:注目:1",
+          "effects": [
+            { "type": "decayStatus", "statusId": "debuff-gaze", "amount": 1, "target": "mainTarget" }
+          ]
+        }
+      ],
+      "description": "观测锥面以约 6 秒为一个周期在工作面内扫过，造成 80% 攻击力的物理伤害并为该目标叠加 1 层**「注目」**。**满 3 层**时基座会定向延展并发动一次贯穿性穿刺。**注目计数不因脱离锥面而清零**，只随时间缓慢衰减（3 单位回合）；**任何非攻击行动使「注目」衰减 1 层**（裁决 `99 D0` 的破绽）。+30 能量。",
+      "rawText": "「当同一目标在同一个锥面周期内被连续覆盖三次，该目标会进入『注目』状态：此时 411 的基座会以异常的速度向该目标定向延展并发动一次贯穿性穿刺。」"
+    },
+    {
+      "id": "skill-411-chuancicike",
+      "kind": "ultimate",
+      "name": "贯穿穿刺",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "cost": { "energy": 90, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "hits": [
+        { "multiplier": 3.00, "target": "main", "element": "physical" }
+      ],
+      "description": "基座以异常的速度定向延展，对单体造成 300% 攻击力的物理伤害。消耗 90 能量。",
+      "rawText": "「CCRF 记录中，此前所有试图以'承伤位顶站在前'方式应对 411 的小队，均在第三次注目时被整体穿透。」"
+    }
+  ]
+}

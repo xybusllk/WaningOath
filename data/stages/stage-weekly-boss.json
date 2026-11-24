@@ -1,0 +1,27 @@
+{
+  "id": "stage-weekly-boss",
+  "name": "每周首领 · 高塔凝视者",
+  "kind": "boss",
+
+  "party": ["char-shouyueren", "char-qianyu-xingyao", "char-belrand", "char-alice"],
+  "partyModes": {},
+
+  "enemies": ["anom-ccrf-411-highboss"],
+
+  "maxRound": 15,
+  "fixedPanel": false,
+  "presetLevel": 80,
+  "skillLevel": 10,
+  "initialEnergyFull": false,
+
+  "environment": { "all": 1.0, "anomaly": 1.0, "disorder": 1.0, "element": {} },
+
+  "reward": {
+    "note": "每周首领首通奖励；服务端用 Progress.BossFreeUsed 限制每周一次（02 §10 周重置）。",
+    "repeatable": true,
+    "firstClear": { "protocolCode": 60, "credit": 0, "items": {} },
+    "repeat": { "protocolCode": 0, "credit": 0, "items": {} }
+  },
+
+  "_note": "每周首领的占位关卡：使用高难首领档位敌人，固定 80 级面板，避免玩家养成差异把每周首领变成不可通关。正式首领与奖励可在作者指定后替换。"
+}

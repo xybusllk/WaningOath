@@ -1,0 +1,272 @@
+{
+  "_comment": "装备系统（02 §6）的机器可读镜像。M7 的装备生成 / 强化 / 面板折算都读这一份；数值全部照抄 02 §6.3 与 §6.4，没有发明任何数字。",
+  "version": 1,
+  "slots": [
+    {
+      "key": "identity",
+      "name": "身份铭牌",
+      "order": 1,
+      "mainStats": [
+        "hpPct"
+      ]
+    },
+    {
+      "key": "chip",
+      "name": "执行芯片",
+      "order": 2,
+      "mainStats": [
+        "atkPct"
+      ]
+    },
+    {
+      "key": "hourglass",
+      "name": "调度沙漏",
+      "order": 3,
+      "mainStats": [
+        "atkPct",
+        "hpPct",
+        "defPct",
+        "elemBonus",
+        "effectHit",
+        "effectRes"
+      ]
+    },
+    {
+      "key": "container",
+      "name": "属性容器",
+      "order": 4,
+      "mainStats": [
+        "atkPct",
+        "hpPct",
+        "defPct",
+        "elemBonus",
+        "effectHit",
+        "effectRes"
+      ]
+    },
+    {
+      "key": "core",
+      "name": "判断核心",
+      "order": 5,
+      "mainStats": [
+        "critRate",
+        "critDmg",
+        "hpPct",
+        "atkPct",
+        "defPct",
+        "healBonus",
+        "shieldBonus"
+      ]
+    },
+    {
+      "key": "peripheral",
+      "name": "协议外设",
+      "order": 6,
+      "mainStats": [
+        "energyRegen",
+        "critRate",
+        "critDmg",
+        "hpPct",
+        "atkPct",
+        "defPct",
+        "healBonus",
+        "shieldBonus"
+      ]
+    }
+  ],
+  "_slotsNote": "02 §6.1：**前 4 件（1~4）= 四件套 · 后 2 件（5~6）= 两件套**。身份铭牌与执行芯片是**固定池**（只出一条），其余四件是功能池。",
+  "mainStats": {
+    "hpPct": {
+      "name": "生命%",
+      "kind": "pct",
+      "max15": 0.46
+    },
+    "atkPct": {
+      "name": "攻击%",
+      "kind": "pct",
+      "max15": 0.46
+    },
+    "defPct": {
+      "name": "防御%",
+      "kind": "pct",
+      "max15": 0.56
+    },
+    "elemBonus": {
+      "name": "属性增伤",
+      "kind": "pct",
+      "max15": 0.31
+    },
+    "effectHit": {
+      "name": "效果命中",
+      "kind": "pct",
+      "max15": 0.46
+    },
+    "effectRes": {
+      "name": "效果抵抗",
+      "kind": "pct",
+      "max15": 0.46
+    },
+    "critRate": {
+      "name": "暴击率",
+      "kind": "pct",
+      "max15": 0.21
+    },
+    "critDmg": {
+      "name": "暴击伤害",
+      "kind": "pct",
+      "max15": 0.42
+    },
+    "healBonus": {
+      "name": "治疗量加成",
+      "kind": "pct",
+      "max15": 0.25
+    },
+    "shieldBonus": {
+      "name": "护盾强度",
+      "kind": "pct",
+      "max15": 0.25
+    },
+    "energyRegen": {
+      "name": "能量恢复效率",
+      "kind": "pct",
+      "max15": 0.21
+    }
+  },
+  "_mainStatsNote": "02 §6.3 的满级（+15）值。⚠️ 同一部位不同主属性有不同上限（例：调度沙漏的防御% 是 56%、属性增伤 31%），所以 **+15 值挂在主属性上、不挂在部位上**。",
+  "subStats": {
+    "atkPct": {
+      "name": "攻击%",
+      "kind": "pct",
+      "max": 0.36
+    },
+    "hpPct": {
+      "name": "生命%",
+      "kind": "pct",
+      "max": 0.36
+    },
+    "defPct": {
+      "name": "防御%",
+      "kind": "pct",
+      "max": 0.45
+    },
+    "atkFlat": {
+      "name": "攻击力",
+      "kind": "flat",
+      "max": 330
+    },
+    "hpFlat": {
+      "name": "生命值",
+      "kind": "flat",
+      "max": 1200
+    },
+    "defFlat": {
+      "name": "防御力",
+      "kind": "flat",
+      "max": 180
+    },
+    "critRate": {
+      "name": "暴击率",
+      "kind": "pct",
+      "max": 0.18
+    },
+    "critDmg": {
+      "name": "暴击伤害",
+      "kind": "pct",
+      "max": 0.36
+    },
+    "speed": {
+      "name": "速度",
+      "kind": "flat",
+      "max": 12
+    },
+    "effectHit": {
+      "name": "效果命中",
+      "kind": "pct",
+      "max": 0.36
+    },
+    "effectRes": {
+      "name": "效果抵抗",
+      "kind": "pct",
+      "max": 0.36
+    },
+    "energyRegen": {
+      "name": "能量恢复效率",
+      "kind": "pct",
+      "max": 0.18
+    },
+    "anomalyBuildUp": {
+      "name": "属性异常积蓄效率",
+      "kind": "pct",
+      "max": 0.3
+    },
+    "healBonus": {
+      "name": "治疗量加成",
+      "kind": "pct",
+      "max": 0.3
+    },
+    "shieldBonus": {
+      "name": "护盾强度",
+      "kind": "pct",
+      "max": 0.3
+    }
+  },
+  "_subStatsNote": "02 §6.4：表里那一列是**满级上限**（= 4 条中 1 条全中 5 次），**单次强化 = 满级 ÷ 5**。所以本表同时给了 max，roll 值由 Roller 按 max/5 生成。速度 12 是唯一的小数值来源（速度在行动值公式里本就连续）。",
+  "rules": {
+    "maxLevel": 15,
+    "subStatInitCount": 3,
+    "subStatFullCount": 4,
+    "subStatFullAtLevel": 3,
+    "enhanceHits": 5,
+    "enhanceHitLevels": [
+      3,
+      6,
+      9,
+      12,
+      15
+    ],
+    "fourPieceSlots": [
+      "identity",
+      "chip",
+      "hourglass",
+      "container"
+    ],
+    "twoPieceSlots": [
+      "core",
+      "peripheral"
+    ]
+  },
+  "_rulesNote": "02 §6.2 / §6.4：初始 3 条副属性，+3 补满第 4 条，此后 **5 次强化命中**分别在 +3 / +6 / +9 / +12 / +15，只强化**已有**副属性、不会新增第 5 条。",
+  "mainStatAtZeroPct": 0.25,
+  "_mainStatCurve": "02 §6.2 只说「每 +1 级提升一档，+15 时达到满级值」，**没给 +0 的起点**。这里的 0.25（即 +0 = 满级的 25%、线性到 +15 = 100%）是【我提议】，写在数据里便于否决。主属性**不随角色养成的其他部分变化**，所以这条曲线的误差只影响「没强化过的装备有多弱」，不影响满级面板。",
+  "_setNote": "02 §6.1：前 4 件一套、后 2 件另一套 ⇒ 主流是 **4 + 2**；也允许 2+2+2 与散件。分组本身写在 rules.fourPieceSlots / rules.twoPieceSlots 里，这里不重复一份（两处真相 = 迟早对不上）。",
+  "_dropNote": "02 §6.5 只说套装「基本为角色专属」，**没给掉落来源**。下面这张表是【我提议】：按关卡类型把已落盘的 7 套分发出去，好让 M7 的闭环（打关 → 掉装备 → 强化 → 面板变强）真的能跑起来。没配的类型（sim / exp）不掉装备。",
+  "drop": {
+    "main": [
+      "gear-ruyue-zhizheng",
+      "gear-yiku-suocang",
+      "gear-slag-and-ember",
+      "gear-dash-to-the-finish",
+      "gear-hedi-fangxian"
+    ],
+    "core": [
+      "gear-bingyuan-fenghuo",
+      "gear-gongli-xulie"
+    ],
+    "hazard": [
+      "gear-gongli-xulie",
+      "gear-jingmian-liuying"
+    ],
+    "weapon": [
+      "gear-jingmian-liuying",
+      "gear-xingxie-bujixian"
+    ],
+    "exp": [
+      "gear-slag-and-ember",
+      "gear-dash-to-the-finish"
+    ]
+  },
+  "dropCount": {
+    "firstClear": 1,
+    "repeat": 0
+  }
+}

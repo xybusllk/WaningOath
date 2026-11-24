@@ -1,0 +1,16 @@
+{
+  "id": "gear-slag-and-ember",
+  "name": "熔渣与余烬",
+  "rarity": 5,
+  "_note": "贝尔兰德的专属套装。2/4 件效果逐字取自 07 §8.6（我提议 · 原稿未给）。4 件走伤害倍率而不是层数上限 —— 上限已经是通用常量 + 权阶Ⅵ 两处真相，再加一处就成三处。",
+  "tiers": [
+    { "pieces": 2, "description": "火属性伤害提高 10%",
+      "effects": [ { "type": "modifyStat", "stat": "dmgBonusFire", "value": 0.10, "target": "self" } ] },
+    { "pieces": 4, "description": "「爆燃」伤害提高 15%；每次触发爆燃后自身火属性伤害 +8%，2 回合，最多 2 层",
+      "effects": [
+        { "type": "modifyStat", "stat": "combustDetonateDamage", "value": 0.15, "target": "self" },
+        { "type": "modifyStat", "stat": "dmgBonusFire", "value": 0.08, "target": "self", "cap": 2, "duration": 2, "triggerHook": "onCombustDetonate" }
+      ] }
+  ],
+  "description": "贝尔兰德 · 火属性主C。"
+}

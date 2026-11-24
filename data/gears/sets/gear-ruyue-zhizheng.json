@@ -1,0 +1,16 @@
+{
+  "id": "gear-ruyue-zhizheng",
+  "name": "如约之证",
+  "rarity": 5,
+  "_note": "守约人的专属套装。2/4 件效果逐字取自 02 §6.5 与 07 §1.6。",
+  "tiers": [
+    { "pieces": 2, "description": "风属性伤害提高 10%",
+      "effects": [ { "type": "modifyStat", "stat": "dmgBonusWind", "value": 0.10, "target": "self" } ] },
+    { "pieces": 4, "description": "持有「风涌」时自身暴击伤害提高 30%；强化元素共鸣的弹射次数 +1",
+      "effects": [
+        { "type": "modifyStat", "stat": "critDmg", "value": 0.30, "target": "self", "condition": "hasStack:windSurge" },
+        { "type": "modifyStat", "stat": "enhancedResonanceBounces", "value": 1, "target": "self" }
+      ] }
+  ],
+  "description": "守约人 · 双模态共用；4 件套的暴击伤害半条在风蚀模态下按 100 #80 的分支处理（场上任意目标风蚀 ≥ 6 层）。"
+}

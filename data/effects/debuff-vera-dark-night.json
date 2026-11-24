@@ -1,0 +1,25 @@
+{
+  "id": "debuff-vera-dark-night",
+  "name": "终将逝去的黯夜",
+  "kind": "debuff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 3,
+  "mods": [
+    { "kind": "Def", "op": "Pct", "value": -0.35, "source": "终将逝去的黯夜：防御力 −35%" }
+  ],
+  "elemMods": [
+    { "kind": "Resist", "element": "physical", "op": "Add", "value": -0.20, "source": "终将逝去的黯夜：全属性抗性 −20%" },
+    { "kind": "Resist", "element": "ice", "op": "Add", "value": -0.20, "source": "终将逝去的黯夜：全属性抗性 −20%" },
+    { "kind": "Resist", "element": "fire", "op": "Add", "value": -0.20, "source": "终将逝去的黯夜：全属性抗性 −20%" },
+    { "kind": "Resist", "element": "lightning", "op": "Add", "value": -0.20, "source": "终将逝去的黯夜：全属性抗性 −20%" },
+    { "kind": "Resist", "element": "wind", "op": "Add", "value": -0.20, "source": "终将逝去的黯夜：全属性抗性 −20%" },
+    { "kind": "Resist", "element": "resonance", "op": "Add", "value": -0.20, "source": "终将逝去的黯夜：全属性抗性 −20%" },
+    { "kind": "Resist", "element": "liye", "op": "Add", "value": -0.20, "source": "终将逝去的黯夜：全属性抗性 −20%" },
+    { "kind": "Resist", "element": "aria", "op": "Add", "value": -0.20, "source": "终将逝去的黯夜：全属性抗性 −20%" }
+  ],
+  "description": "敌方全体防御力 −35%、全属性抗性 −20%，持续 3 回合。",
+  "note": "归属：`原始角色设定\\薇拉·约克.txt` 强化终结技。",
+  "exclusiveTo": []
+}

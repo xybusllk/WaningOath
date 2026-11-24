@@ -1,0 +1,582 @@
+{
+  "id": "char-shouyueren",
+  "name": "守约人",
+  "title": "无名的守望者",
+  "rarity": 5,
+  "element": "wind",
+  "path": "dps",
+  "anchorRow": "dps",
+  "weaponType": "dao",
+  "faction": [
+    "CCRF-SITE14",
+    "STORM-EYE"
+  ],
+  "birthday": "ACCOUNT_CREATED",
+  "genderVariant": true,
+  "base": {
+    "atk": 300,
+    "hp": 3600,
+    "def": 100,
+    "speed": 100,
+    "critRate": 0.05,
+    "critDmg": 1.5,
+    "energyMax": 120,
+    "energyOverflowCap": 0,
+    "threat": 50
+  },
+  "growth": {
+    "panelGrowth": 1.01,
+    "breakthroughBonus": {
+      "atk": 0.05
+    }
+  },
+  "_comment": "★ 双模态角色（01 §5.4，`100` #80~#85）。两套完整技能组，进战斗前选定、整场固定、战斗内不可切。默认 = windsurge。两个模态的属性都是风（01 §5.4：模态内属性应统一）。",
+  "modes": {
+    "default": "windsurge",
+    "windsurge": {
+      "name": "升格模态·风涌",
+      "element": "wind",
+      "skills": {
+        "basic": {
+          "id": "skill-wuming-fengqi",
+          "kind": "basic",
+          "name": "无名风起",
+          "targetType": "single",
+          "scalingBase": "atk",
+          "scalingArray": "basic",
+          "cost": {
+            "energy": 0,
+            "resonanceIndex": 0
+          },
+          "gain": {
+            "resonanceIndex": 1,
+            "energy": 15
+          },
+          "hits": [
+            {
+              "multiplier": 1,
+              "target": "main",
+              "element": "wind"
+            }
+          ],
+          "description": "100% 攻击力风属性；+1 共鸣指数；+15 能量",
+          "rawText": "100% 攻击力风属性；+1 共鸣指数；+15 能量",
+          "optimization": {
+            "source": "优化稿/守约人-技能组-全部模态.md",
+            "archivedAt": "2026-11-10"
+          }
+        },
+        "resonance": {
+          "id": "skill-hengdao-wenlu",
+          "kind": "resonance",
+          "name": "横刀问路",
+          "targetType": "blast",
+          "scalingBase": "atk",
+          "scalingArray": "resonance",
+          "cost": {
+            "energy": 0,
+            "resonanceIndex": 1
+          },
+          "gain": {
+            "resonanceIndex": 0,
+            "energy": 30
+          },
+          "hits": [
+            {
+              "multiplier": 2.5,
+              "target": "main",
+              "element": "wind"
+            },
+            {
+              "multiplier": 1.95,
+              "target": "adjacent",
+              "element": "wind"
+            }
+          ],
+          "description": "主目标 250% / 相邻 195% 攻击力风属性；−1 共鸣指数；+30 能量",
+          "rawText": "主目标 250% / 相邻 195% 攻击力风属性；−1 共鸣指数；+30 能量",
+          "optimization": {
+            "source": "优化稿/守约人-技能组-全部模态.md",
+            "archivedAt": "2026-11-10"
+          }
+        },
+        "talent": {
+          "id": "skill-duanxian-xunhen",
+          "kind": "talent",
+          "name": "断线寻痕",
+          "scalingArray": "none",
+          "triggers": [
+            {
+              "hook": "onAttack",
+              "scope": "self",
+              "effects": [
+                {
+                  "type": "conditional",
+                  "condition": "targetIsElitePlus",
+                  "then": [
+                    {
+                      "type": "applyBuff",
+                      "buffId": "buff-duanxian-xunhen",
+                      "stacks": 1,
+                      "duration": 2,
+                      "target": "self",
+                      "stackCounter": "perAttack"
+                    }
+                  ],
+                  "onFail": [
+                    {
+                      "type": "chanceCheck",
+                      "chance": 0.01,
+                      "onSuccess": [
+                        {
+                          "type": "execute"
+                        }
+                      ],
+                      "onFail": [
+                        {
+                          "type": "applyBuff",
+                          "buffId": "buff-duanxian-xunhen",
+                          "stacks": 1,
+                          "duration": 2,
+                          "target": "self",
+                          "stackCounter": "perAttack"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "description": "攻击敌人时判定：1% 概率直接秒杀当前敌人（对精英级及以上无效）；99% 概率使自身暴击伤害 +10%，2 回合，最多 3 层，叠加时重置。对精英及以上，1% 秒杀分支不生效，该次判定直接走 99% 的增伤分支。",
+          "rawText": "攻击敌人时判定：1% 概率直接秒杀当前敌人（对精英级及以上无效）；99% 概率使自身暴击伤害 +10%，2 回合，最多 3 层，叠加时重置。对精英及以上，1% 秒杀分支不生效，该次判定直接走 99% 的增伤分支。",
+          "optimization": {
+            "source": "优化稿/守约人-技能组-全部模态.md",
+            "archivedAt": "2026-11-10"
+          },
+          "cost": {
+            "energy": 0
+          },
+          "gain": {
+            "energy": 0
+          },
+          "targetType": "partyAll"
+        },
+        "ultimate": {
+          "id": "skill-feng-ruyue-erzhi",
+          "kind": "ultimate",
+          "name": "风，如约而至",
+          "targetType": "aoe",
+          "scalingBase": "atk",
+          "scalingArray": "ultimate",
+          "cost": {
+            "energy": 99.6,
+            "resonanceIndex": 0
+          },
+          "gain": {
+            "resonanceIndex": 0,
+            "energy": 0
+          },
+          "hits": [
+            {
+              "multiplier": 11.25,
+              "target": "all",
+              "element": "wind"
+            }
+          ],
+          "onCast": [
+            {
+              "type": "gainStack",
+              "stack": "windSurge",
+              "amount": 2,
+              "cap": 2,
+              "target": "self"
+            },
+            {
+              "type": "extraTurn",
+              "target": "self"
+            }
+          ],
+          "description": "敌方全体 1125% 攻击力风属性；消耗 120 能量；获得 2 层「风涌」（权阶Ⅵ 上限 →3）并立即行动",
+          "rawText": "敌方全体 1125% 攻击力风属性；消耗 120 能量；获得 2 层「风涌」（权阶Ⅵ 上限 →3）并立即行动",
+          "optimization": {
+            "source": "优化稿/守约人-技能组-全部模态.md",
+            "archivedAt": "2026-11-10"
+          }
+        },
+        "enhancedResonance": {
+          "id": "skill-feng-guoyi-liuhen",
+          "kind": "enhanced_resonance",
+          "name": "风，过亦留痕",
+          "targetType": "bounce",
+          "scalingBase": "atk",
+          "scalingArray": "resonance",
+          "cost": {
+            "energy": 0,
+            "resonanceIndex": 1,
+            "stack": "windSurge",
+            "stackAmount": 1
+          },
+          "gain": {
+            "resonanceIndex": 0,
+            "energy": 40
+          },
+          "hits": [
+            {
+              "multiplier": 1.8,
+              "target": "main",
+              "element": "wind"
+            },
+            {
+              "multiplier": 0.85,
+              "target": "random",
+              "times": 4,
+              "element": "wind"
+            }
+          ],
+          "description": "指定单体 180% + 随机 4 名敌人各 85% 攻击力风属性；消耗 1 层「风涌」；+ 1 共鸣指数；+40能量",
+          "rawText": "指定单体 180% + 随机 4 名敌人各 85% 攻击力风属性；消耗 1 层「风涌」；+ 1 共鸣指数；+40能量",
+          "optimization": {
+            "source": "优化稿/守约人-技能组-全部模态.md",
+            "archivedAt": "2026-11-10"
+          }
+        }
+      }
+    },
+    "winderosion": {
+      "name": "升格模态·风蚀",
+      "element": "wind",
+      "skills": {
+        "basic": {
+          "id": "skill-wuming-fengqi-erosion",
+          "kind": "basic",
+          "name": "无名风起",
+          "targetType": "single",
+          "scalingBase": "atk",
+          "scalingArray": "basic",
+          "cost": {
+            "energy": 0,
+            "resonanceIndex": 0
+          },
+          "gain": {
+            "resonanceIndex": 1,
+            "energy": 15
+          },
+          "hits": [
+            {
+              "multiplier": 0.85,
+              "target": "main",
+              "element": "wind",
+              "onHit": [
+                {
+                  "type": "applyAnomalyStack",
+                  "element": "wind",
+                  "stacks": 1,
+                  "target": "mainTarget",
+                  "stackCounter": "perHit"
+                }
+              ]
+            }
+          ],
+          "description": "85% 攻击力风属性；+1 共鸣指数；+20 能量；施加 1 层「风蚀」",
+          "rawText": "85% 攻击力风属性；+1 共鸣指数；+20 能量；施加 1 层「风蚀」",
+          "optimization": {
+            "source": "优化稿/守约人-技能组-全部模态.md",
+            "archivedAt": "2026-11-10"
+          }
+        },
+        "resonance": {
+          "id": "skill-hengdao-wenlu-erosion",
+          "kind": "resonance",
+          "name": "横刀问路",
+          "targetType": "blast",
+          "scalingBase": "atk",
+          "scalingArray": "resonance",
+          "cost": {
+            "energy": 0,
+            "resonanceIndex": 1
+          },
+          "gain": {
+            "resonanceIndex": 0,
+            "energy": 30
+          },
+          "hits": [
+            {
+              "multiplier": 1.8,
+              "target": "main",
+              "element": "wind",
+              "onHit": [
+                {
+                  "type": "applyAnomalyStack",
+                  "element": "wind",
+                  "stacks": 3,
+                  "target": "mainTarget",
+                  "stackCounter": "perHit"
+                }
+              ]
+            },
+            {
+              "multiplier": 1.25,
+              "target": "adjacent",
+              "element": "wind",
+              "onHit": [
+                {
+                  "type": "applyAnomalyStack",
+                  "element": "wind",
+                  "stacks": 1,
+                  "target": "mainTarget",
+                  "stackCounter": "perHit"
+                }
+              ]
+            }
+          ],
+          "description": "主目标 180% / 相邻 125% 攻击力风属性；−1 共鸣指数；+20 能量；主目标 3 层「风蚀」、溅射目标 1 层",
+          "rawText": "主目标 180% / 相邻 125% 攻击力风属性；−1 共鸣指数；+20 能量；主目标 3 层「风蚀」、溅射目标 1 层",
+          "optimization": {
+            "source": "优化稿/守约人-技能组-全部模态.md",
+            "archivedAt": "2026-11-10"
+          }
+        },
+        "talent": {
+          "id": "skill-duanxian-xunhen-erosion",
+          "kind": "talent",
+          "name": "断线寻痕",
+          "scalingArray": "none",
+          "triggers": [
+            {
+              "hook": "onAttack",
+              "scope": "self",
+              "effects": [
+                {
+                  "type": "conditional",
+                  "condition": "targetIsElitePlus",
+                  "then": [
+                    {
+                      "type": "applyAnomalyStack",
+                      "element": "wind",
+                      "stacks": 1,
+                      "target": "mainTarget",
+                      "stackCounter": "perAttack"
+                    }
+                  ],
+                  "onFail": [
+                    {
+                      "type": "chanceCheck",
+                      "chance": 0.01,
+                      "onSuccess": [
+                        {
+                          "type": "execute"
+                        }
+                      ],
+                      "onFail": [
+                        {
+                          "type": "applyAnomalyStack",
+                          "element": "wind",
+                          "stacks": 1,
+                          "target": "mainTarget",
+                          "stackCounter": "perAttack"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "description": "攻击敌人时判定：1% 概率直接秒杀当前敌人（对精英级及以上无效）；99% 概率为被攻击的敌人施加 1 层「风蚀」并在下一回合中使我方全体施加「风蚀」时多施加一层",
+          "rawText": "攻击敌人时判定：1% 概率直接秒杀当前敌人（对精英级及以上无效）；99% 概率为被攻击的敌人施加 1 层「风蚀」并在下一回合中使我方全体施加「风蚀」时多施加一层",
+          "optimization": {
+            "source": "优化稿/守约人-技能组-全部模态.md",
+            "archivedAt": "2026-11-10"
+          },
+          "cost": {
+            "energy": 0
+          },
+          "gain": {
+            "energy": 0
+          },
+          "targetType": "partyAll"
+        },
+        "ultimate": {
+          "id": "skill-feng-ruyue-erzhi-erosion",
+          "kind": "ultimate",
+          "name": "风，如约而至",
+          "targetType": "aoe",
+          "scalingBase": "atk",
+          "scalingArray": "ultimate",
+          "cost": {
+            "energy": 100,
+            "resonanceIndex": 0
+          },
+          "gain": {
+            "resonanceIndex": 0,
+            "energy": 20
+          },
+          "hits": [
+            {
+              "multiplier": 7.25,
+              "target": "all",
+              "element": "wind"
+            }
+          ],
+          "onCast": [
+            {
+              "type": "applyAnomalyStack",
+              "element": "wind",
+              "stacks": 2,
+              "target": "allEnemies"
+            },
+            {
+              "type": "extraTurn",
+              "target": "self"
+            }
+          ],
+          "description": "敌方全体 725% 攻击力风属性；消耗 120 能量；敌方全体 2 层「风蚀」；立即行动。本模态的终结技不给「风涌」。当本技能攻击超过4个敌方或连续释放两次本技能时目标时返还80点能量",
+          "rawText": "敌方全体 725% 攻击力风属性；消耗 120 能量；敌方全体 2 层「风蚀」；立即行动。本模态的终结技不给「风涌」。当本技能攻击超过4个敌方或连续释放两次本技能时目标时返还80点能量",
+          "optimization": {
+            "source": "优化稿/守约人-技能组-全部模态.md",
+            "archivedAt": "2026-11-10"
+          }
+        },
+        "enhancedResonance": {
+          "id": "skill-feng-guoyi-liuhen-erosion",
+          "kind": "enhanced_resonance",
+          "name": "风，过亦留痕",
+          "targetType": "bounce",
+          "scalingBase": "atk",
+          "scalingArray": "resonance",
+          "cost": {
+            "energy": 0,
+            "resonanceIndex": 1,
+            "requires": "usedUltimate AND anomalyStacksAtLeast:wind:9"
+          },
+          "gain": {
+            "resonanceIndex": 0,
+            "energy": 0
+          },
+          "hits": [
+            {
+              "multiplier": 1,
+              "target": "main",
+              "element": "wind",
+              "onHit": [
+                {
+                  "type": "applyAnomalyStack",
+                  "element": "wind",
+                  "stacks": 1,
+                  "target": "mainTarget",
+                  "stackCounter": "perHit"
+                }
+              ]
+            },
+            {
+              "multiplier": 0.55,
+              "target": "randomUnhit",
+              "times": 4,
+              "element": "wind",
+              "condition": "enemyCountGE:3",
+              "onHit": [
+                {
+                  "type": "applyAnomalyStack",
+                  "element": "wind",
+                  "stacks": 1,
+                  "target": "mainTarget",
+                  "stackCounter": "perHit"
+                }
+              ]
+            }
+          ],
+          "description": "指定单体 100% + 随机 4 名敌人各 55% 攻击力风属性；消耗 1 共鸣指数（不消耗「风涌」）；每段各施加 1 层「风蚀」；敌人 ≥ 3 人时优先弹射未被本技能攻击过的目标。开启条件：本场战斗中释放过终结技 AND 场上任意目标持有的风蚀 ≥ 9 层（每自然回合检查、条件不满足即收回）",
+          "rawText": "指定单体 100% + 随机 4 名敌人各 55% 攻击力风属性；消耗 1 共鸣指数（不消耗「风涌」）；每段各施加 1 层「风蚀」；敌人 ≥ 3 人时优先弹射未被本技能攻击过的目标。开启条件：本场战斗中释放过终结技 AND 场上任意目标持有的风蚀 ≥ 9 层（每自然回合检查、条件不满足即收回）",
+          "optimization": {
+            "source": "优化稿/守约人-技能组-全部模态.md",
+            "archivedAt": "2026-11-10"
+          }
+        }
+      }
+    }
+  },
+  "eidolons": [
+    {
+      "rank": 1,
+      "name": "启程",
+      "effects": [
+        {
+          "type": "changeEnergyCost",
+          "delta": -10
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "识途",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "executeChance",
+          "value": 0.025
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "行路",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 12
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "风眼",
+      "effects": [
+        {
+          "type": "dodge",
+          "chance": 0.25
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "归途",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 14
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "name": "履约",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "critRate",
+          "value": 0.2
+        }
+      ]
+    }
+  ],
+  "signatureWeapon": "weap-hengdao-yuanchu",
+  "gearSet": "gear-ruyue-zhizheng",
+  "lore": {
+    "quote": "无论这般终焉往复多少次，我保证我会如约而至。",
+    "narrativeSkills": [
+      "断线"
+    ],
+    "secrets": [
+      "真实年龄未知",
+      "与「约定」的关系未揭示"
+    ],
+    "speechStyle": "简短、克制、常带疑问句；不主动承诺，但承诺了必做到"
+  }
+}

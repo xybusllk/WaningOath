@@ -1,0 +1,18 @@
+{
+  "id": "buff-vera-dragon-bond",
+  "name": "龙裔共鸣",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 0,
+  "mods": [
+    { "kind": "Hp", "op": "Pct", "value": 0.30, "source": "余烬天龙在场：生命上限 +30%" },
+    { "kind": "CritRate", "op": "Pct", "value": 0.10, "source": "余烬天龙在场：暴击率 +10%" },
+    { "kind": "CritDmg", "op": "Pct", "value": 0.30, "source": "余烬天龙在场：暴击伤害 +30%" }
+  ],
+  "elemMods": [],
+  "description": "「余烬天龙」在场期间，薇拉生命上限 +30%、暴击率 +10%、暴击伤害 +30%。召唤消失时由角色触发器移除。",
+  "note": "归属：`原始角色设定\\薇拉·约克.txt` 元素共鸣。",
+  "exclusiveTo": []
+}

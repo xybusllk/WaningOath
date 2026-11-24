@@ -1,0 +1,16 @@
+{
+  "id": "buff-rolanda-guard-ally",
+  "name": "黑林急救·友方",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 0,
+  "lethalGuardHealPct": 0.5,
+  "lethalGuardBuffId": "buff-rolanda-guard-buff",
+  "mods": [],
+  "elemMods": [],
+  "description": "队伍内其他友方受到致命伤害时，免疫本次伤害、恢复其生命上限 50%，并使全队获得 10% 全伤害提高；每场一次。",
+  "note": "自身同时持有「黑林急救·自身」时，Combat 取更高的 80% 治疗；10% 全伤害提高由触发时的 applyBuff 施加。",
+  "exclusiveTo": []
+}

@@ -1,0 +1,323 @@
+{
+  "id": "char-qianyu-xingyao",
+  "name": "千语星遥",
+  "title": "SITE14 设施总监",
+  "rarity": 5,
+  "element": "ice",
+  "path": "sub_dps",
+  "anchorRow": "subDps",
+  "weaponType": "dao",
+  "faction": [
+    "CCRF-SITE14"
+  ],
+  "birthday": "07-13",
+  "base": {
+    "atk": 290,
+    "hp": 3200,
+    "def": 100,
+    "speed": 105,
+    "critRate": 0.05,
+    "critDmg": 1.5,
+    "energyMax": 105,
+    "energyOverflowCap": 0,
+    "threat": 50
+  },
+  "growth": {
+    "panelGrowth": 1.01,
+    "breakthroughBonus": {
+      "atk": 0.05
+    }
+  },
+  "skills": {
+    "basic": {
+      "id": "skill-qiwu-banxingyue",
+      "kind": "basic",
+      "name": "起舞伴星跃",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "basic",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "resonanceIndex": 1,
+        "energy": 25
+      },
+      "hits": [
+        {
+          "multiplier": 0.95,
+          "target": "main",
+          "element": "ice"
+        }
+      ],
+      "description": "95%攻击力冰属性伤害；+1共鸣指数，+25能量",
+      "rawText": "95%攻击力冰属性伤害；+1共鸣指数，+25能量",
+      "optimization": {
+        "source": "优化稿/千语星遥-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "resonance": {
+      "id": "skill-xinghai-yonghailang",
+      "kind": "resonance",
+      "name": "星海涌骇浪",
+      "targetType": "blast",
+      "scalingBase": "atk",
+      "scalingArray": "resonance",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 1
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 35
+      },
+      "hits": [
+        {
+          "multiplier": 1.4,
+          "target": "main",
+          "element": "ice"
+        },
+        {
+          "multiplier": 1.1,
+          "target": "adjacent",
+          "element": "ice"
+        }
+      ],
+      "onCast": [
+        {
+          "type": "conditional",
+          "condition": "always",
+          "then": [
+            {
+              "type": "applyBuff",
+              "buffId": "buff-faction-slot1-ice",
+              "stacks": 1,
+              "duration": 2,
+              "target": "partySlot1"
+            }
+          ]
+        }
+      ],
+      "description": "主目标140%/相邻110%攻击力冰属性伤害；−1共鸣指数；获得35能量；若我方一号位为CCRF阵营，则该角色冰属性伤害+25%，持续2回合",
+      "rawText": "主目标140%/相邻110%攻击力冰属性伤害；−1共鸣指数；获得35能量；若我方一号位为CCRF阵营，则该角色冰属性伤害+25%，持续2回合",
+      "optimization": {
+        "source": "优化稿/千语星遥-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "talent": {
+      "id": "skill-xingchen-youlianjie",
+      "kind": "talent",
+      "name": "星辰有联结",
+      "scalingArray": "none",
+      "triggers": [
+        {
+          "hook": "onUltimateCast",
+          "scope": "ally",
+          "skillKind": "ultimate",
+          "effects": [
+            {
+              "type": "followUpAttack",
+              "multiplier": 1.05,
+              "element": "ice",
+              "target": "mainTarget"
+            },
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-ice-vuln",
+              "stacks": 1,
+              "duration": 2,
+              "target": "mainTarget"
+            },
+            {
+              "type": "applyBuff",
+              "buffId": "buff-starlink",
+              "stacks": 1,
+              "duration": 2,
+              "target": "partyAll"
+            },
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-def-down-15",
+              "stacks": 1,
+              "duration": 2,
+              "target": "mainTarget"
+            },
+            {
+              "type": "gainEnergy",
+              "amount": 10,
+              "target": "self"
+            }
+          ]
+        }
+      ],
+      "description": "任意我方释放终结技攻击敌人后，自身立即对该敌人发动追加攻击：105%攻击力冰属性；并使目标冰属性易伤+15%、我方全体暴击率+10%/暴击伤害+20%、目标防御−15%，持续2回合；自身+25能量",
+      "rawText": "任意我方释放终结技攻击敌人后，自身立即对该敌人发动追加攻击：105%攻击力冰属性；并使目标冰属性易伤+15%、我方全体暴击率+10%/暴击伤害+20%、目标防御−15%，持续2回合；自身+25能量",
+      "optimization": {
+        "source": "优化稿/千语星遥-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      },
+      "cost": {
+        "energy": 0
+      },
+      "gain": {
+        "energy": 25
+      },
+      "targetType": "single",
+      "hits": [
+        {
+          "multiplier": 1.05,
+          "target": "main",
+          "element": "ice"
+        }
+      ],
+      "scalingBase": "atk"
+    },
+    "ultimate": {
+      "id": "skill-yongbuluomu-dexingchen",
+      "kind": "ultimate",
+      "name": "永不落幕的星辰",
+      "targetType": "aoe",
+      "scalingBase": "atk",
+      "scalingArray": "ultimate",
+      "cost": {
+        "energy": 105,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 0
+      },
+      "hits": [
+        {
+          "multiplier": 5.4,
+          "target": "all",
+          "element": "ice"
+        }
+      ],
+      "onCast": [
+        {
+          "type": "applyBuff",
+          "buffId": "buff-memory-feast",
+          "stacks": 1,
+          "duration": 1,
+          "target": "partyAll"
+        },
+        {
+          "type": "applyDebuff",
+          "debuffId": "debuff-vuln-30",
+          "stacks": 1,
+          "duration": 1,
+          "target": "mainTarget"
+        },
+        {
+          "type": "conditional",
+          "condition": "enemyCountLE:3",
+          "then": [
+            {
+              "type": "dealDamage",
+              "multiplier": 0.45,
+              "element": "ice",
+              "hits": 5,
+              "target": "randomEnemy",
+              "countsAsUltimateDamage": true
+            }
+          ]
+        }
+      ],
+      "description": "敌方全体540%攻击力冰属性伤害；为我方全体添加「记忆里的欢宴」：暴击率+10%/暴击伤害+30%，持续1回合；被命中的敌方目标附加30%易伤；若命中目标≤3个，额外对随机敌方单体造成5次45%攻击力冰属性伤害（视为终结技伤害）",
+      "rawText": "敌方全体540%攻击力冰属性伤害；为我方全体添加「记忆里的欢宴」：暴击率+10%/暴击伤害+30%，持续1回合；被命中的敌方目标附加30%易伤；若命中目标≤3个，额外对随机敌方单体造成5次45%攻击力冰属性伤害（视为终结技伤害）",
+      "optimization": {
+        "source": "优化稿/千语星遥-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    }
+  },
+  "eidolons": [
+    {
+      "rank": 1,
+      "name": "早班，先打个卡",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "basicExtraHit",
+          "value": 0.45
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "空调房里的权限溢出",
+      "effects": [
+        {
+          "type": "changeResonanceCost",
+          "delta": -1
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "档案室翻到了第叁页",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 12
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "备忘录里写着：该出手了",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "followUpMultiplier",
+          "value": 1.05
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "冰镇汽水，满格电量",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 14
+        },
+        {
+          "type": "changeEnergyCost",
+          "delta": -20
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "name": "不落星辰，今天也准时下班",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "ultimateExtraHits",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "signatureWeapon": "weap-buluo-xingchen",
+  "gearSet": "gear-yiku-suocang",
+  "lore": {
+    "quote": "你是「守约人」。会如约而至的人，不会那么坏。",
+    "narrativeSkills": [
+      "溯忆",
+      "忆库"
+    ],
+    "speechStyle": "慵懒、随性，爱用「唔」「哦？」；关键处会突然认真"
+  }
+}

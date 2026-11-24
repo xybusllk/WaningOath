@@ -1,0 +1,32 @@
+{
+  "id": "buff-vera-gunslinger",
+  "name": "火枪手",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 3,
+  "mods": [],
+  "elemMods": [],
+  "onExpire": [
+    {
+      "type": "conditional",
+      "condition": "notStatus:强化终结技已用",
+      "then": [
+        {
+          "type": "stackDetonate",
+          "stack": "狩猎印记",
+          "multiplier": 4.8,
+          "hits": 2,
+          "bonusAtStacks": 5,
+          "bonusMultiplier": 7.2,
+          "bonusTarget": "allEnemies",
+          "spendAll": true
+        }
+      ]
+    }
+  ],
+  "description": "薇拉进入「火枪手」状态 3 自然回合：锁定其余技能，获得强化普攻 / 强化终结技；到期时若未释放过强化终结技，则结算全部「狩猎印记」。",
+  "note": "⚠️ 「锁定其余技能」由普通技能的 `requires: notStatus:火枪手` 与强化技能的 `requires: statusAtLeast:火枪手:1` 共同表达。到期结算走 `StatusDef.OnExpire`（被驱散不触发）。归属：`原始角色设定\\薇拉·约克.txt` 终结技。",
+  "exclusiveTo": []
+}

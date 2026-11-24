@@ -1,0 +1,18 @@
+{
+  "id": "buff-prairie-fire-2",
+  "name": "燎原",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 3,
+  "mods": [],
+  "elemMods": [],
+  "knobs": {
+    "droneDamageBonus": 0.30,
+    "droneExtraCombust": 1
+  },
+  "description": "2 发火种的燎原：无人机攻击**不消耗**无人机、伤害 +30%、额外叠 1 层可燃、**全队火属性伤害 +10%**，持续 3 自然回合。",
+  "note": "⚠️ 与 1 / 3 档**同名不同 id**，理由见 `buff-prairie-fire-1` 的 note。⚠️ 本档多出来的「全队火属性伤害 +10%」不在本文件里 —— 本状态挂在瓦列里娅身上、只带无人机相关的旋钮；那条全队加成由终结技数据另挂一个**光环**给队友。归属：`原始角色设定\\瓦列里娅.txt`。",
+  "exclusiveTo": []
+}

@@ -1,0 +1,28 @@
+{
+  "id": "weap-youya-beige",
+  "name": "优雅悲歌",
+  "rarity": 5,
+  "weaponType": "dao",
+  "owner": "char-xingyao-darknight",
+
+  "mainStat": { "kind": "CritDmg", "op": "Pct", "value": 0.40, "note": "保留原稿主属性（101 §4.4）" },
+  "subStat": { "kind": "Hp", "op": "Add", "value": 1200, "note": "原稿「生命值 +30%」正好就是新模型的副属性位，只需把百分比换成固定值 —— 这把武器零损失（101 §4.4）" },
+
+  "effect": {
+    "appliesWhen": { "weaponType": "dao" },
+    "initialOverrideRank": 1,
+    "trigger": { "hook": "onFollowUp", "duration": 0, "target": "self", "note": "101 §4.4：追加攻击后。⚠️ 原文写「直接加算」、未写持续 ⇒ 按永久（本场）处理" },
+    "tiers": [
+      { "rank": 1, "anomalyBuildUpBonus": 0.175 },
+      { "rank": 2, "anomalyBuildUpBonus": 0.20 },
+      { "rank": 3, "anomalyBuildUpBonus": 0.225 },
+      { "rank": 4, "anomalyBuildUpBonus": 0.25 },
+      { "rank": 5, "anomalyBuildUpBonus": 0.275 }
+    ],
+    "description": "装备者（仅单刀类）进行**追加攻击**后：装备者**异常积蓄效率 +17.5/20/22.5/25/27.5%**（**直接加算**）。五段依次对应权限覆写 1~5 阶。"
+  },
+
+  "growth": { "mainAndSubGrowWithLevel": true, "levelFactor": 2.195, "effectGrowsWithOverrideOnly": true },
+  "note": "⚠️ **本武器是 `100` 乙14 的当事武器之一**：`07 §4.5` 转写时把原稿的五段**抄丢了**，本表按 `101 §4.4` 补回。⚠️ 初始权限覆写原稿未给，取 **1 阶**。⚠️ 武器系统整体属 M7，本文件当前只作声明与 M3 校验输入，不进战斗。",
+  "flavor": "刀鞘上有一道很浅的旧痕，像是被人反复摩挲过。她从不解释那是什么。"
+}

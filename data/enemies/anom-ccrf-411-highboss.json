@@ -1,0 +1,77 @@
+{
+  "id": "anom-ccrf-411-highboss",
+  "name": "高塔凝视者（高难档）",
+  "ccrfCode": "CCRF-411",
+
+  "tier": "highboss",
+  "category": "anomaly",
+  "level": 90,
+
+  "base": {
+    "atk": 6500,
+    "hp": 350000,
+    "def": 1200,
+    "speed": 70,
+    "critRate": 0.05,
+    "critDmg": 1.50,
+    "energyMax": 120,
+    "threat": 100
+  },
+
+  "resistAll": 0.0,
+  "resist": {},
+  "anomalyResist": {},
+
+  "aiProfile": "default",
+
+  "skills": [
+    {
+      "id": "skill-411hb-guancezhuimian",
+      "kind": "skill",
+      "name": "观测锥面",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "cost": { "energy": 0, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 0, "energy": 30 },
+      "hits": [
+        {
+          "multiplier": 0.80,
+          "target": "main",
+          "element": "physical",
+          "onHit": [
+            { "type": "applyDebuff", "debuffId": "debuff-gaze", "stacks": 1, "duration": 3, "target": "mainTarget", "stackCounter": "perHit" }
+          ]
+        }
+      ],
+      "triggers": [
+        {
+          "_note": "与首领档的破绽触发完全同构（本体同源）。",
+          "hook": "onNonAttackAction",
+          "scope": "enemy",
+          "condition": "actorStatusAtLeast:注目:1",
+          "effects": [
+            { "type": "decayStatus", "statusId": "debuff-gaze", "amount": 1, "target": "mainTarget" }
+          ]
+        }
+      ],
+      "description": "与首领档的「观测锥面」完全同构 —— **只改了面板，技能一字未改**（本体同源）。含同一份「非攻击行动使注目衰减 1 层」的破绽触发。",
+      "rawText": "本文件是一个**档位靶子**，不是独立的异常体档案。"
+    },
+    {
+      "id": "skill-411hb-chuancicike",
+      "kind": "ultimate",
+      "name": "贯穿穿刺",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "cost": { "energy": 90, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "hits": [
+        { "multiplier": 3.00, "target": "main", "element": "physical" }
+      ],
+      "description": "与首领档的「贯穿穿刺」完全同构 —— **只改了面板，技能一字未改**。",
+      "rawText": "本文件是一个**档位靶子**，不是独立的异常体档案。"
+    }
+  ]
+}

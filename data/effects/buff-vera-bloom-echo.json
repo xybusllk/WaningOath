@@ -1,0 +1,23 @@
+{
+  "id": "buff-vera-bloom-echo",
+  "name": "借你羽梢一瞬",
+  "kind": "buff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "round",
+  "duration": 2,
+  "mods": [],
+  "elemMods": [
+    { "kind": "DmgAmp", "element": "physical", "op": "Add", "value": 0.15, "source": "绽放响应：伤害加深 +15%" },
+    { "kind": "DmgAmp", "element": "ice", "op": "Add", "value": 0.15, "source": "绽放响应：伤害加深 +15%" },
+    { "kind": "DmgAmp", "element": "fire", "op": "Add", "value": 0.15, "source": "绽放响应：伤害加深 +15%" },
+    { "kind": "DmgAmp", "element": "lightning", "op": "Add", "value": 0.15, "source": "绽放响应：伤害加深 +15%" },
+    { "kind": "DmgAmp", "element": "wind", "op": "Add", "value": 0.15, "source": "绽放响应：伤害加深 +15%" },
+    { "kind": "DmgAmp", "element": "resonance", "op": "Add", "value": 0.15, "source": "绽放响应：伤害加深 +15%" },
+    { "kind": "DmgAmp", "element": "liye", "op": "Add", "value": 0.15, "source": "绽放响应：伤害加深 +15%" },
+    { "kind": "DmgAmp", "element": "aria", "op": "Add", "value": 0.15, "source": "绽放响应：伤害加深 +15%" }
+  ],
+  "description": "队伍中其他角色释放元素绽放时，薇拉响应并获得「借你羽梢一瞬」：伤害加深 +15%，持续 2 回合。",
+  "note": "⚠️ 原稿的「下一次自身绽放的增益强度与持续时间翻倍」需要记录「下一次绽放」并改状态参数，当前用伤害加深近似。归属：`原始角色设定\\薇拉·约克.txt` 元素绽放。",
+  "exclusiveTo": []
+}

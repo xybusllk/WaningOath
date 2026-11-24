@@ -1,0 +1,17 @@
+{
+  "id": "stage-charsim-valeria",
+  "name": "角色自检靶场 · 瓦列里娅",
+  "kind": "charsim",
+  "_note": "**不是游戏内容**：这是给 `Sim battle` 用的角色自检靶场（与 stage-sim-* 同一性质，但 `kind` 故意不用 \"sim\"）。⚠️ **为什么不用 \"sim\"**：`Sim batch` 会枚举全部 `kind == \"sim\"` 的关卡跑 M2 分档实测 —— 把她加进去会把那张 1024 场的表整个改掉，而那张表正在等作者裁决。用独立的 kind 把「角色自检」与「平衡实测」分开。⚠️ 没有 reward 段：服务端对非白名单 kind 不会发奖（`stage/clear` 只认表内 id，且 sim 类一律拒绝）。",
+  "party": ["char-valeria", "char-shouyueren", "char-qianyu-xingyao", "char-belrand"],
+  "enemies": ["anom-ccrf-502"],
+  "maxRound": 15,
+  "reward": {
+    "note": "自检靶场不发奖。",
+    "repeatable": false,
+    "staminaCost": 0,
+    "unlockProtocolLevel": 0,
+    "firstClear": {},
+    "repeat": {}
+  }
+}

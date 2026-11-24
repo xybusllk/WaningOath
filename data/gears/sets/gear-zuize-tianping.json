@@ -1,0 +1,12 @@
+﻿{
+  "id": "gear-zuize-tianping",
+  "name": "罪业与天平",
+  "rarity": 5,
+  "_note": "卡尔尼菲琪亚的专属套装【我提议 · 原稿未给】。名字取自她的「天平」叙事技能与「罪业归赎」权阶；效果只补物理增伤与暴伤。",
+  "tiers": [
+    { "pieces": 2, "description": "伤害加深 10%（近似物理增伤）", "effects": [ { "type": "modifyStat", "stat": "dmgAmp", "value": 0.10, "target": "self" } ] },
+    { "pieces": 4, "description": "暴击伤害提高 20%", "effects": [ { "type": "modifyStat", "stat": "critDmg", "value": 0.20, "target": "self" } ] }
+  ],
+  "description": "卡尔尼菲琪亚 · 物理主C（裁决 + 处决）。"
+}
+

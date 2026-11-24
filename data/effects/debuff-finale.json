@@ -1,0 +1,23 @@
+{
+  "id": "debuff-finale",
+  "name": "终幕",
+  "kind": "debuff",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "turn",
+  "duration": 3,
+  "mods": [
+    { "kind": "Def", "op": "Pct", "value": -0.30, "source": "终幕（防御力 −30%）" }
+  ],
+  "elemMods": [
+    { "kind": "Vuln", "element": "Physical", "op": "Add", "value": 0.15, "source": "终幕（受到的伤害 +15%）" },
+    { "kind": "Vuln", "element": "Ice", "op": "Add", "value": 0.15, "source": "终幕（受到的伤害 +15%）" },
+    { "kind": "Vuln", "element": "Fire", "op": "Add", "value": 0.15, "source": "终幕（受到的伤害 +15%）" },
+    { "kind": "Vuln", "element": "Lightning", "op": "Add", "value": 0.15, "source": "终幕（受到的伤害 +15%）" },
+    { "kind": "Vuln", "element": "Wind", "op": "Add", "value": 0.15, "source": "终幕（受到的伤害 +15%）" },
+    { "kind": "Vuln", "element": "Resonance", "op": "Add", "value": 0.15, "source": "终幕（受到的伤害 +15%）" },
+    { "kind": "Vuln", "element": "Resonance", "op": "Add", "value": 0.10, "source": "终幕（受到的共振属性伤害额外 +10%）" }
+  ],
+  "description": "星见爱乃二段终结技「晨星咏叹·落幕华彩」施加的敌方减益，持续 3 回合（07 §6.2.8）：防御力 −30%；受到的伤害 +15%；受到的**共振**属性伤害**额外 +10%**（与上一条叠加 ⇒ 共振系敌人共吃 25%）。施加概率 100% 基础概率（权阶Ⅵ → 固定必定施加）。",
+  "note": "⚠️ **防御 −30% 在比率减伤下的实际增伤只有约 3.1% ~ 11.1%，不要按 30% 记账**（01 §2.2 的凸曲线条款）。⚠️ 「共振易伤 +10%」单独一条 ElemMod，与全属性 +15% 两条相加 = 共振共 25%；因为 `ElemStat.Vuln` 是加算语义（Stats.ElemAccumulator.GetPct），两条会正确叠加。⚠️ 元素只列六条：离谒 / 咏叹在取值时解析到冰 / 共振（ElementInfo.Resolve），与 debuff-vuln-30 同一口径。"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "buff-red-tide-will",
+  "name": "赤潮意志",
+  "kind": "buff",
+  "stackCap": 3,
+  "stackable": true,
+  "durationUnit": "round",
+  "duration": 2,
+  "mods": [],
+  "elemMods": [
+    { "kind": "DmgBonus", "element": "fire", "op": "Add", "value": 0.03, "source": "赤潮意志：每消耗 1 架无人机，全队火属性伤害 +3%（最多 3 层）" }
+  ],
+  "description": "权阶Ⅳ「赤潮的意志」：每消耗 1 架「无人机」，我方全体火属性伤害 +3%，持续 2 自然回合，最多叠 3 层（+9%）。",
+  "note": "⚠️ **可叠层**（`stackCap: 3`）：每消耗一架无人机挂一层，重复触发只叠层并刷新时间。⚠️ 不写 `appliesTo` —— 它按 `target: partyAll` **逐人挂载**，这样每名队友各自吃满 3 层；光环（`appliesTo: partyAll`）只挂一份、靠 `StatusesAffecting` 扩散，两种写法不能混用。⚠️ 闸门在权阶Ⅳ：没有 `dmgBonusFire` 旋钮时这条 buff 不会被挂上。归属：`原始角色设定\\瓦列里娅.txt` 权阶Ⅳ。",
+  "exclusiveTo": []
+}

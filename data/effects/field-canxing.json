@@ -1,0 +1,13 @@
+{
+  "id": "field-canxing",
+  "name": "灿星",
+  "kind": "field",
+  "stackCap": 1,
+  "stackable": false,
+  "durationUnit": "turn",
+  "duration": 5,
+  "mods": [],
+  "elemMods": [],
+  "description": "群星誓约的领域「灿星」。领域内自身暴击率 +20% / 暴击伤害 +40%；我方其他单位每次行动为她叠 1 层「星忆」。权阶Ⅳ 后允许与其他领域并存。",
+  "note": "领域本体只做登记与计时；暴击增益由 buff-canxing 承担，叠层由后续 onAllyAction 触发器补。"
+}

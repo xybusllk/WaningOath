@@ -1,0 +1,504 @@
+{
+  "id": "char-hoshimi-aino",
+  "name": "星见爱乃",
+  "title": "站点小太阳",
+  "rarity": 5,
+  "element": "aria",
+  "path": "healer",
+  "anchorRow": "survival",
+  "weaponType": "focus",
+  "faction": [
+    "CCRF"
+  ],
+  "birthday": "01-13",
+  "genderVariant": false,
+  "_comment": "07 §6（L734–L998）。咏叹 = 共振的变体（01 §2.1）；全作第一位施术仪角色。定位「生存 · 治疗」，锚点行 survival（02 §1.2 生存 / 治疗位 5★：1 级 260 / 4,000，满配 2,200 / 18,000~20,000）。她是生命倍率角色，但**不做** 07 §3.2 / §4.3 式尺度换算 —— 倍率与面板锚点同时确定。二段终结技用 `bloom` 位近似（引擎暂不驱动 bloom，见各技能 description 与文件末 `_note`）。",
+  "base": {
+    "atk": 260,
+    "hp": 4000,
+    "def": 100,
+    "speed": 100,
+    "critRate": 0.05,
+    "critDmg": 1.5,
+    "energyMax": 130,
+    "energyOverflowCap": 0,
+    "threat": 50
+  },
+  "growth": {
+    "panelGrowth": 1.01,
+    "breakthroughBonus": {
+      "hp": 0.04,
+      "energyRegen": 0.04
+    }
+  },
+  "skills": {
+    "basic": {
+      "id": "skill-xingxie-yinbo",
+      "kind": "basic",
+      "name": "星屑音波",
+      "targetType": "blast",
+      "scalingBase": "hp",
+      "scalingArray": "basic",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "resonanceIndex": 1,
+        "energy": 20
+      },
+      "hits": [
+        {
+          "multiplier": 0.1,
+          "target": "main",
+          "element": "aria",
+          "onHit": [
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-starlight-mark",
+              "stacks": 1,
+              "baseChance": 1,
+              "target": "mainTarget",
+              "stackCounter": "perAttack"
+            }
+          ]
+        },
+        {
+          "multiplier": 0.1,
+          "target": "adjacent",
+          "element": "aria",
+          "onHit": [
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-starlight-mark",
+              "stacks": 1,
+              "baseChance": 1,
+              "target": "mainTarget",
+              "stackCounter": "perAttack"
+            }
+          ]
+        }
+      ],
+      "description": "对主目标与相邻目标造成10%生命上限的咏叹属性伤害；+1共鸣指数；+10能量；100%基础概率附加1层「星光印记」。",
+      "rawText": "对主目标与相邻目标造成10%生命上限的咏叹属性伤害；+1共鸣指数；+10能量；100%基础概率附加1层「星光印记」。",
+      "optimization": {
+        "source": "优化稿/星见爱乃-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "resonance": {
+      "id": "skill-xinggui-manbu",
+      "kind": "resonance",
+      "name": "星轨漫步",
+      "targetType": "partyAll",
+      "scalingBase": "hp",
+      "scalingArray": "resonance",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 1
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 30
+      },
+      "onCast": [
+        {
+          "type": "heal",
+          "pctMaxHp": 0.3,
+          "flat": 1224,
+          "target": "partyAll"
+        }
+      ],
+      "description": "消耗1点共鸣指数；+20能量。为我方全体治疗：生命上限×45%×等级修正系数+1,224。",
+      "rawText": "消耗1点共鸣指数；+20能量。为我方全体治疗：生命上限×45%×等级修正系数+1,224。",
+      "optimization": {
+        "source": "优化稿/星见爱乃-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "talent": {
+      "id": "skill-gongqing-zengfu-xiebo",
+      "kind": "talent",
+      "name": "共情增幅谐波",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "triggers": [
+        {
+          "_note": "「星光迸发」：友方攻击**已经带有 3 层印记**的敌人后触发（onAttack 在伤害段之前派发，所以这一条读的是攻击开始前的层数；本次攻击新加的那 1 层留给下一次攻击）。",
+          "hook": "onAttack",
+          "scope": "ally",
+          "condition": "targetStatusAtLeast:星光印记:3",
+          "effects": [
+            {
+              "type": "additionalDamage",
+              "multiplier": 2.2,
+              "scalingBase": "atk",
+              "element": "resonance",
+              "target": "mainTarget",
+              "canCrit": true,
+              "accumulateAnomaly": true,
+              "_note": "爱乃攻击力 × 220% 的**共振**附加伤害（不是咏叹、不是生命上限）。触发者归 HookBus：Actor = 爱乃（触发器所属单位），所以倍率取爱乃的攻击力 ✓"
+            },
+            {
+              "type": "decayStatus",
+              "statusId": "debuff-starlight-mark",
+              "amount": 3,
+              "target": "mainTarget",
+              "_note": "立即消耗该目标身上全部印记（印记上限 3 ⇒ 减 3 即归零）"
+            },
+            {
+              "type": "gainEnergy",
+              "amount": 15,
+              "_note": "07 §6.2.3：回能给**触发此次迸发的友方单位**；当前 `gainEnergy` 原子固定结算给 ctx.Actor（= 触发器所属单位爱乃），这是已知实现缺口，待 M7 补「回能给事件行动者」的口径"
+            }
+          ]
+        },
+        {
+          "_note": "「追光者」附加：追光者期间每次攻击命中必定为目标附加 1 层「星光印记」（每次攻击 = 1 层）。判定读攻击者身上的「追光者」。",
+          "hook": "onAttack",
+          "scope": "ally",
+          "condition": "actorStatusAtLeast:追光者:1",
+          "effects": [
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-starlight-mark",
+              "stacks": 1,
+              "baseChance": 1,
+              "target": "mainTarget",
+              "stackCounter": "perAttack"
+            }
+          ]
+        },
+        {
+          "_note": "战斗固有「温柔的叛逆者」① 与「未竟的追光者」：两者都是常驻被动。`onBattleStart` 在 HookBus 里没有 Actor、scope 判定会直接失败（已知实现限制），故改挂自身第一个 `onTurnStart` + `oncePerBattle: 1`，效果 duration 0 = 本场永久。",
+          "hook": "onTurnStart",
+          "scope": "self",
+          "oncePerBattle": 1,
+          "effects": [
+            {
+              "type": "modifyStat",
+              "stat": "healBonus",
+              "value": 0.2,
+              "target": "self",
+              "duration": 0,
+              "_note": "温柔的叛逆者①：对「可控友好 / 中性」单位的治疗或增益效果 +20%。healBonus 只能表达**治疗**那一半；「增益效果 +20%」没有对应词条，见 note"
+            },
+            {
+              "type": "modifyStat",
+              "stat": "damageReduction",
+              "value": 0.1,
+              "target": "partyAll",
+              "duration": 0,
+              "_note": "未竟的追光者：我方全体**受到的共振属性伤害** −10%。引擎只有通用「受到的伤害降低」，这里用通用减伤近似（实际会连物理 / 冰 / 火等一起减 10%），见 note"
+            }
+          ]
+        },
+        {
+          "_note": "战斗固有「温柔的叛逆者」②：使用**包含治疗的技能**时 20% 概率给生命值最低的友方附加「星光护盾」。她唯一含治疗的技能是元素共鸣「星轨漫步」，因此挂 `onResonanceCast`（比 onSkillCast 更窄、更贴近原文，且不会在普攻上误触发）。",
+          "hook": "onResonanceCast",
+          "scope": "self",
+          "chance": 0.2,
+          "effects": [
+            {
+              "type": "shield",
+              "pctMaxHp": 0.1,
+              "target": "partyLowestHp",
+              "shieldOneHit": true,
+              "_note": "「星光护盾」= 生命上限 ×10%，受护盾强度加成；只吸收**一次**伤害实例，剩余立即消失、不结转；重复获得取较高值并刷新、不叠加（辛6 口径）。shieldOneHit 字段表达「只挡一次」，引擎侧结算待 M7"
+            }
+          ]
+        }
+      ],
+      "description": "「星光印记」：每层使携带者受到伤害+5%，最多3层；「星光迸发」：友方攻击3层印记敌人后，消耗全部印记，造成爱乃攻击力×220%的共振属性附加伤害，触发者何爱乃自己+25能量。",
+      "rawText": "「星光印记」：每层使携带者受到伤害+5%，最多3层；「星光迸发」：友方攻击3层印记敌人后，消耗全部印记，造成爱乃攻击力×220%的共振属性附加伤害，触发者何爱乃自己+25能量。",
+      "optimization": {
+        "source": "优化稿/星见爱乃-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      },
+      "cost": {
+        "energy": 0
+      },
+      "gain": {
+        "energy": 25
+      },
+      "targetType": "aoe"
+    },
+    "ultimate": {
+      "id": "skill-chenxing-yongtan-kaimu-zhuiguang",
+      "kind": "ultimate",
+      "name": "晨星咏叹·开幕追光",
+      "targetType": "self",
+      "scalingBase": "hp",
+      "scalingArray": "ultimate",
+      "cost": {
+        "energy": 130,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 0
+      },
+      "onCast": [
+        {
+          "type": "deployField",
+          "fieldId": "field-starlight-concert",
+          "duration": 3
+        },
+        {
+          "type": "applyBuff",
+          "buffId": "buff-lightchaser",
+          "stacks": 1,
+          "duration": 3,
+          "target": "partyAll"
+        }
+      ],
+      "description": "消耗130能量。展开领域「星光音乐会」并为全队施加「追光者」，持续3回合（权阶Ⅴ→4回合）。领域：任意我方单位行动后治疗爱乃生命上限×10%；带印记敌人全属性抗性-10%；3层印记触发「星光迸发」并插入额外回合。追光者：攻击力+爱乃生命上限×7.5%，暴击率+17.5%，暴击伤害+25%，每次攻击命中必定附加1层印记。",
+      "rawText": "消耗130能量。展开领域「星光音乐会」并为全队施加「追光者」，持续3回合（权阶Ⅴ→4回合）。领域：任意我方单位行动后治疗爱乃生命上限×10%；带印记敌人全属性抗性-10%；3层印记触发「星光迸发」并插入额外回合。追光者：攻击力+爱乃生命上限×7.5%，暴击率+17.5%，暴击伤害+25%，每次攻击命中必定附加1层印记。",
+      "optimization": {
+        "source": "优化稿/星见爱乃-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "bloom": {
+      "id": "skill-chenxing-yongtan-luomu-huacai",
+      "kind": "bloom",
+      "name": "晨星咏叹·落幕华彩",
+      "targetType": "aoe",
+      "scalingBase": "hp",
+      "scalingArray": "ultimate",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0,
+        "requires": "usedUltimate"
+      },
+      "gain": {
+        "resonanceIndex": 0,
+        "energy": 0
+      },
+      "hits": [
+        {
+          "multiplier": 0.5,
+          "target": "all",
+          "element": "aria",
+          "_note": "① 先追加一次元素绽放「祈愿星光交响」：75% 生命上限咏叹群攻。它本该是独立的 bloom 技能，但 `bloom` 技能位只有一个 ⇒ 与二段本体合并成两段，按结算顺序排列"
+        },
+        {
+          "multiplier": 0.3333,
+          "target": "all",
+          "element": "aria",
+          "onHit": [
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-finale",
+              "stacks": 1,
+              "duration": 3,
+              "baseChance": 1,
+              "target": "mainTarget",
+              "_note": "③ 绽放与 50% 群攻结算完后，对全体敌人施加「终幕」3 回合（onHit 在该段伤害之后、且逐命中目标各执行一次）。施加概率用 baseChance 1.0 表达「100% 基础概率」；权阶Ⅵ「必定施加」需要 effectRes 免疫，当前无字段",
+              "stackCounter": "perAttack"
+            }
+          ]
+        }
+      ],
+      "description": "触发条件：通过充满能量释放的终结技（权阶Ⅳ后取消条件）。效果：追加一次元素绽放「祈愿星光交响」；然后对敌方全体造成50%生命上限的咏叹伤害；对全体敌方100%基础概率施加「终幕」3回合（防御-30%，受到伤害+15%，受到共振伤害额外+10%）。",
+      "rawText": "触发条件：通过充满能量释放的终结技（权阶Ⅳ后取消条件）。效果：追加一次元素绽放「祈愿星光交响」；然后对敌方全体造成50%生命上限的咏叹伤害；对全体敌方100%基础概率施加「终幕」3回合（防御-30%，受到伤害+15%，受到共振伤害额外+10%）。",
+      "optimization": {
+        "source": "优化稿/星见爱乃-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "optimized_bloom_3": {
+      "id": "skill-char-hoshimi-aino-optimized_bloom_3",
+      "kind": "bloom",
+      "name": "祈愿星光交响",
+      "targetType": "single",
+      "scalingBase": "hp",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "energy": 20,
+        "resonanceIndex": 0
+      },
+      "hits": [
+        {
+          "multiplier": 0.3,
+          "target": "main",
+          "element": "aria"
+        }
+      ],
+      "description": "对锁定目标造成30%生命上限的咏叹属性伤害；派生技能，只能由终结技触发。",
+      "rawText": "对锁定目标造成30%生命上限的咏叹属性伤害；派生技能，只能由终结技触发。",
+      "optimization": {
+        "source": "优化稿/星见爱乃-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "optimized_inherent1_7": {
+      "id": "skill-char-hoshimi-aino-optimized_inherent1_7",
+      "kind": "inherent1",
+      "name": "温柔的叛逆者",
+      "targetType": "partyAll",
+      "scalingBase": "hp",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "hits": [],
+      "description": "对处于「可控友好」或「中性」状态的单位治疗或增益效果+20%；使用包含治疗的技能时，20%概率为生命值最低的友方附加「星光护盾」（护盾值=爱乃生命上限×10%，受护盾强度加成，只吸收一次伤害，剩余不结转，不叠加）。",
+      "rawText": "对处于「可控友好」或「中性」状态的单位治疗或增益效果+20%；使用包含治疗的技能时，20%概率为生命值最低的友方附加「星光护盾」（护盾值=爱乃生命上限×10%，受护盾强度加成，只吸收一次伤害，剩余不结转，不叠加）。",
+      "optimization": {
+        "source": "优化稿/星见爱乃-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    },
+    "optimized_inherent2_8": {
+      "id": "skill-char-hoshimi-aino-optimized_inherent2_8",
+      "kind": "inherent2",
+      "name": "未竟的追光者",
+      "targetType": "partyAll",
+      "scalingBase": "atk",
+      "cost": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "gain": {
+        "energy": 0,
+        "resonanceIndex": 0
+      },
+      "hits": [],
+      "description": "爱乃处于队伍中时，我方全体受到的共振属性伤害降低10%。",
+      "rawText": "爱乃处于队伍中时，我方全体受到的共振属性伤害降低10%。",
+      "optimization": {
+        "source": "优化稿/星见爱乃-技能组-全部模态.md",
+        "archivedAt": "2026-11-10"
+      }
+    }
+  },
+  "eidolons": [
+    {
+      "rank": 1,
+      "name": "晨糖开嗓",
+      "effects": [
+        {
+          "type": "changeEnergyCost",
+          "delta": -20,
+          "setTo": 110,
+          "_note": "终结技消耗 130 → 110。只降消耗、不降上限 ⇒ 「充满能量释放」的判定仍然是 130（辛8：这是选择权，不是削弱）"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "和声描谱",
+      "triggers": [
+        {
+          "_note": "元素绽放「祈愿星光交响」释放后：回复 1 点共鸣指数；命中的敌方单位均额外获得 1 层「星光印记」。",
+          "hook": "onSkillCast",
+          "scope": "self",
+          "skillKind": "bloom",
+          "effects": [
+            {
+              "type": "gainResonance",
+              "amount": 1
+            },
+            {
+              "type": "applyDebuff",
+              "debuffId": "debuff-starlight-mark",
+              "stacks": 1,
+              "baseChance": 1,
+              "target": "allEnemies",
+              "stackCounter": "perAttack"
+            }
+          ]
+        }
+      ],
+      "effects": []
+    },
+    {
+      "rank": 3,
+      "name": "星谱练声",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 12
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "共情满场",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "secondUltimateUnconditional",
+          "value": 1,
+          "_note": "不论如何发动终结技都发动二段终结技（取消「充满能量」条件）。这是机制开关，不是面板数值；引擎侧待 M7 实现"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "华彩加演",
+      "shared": true,
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "skillLevel",
+          "value": 2,
+          "cap": 14
+        },
+        {
+          "type": "modifyStat",
+          "stat": "lightchaserDuration",
+          "value": 1,
+          "_note": "「追光者」持续 3 → 4 回合"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "name": "追光落幕",
+      "effects": [
+        {
+          "type": "modifyStat",
+          "stat": "finaleRandomHitsPerMark",
+          "value": 1,
+          "_note": "二段终结技额外段数 = N（元素绽放命中的敌方单位数，≤5）× M（所有敌方持有的星光印记总数，≤15），每段 10% 生命上限咏叹、随机敌方。满场 5 敌上限 75 段 = 750% 生命（≈150,000 @20,000 生命）；单敌 3 层谷值 3 段 = 30%。**不封顶**（02 §0 宪法 6）；N×M 无法用已登记条件表达，故以旋钮占位 + 本条描述记录公式，待 M2 报期望而非峰值"
+        },
+        {
+          "type": "modifyStat",
+          "stat": "finaleAlwaysApply",
+          "value": 1,
+          "_note": "「终幕」由 100% 基础概率改为必定施加"
+        }
+      ]
+    }
+  ],
+  "signatureWeapon": "weap-chenxing-yongtantiao",
+  "gearSet": "gear-xingxie-bujixian",
+  "lore": {
+    "quote": "我想用歌声，触及那些被定义为怪物的事物心中——或许存在的星空。",
+    "narrativeSkills": [
+      "温柔的叛逆者"
+    ],
+    "fieldSkills": [
+      "fs-sugar-supply-party"
+    ],
+    "secrets": [
+      "CCRF 下属 Site-14 文娱专员",
+      "权限 1-0-0"
+    ],
+    "speechStyle": "对外是元气明亮的「站点小太阳」，短句、爱用糖果与舞台比喻；独处时会低声哼唱 —— 底色是「孤独观测者」与「未竟的追光者」",
+    "relationships": {}
+  },
+  "_note": "数据落盘口径（07 §6 / 105 §2.4）：① 面板 260 / 4,000 / 100 / 100 / 5% / 150% / 能量 130，突破每次 生命 +4% / 能量恢复效率 +4% ×4；② 二段终结技用 `bloom` 位承载（75% 绽放 + 50% 落幕 + 终幕）；③ 权阶Ⅵ 的 N×M 段数、权阶Ⅳ 的「取消条件」、权阶Ⅵ 的「终幕必定」都只能以旋钮 / 描述占位；④ 「追光者」攻击力按爱乃生命 7.5%（@20,000 = +1,500）在 buff 的 mods 里写死为 Atk +1,500 —— `mods` 不能按生命上限动态取值，动态化需要新原子 / 新词条（待 M7）；⑤ 战斗固有「温柔的叛逆者」的「增益 +20%」与「未竟的追光者」的「仅共振减伤」都只有近似表达，分别在触发器与 buff 的 note 里写明；⑥ 07 §6 未给「星光印记」持续回合 ⇒ 按 duration 0 = 本场永久（01 §1.3），只在被迸发消耗时归零。"
+}
