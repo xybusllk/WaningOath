@@ -88,7 +88,7 @@ public static class Portraits
             "char-karni" => [new SkinDef("base", "原皮（占位）", "karni-base.png")],
             "char-rolanda" => [new SkinDef("base", "原皮（占位）", "rolanda-base.png")],
             "char-xingyao-star-oath" => [new SkinDef("base", "原皮", "star-oath-base.png")],
-            "char-qianyu-jingxing" => [new SkinDef("base", "原皮（占位）", "jingxing-base.png")],
+            "char-qianyu-jingxing" => [new SkinDef("base", "原皮", "jingxing-base.png")],
             "char-hoshimi-aino" => [new SkinDef("base", "原皮", "aino-base.png")],
             "char-lin-jingyuan" => [new SkinDef("base", "原皮（占位）", "lin-base.png")],
             _ => [],

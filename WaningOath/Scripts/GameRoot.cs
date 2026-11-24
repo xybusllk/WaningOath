@@ -472,6 +472,9 @@ public partial class GameRoot : Control
     private void Swap(Control screen)
     {
         ApplyBackground();
+        // **背景是"这一屏"的，不是"这一局"的**：用完就清，
+        // 否则没申请背景的界面（角色 / 商店 / 设置…）会一直挂着上一屏的图。
+        _pendingBackground = "";
         foreach (Node child in _screenHost.GetChildren()) child.QueueFree();
         screen.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
         _screenHost.AddChild(screen);
@@ -1862,10 +1865,13 @@ public partial class GameRoot : Control
                 && !def.ResolveElements().Any(e => string.Equals(ElementZh(e), _characterFilter, StringComparison.Ordinal)))
                 continue;
             VBoxContainer cell = new() { SizeFlagsHorizontal = SizeFlags.ExpandFill };
+            cell.AddThemeConstantOverride("separation", 6);
 
+            // 四列卡位：立绘缩到 120×180，让 4 行在 1080 高里排得下（13 名角色 = 4 行），
+            // 之前 150×240 时每格过高，滚动区里两行会挤在一起。
             TextureRect? tex = Portraits.Tile(
                 Portraits.FileForSkin(id, _save.Profile.ProtagonistGender,
-                    _save.Profile.Skins.GetValueOrDefault(id)) ?? "", 150f, 240f);
+                    _save.Profile.Skins.GetValueOrDefault(id)) ?? "", 120f, 180f);
             if (tex is not null) cell.AddChild(tex);
 
             string elements = string.Join(" / ", def.ResolveElements().Select(ElementZh));
@@ -1901,7 +1907,8 @@ public partial class GameRoot : Control
         };
         scroll.AddChild(grid);
         root.AddChild(scroll);
-        root.AddChild(new Control { SizeFlagsVertical = SizeFlags.ExpandFill });
+        // 不要再补一个 ExpandFill 的占位控件：它会和滚动区平分高度，
+        // 结果滚动区只剩一半、下面一大片空白（13 名角色只看得到两行）。
         root.AddChild(Wrap(BackButton(ShowHome)));
         Swap(root);
         StatusLine();

@@ -33,6 +33,18 @@ public static class EnemyArt
     /// <summary>由数据 id 推出卡牌图文件名。</summary>
     public static string FileFor(string defId) => defId + "-base.png";
 
+    /// <summary>
+    /// 候选文件名：高难档（`anom-ccrf-411-highboss`）画的还是同一只异常，
+    /// 所以没有专属图时**退回基础档**，不必为同一只怪再出一张。
+    /// </summary>
+    private static System.Collections.Generic.IEnumerable<string> Candidates(string defId)
+    {
+        yield return defId + "-base.png";
+        const string highboss = "-highboss";
+        if (defId.EndsWith(highboss, System.StringComparison.Ordinal))
+            yield return defId[..^highboss.Length] + "-base.png";
+    }
+
     /// <summary>取一张异常体立绘；取不到返回 <c>null</c>。</summary>
     public static Texture2D? TryLoad(string defId)
     {
@@ -42,25 +54,22 @@ public static class EnemyArt
         Texture2D? tex = null;
         try
         {
-            string path = Dir + FileFor(defId);
-            if (!Godot.FileAccess.FileExists(path))
+            foreach (string fileName in Candidates(defId))
             {
-                // 缺图是常态（目前只有候门有图），不刷屏：只在自报里计数。
-                MissingCount++;
-            }
-            else
-            {
+                string path = Dir + fileName;
+                if (!Godot.FileAccess.FileExists(path)) continue;
+
                 Image? img = Image.LoadFromFile(path);
                 if (img is not null)
                 {
                     tex = ImageTexture.CreateFromImage(img);
                     LoadedCount++;
                 }
-                else
-                {
-                    MissingCount++;
-                }
+                break;
             }
+
+            // 一个候选都没命中：缺图是常态（多数异常还没出图），不刷屏，只计数。
+            if (tex is null) MissingCount++;
         }
         catch (System.Exception e)
         {
