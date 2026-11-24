@@ -51,6 +51,9 @@ WaningOath/Assets/Portraits/          立绘，透明底 PNG，2:3，宽边 ≥1
   shouyueren-f-base.png / shouyueren-m-base.png   守约人（女/男）
   xingyao-base.png         千语星遥
 
+WaningOath/Assets/Enemies/            异常体立绘，透明底 PNG，2:3
+  anom-ccrf-017-base.png  候门（CCRF-017）
+
 WaningOath/Assets/Backgrounds/        场景图，16:9 PNG（或 JPEG），≤1920×1080 起
   site14-hill-dawn.png     后山·晨雾
   site14-hill-ridge.png    远眺设施群（也当大厅背景的退路）

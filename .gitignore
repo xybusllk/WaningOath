@@ -86,3 +86,6 @@ iconforge/
 技能等级倍率修正数组.txt
 build-workspace-context.mjs
 tools/story-editor/
+
+# ---- 异常体立绘（AI 生成，不进库）----
+WaningOath/Assets/Enemies/*.png

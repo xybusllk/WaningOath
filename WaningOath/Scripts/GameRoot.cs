@@ -233,9 +233,12 @@ public partial class GameRoot : Control
         // 场景图同理：S8 食堂在巡检里没被单独打开，这里主动把 Requested 清单过一遍，
         // 让自报的"4 张都试过"成立（而不是把没访问到的那张算成 missing）。
         foreach (string bg in Backgrounds.Requested) Backgrounds.TryLoad(bg);
+        // 异常体立绘同理：只有候门有图，巡检里没打开到那只的话就主动加载一遍。
+        foreach (EnemyDef enemyDef in _data.Enemies.Values) EnemyArt.TryLoad(enemyDef.Id);
         GD.Print($"[SMOKE] assets portraits={Portraits.LoadedCount} missing={Portraits.MissingCount} " +
                  $"backgrounds={Backgrounds.LoadedCount}/{Backgrounds.MissingCount} " +
-                 $"font={(ReferenceEquals(_font.GetType(), typeof(SystemFont)) ? "system" : "bundled")}");
+                 $"font={(ReferenceEquals(_font.GetType(), typeof(SystemFont)) ? "system" : "bundled")} " +
+                 $"enemies={EnemyArt.LoadedCount}/{EnemyArt.MissingCount}");
         GD.Print($"[SMOKE] layout={(failed == 0 ? "ok" : "fail")} failed={failed} screens={screens.Length} width={vpWidth:0}");
         GD.Print("[自报] 巡检结束");
         GetTree().Quit(failed == 0 ? 0 : 1);
@@ -3930,8 +3933,10 @@ public partial class GameRoot : Control
     {
         PanelContainer panel = new()
         {
-            SizeFlagsHorizontal = SizeFlags.ExpandFill,
-            CustomMinimumSize = new Vector2(220, 0),
+            // 我方是四张并排的窄卡（撑满）；敌方是"一张卡"，收成内容宽度 ——
+            // 铺满整行会让右边的立绘变成角落里的一张贴纸。
+            SizeFlagsHorizontal = ally ? SizeFlags.ExpandFill : SizeFlags.ShrinkBegin,
+            CustomMinimumSize = ally ? new Vector2(220, 0) : new Vector2(430, 250),
         };
 
         MarginContainer pad = new();
@@ -3941,9 +3946,15 @@ public partial class GameRoot : Control
         pad.AddThemeConstantOverride("margin_bottom", 8);
         panel.AddChild(pad);
 
-        VBoxContainer box = new();
+        // 敌方卡牌：左边文字、右边立绘（没有图就只留文字，见 EnemyArt.Tile）。
+        // 我方卡牌保持纯文字 —— 一张屏上放四张立绘会挤，也抢掉战斗日志的位置。
+        HBoxContainer row = new();
+        row.AddThemeConstantOverride("separation", 12);
+        pad.AddChild(row);
+
+        VBoxContainer box = new() { SizeFlagsHorizontal = SizeFlags.ExpandFill };
         box.AddThemeConstantOverride("separation", 4);
-        pad.AddChild(box);
+        row.AddChild(box);
 
         Label name = new()
         {
@@ -4000,6 +4011,12 @@ public partial class GameRoot : Control
                 AutowrapMode = TextServer.AutowrapMode.WordSmart,
             };
             box.AddChild(anomalies);
+        }
+
+        if (!ally)
+        {
+            TextureRect? art = EnemyArt.Tile(u.DefId, 176f, 264f);
+            if (art is not null) row.AddChild(art);
         }
 
         return panel;
