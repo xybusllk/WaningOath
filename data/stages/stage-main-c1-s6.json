@@ -1,0 +1,24 @@
+{
+  "id": "stage-main-c1-s6",
+  "name": "第一章 第6节 · 两清",
+  "kind": "main",
+
+  "party": ["char-shouyueren", "char-qianyu-jingxing", "char-qianyu-xingyao"],
+  "enemies": ["anom-ccrf-502-61"],
+
+  "maxRound": 20,
+  "fixedPanel": true,
+  "presetLevel": 80,
+  "skillLevel": 10,
+
+  "initialEnergyFull": true,
+
+  "environment": { "all": 1.0, "anomaly": 1.0, "disorder": 1.0 },
+
+  "reward": {
+    "note": "第一章 Boss 战；同样不给首通奖励（08 §8.1）。血量按 502 的两倍给，抬的是「撑住」而不是「拼输出」。",
+    "repeatable": true,
+    "firstClear": { "protocolCode": 0, "credit": 0, "items": {} },
+    "repeat": { "protocolCode": 0, "credit": 0, "items": {} }
+  }
+}

@@ -27,6 +27,9 @@ public sealed class StoryBeat
     /// <summary>这一拍换场景（缺省沿用本节场景）。</summary>
     public string? Scene { get; set; }
 
+    /// <summary>`battle` 拍要跳去的关卡 id（`data/stages/&lt;id&gt;.json`）。</summary>
+    public string? Stage { get; set; }
+
     /// <summary>表格（档案 / 表单）：若干行，每行若干格。</summary>
     public List<string[]>? Table { get; set; }
 }

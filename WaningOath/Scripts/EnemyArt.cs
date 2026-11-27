@@ -42,9 +42,15 @@ public static class EnemyArt
     private static System.Collections.Generic.IEnumerable<string> Candidates(string defId)
     {
         yield return defId + "-base.png";
-        const string highboss = "-highboss";
-        if (defId.EndsWith(highboss, System.StringComparison.Ordinal))
-            yield return defId[..^highboss.Length] + "-base.png";
+
+        // 关卡变体画的还是同一只怪：找不到自己的图就退回基础档，
+        // 这样「库存个体」「高难档」不会各占一张美术资源。
+        string[] variantSuffixes = ["-highboss", "-c1", "-c2", "-c3"];
+        foreach (string suffix in variantSuffixes)
+        {
+            if (!defId.EndsWith(suffix, System.StringComparison.Ordinal)) continue;
+            yield return defId[..^suffix.Length] + "-base.png";
+        }
     }
 
     /// <summary>取一张异常体立绘；取不到返回 <c>null</c>。</summary>

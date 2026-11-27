@@ -1,0 +1,64 @@
+{
+  "id": "anom-ccrf-502-61",
+  "name": "第六十一具",
+  "ccrfCode": "CCRF-502-61",
+
+  "tier": "boss",
+  "category": "anomaly",
+  "level": 90,
+
+  "base": {
+    "atk": 2400,
+    "hp": 110000,
+    "def": 500,
+    "speed": 78,
+    "critRate": 0.05,
+    "critDmg": 1.50,
+    "energyMax": 0,
+    "threat": 60
+  },
+
+  "resistAll": 0.0,
+  "resist": {},
+  "anomalyResist": {},
+
+  "aiProfile": "default",
+
+  "skills": [
+    {
+      "id": "skill-61-huijing",
+      "kind": "basic",
+      "name": "回敬",
+      "targetType": "single",
+      "scalingBase": "atk",
+      "scalingArray": "none",
+      "cost": { "energy": 0, "resonanceIndex": 0 },
+      "gain": { "resonanceIndex": 0, "energy": 0 },
+      "hits": [
+        { "multiplier": 1.00, "target": "main", "element": "physical" }
+      ],
+      "triggers": [
+        {
+          "hook": "onDamageTaken",
+          "scope": "self",
+          "oncePerTurn": 1,
+          "effects": [
+            { "type": "applyBuff", "buffId": "buff-compensation", "stacks": 1, "target": "self", "stackCounter": "perAttack" }
+          ]
+        },
+        {
+          "_note": "与 502 同一套机制：3 层「代偿」= 完全苏醒。Boss 版只是血更厚、攻击更低 —— 第 6 节要的是「撑到签字」，不是拼输出。",
+          "hook": "onStackReach",
+          "scope": "self",
+          "condition": "statusAtLeast:代偿:3",
+          "oncePerBattle": 1,
+          "effects": [
+            { "type": "applyBuff", "buffId": "buff-awakened", "stacks": 1, "duration": 0, "target": "self" }
+          ]
+        }
+      ],
+      "description": "以完全相同的姿态回敬攻击者，造成 100% 攻击力的物理伤害。受到集中打击时（每单位回合最多 1 次）获得 1 层「代偿」。满 3 层「代偿」时完成「完全苏醒」（移速 +25%、受到的伤害降低 20%，永久）。",
+      "rawText": "它是 502 里多出来的那一具：同一副铅灰外壳，胸口一块空白工牌，颈侧一道横向的压痕。它会学人——学人抬手、学人签字，学得很慢。"
+    }
+  ]
+}

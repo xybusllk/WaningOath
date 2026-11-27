@@ -1,0 +1,24 @@
+{
+  "id": "stage-main-c1-s4",
+  "name": "第一章 第4节 · 第一次断线",
+  "kind": "main",
+
+  "party": ["char-shouyueren", "char-qianyu-jingxing"],
+  "enemies": ["anom-ccrf-502-c1"],
+
+  "maxRound": 15,
+  "fixedPanel": true,
+  "presetLevel": 80,
+  "skillLevel": 10,
+
+  "initialEnergyFull": true,
+
+  "environment": { "all": 1.0, "anomaly": 1.0, "disorder": 1.0 },
+
+  "reward": {
+    "note": "第一章的战斗节点，剧情侧明确「奖励不归剧情侧、留空」（08 §8.1）；这里不给首通奖励，避免发明数字。",
+    "repeatable": true,
+    "firstClear": { "protocolCode": 0, "credit": 0, "items": {} },
+    "repeat": { "protocolCode": 0, "credit": 0, "items": {} }
+  }
+}

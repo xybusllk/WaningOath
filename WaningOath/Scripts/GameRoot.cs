@@ -165,6 +165,20 @@ public partial class GameRoot : Control
                 StoryScript? s1 = StoryScript.Load("chapter-1");
                 if (s1 is not null) StartScript(s1);
             }),
+            ("story-c1-battle", "第一章战斗节点", () =>
+            {
+                StoryScript? sb = StoryScript.Load("chapter-1");
+                if (sb is null) return;
+                StartScript(sb);
+                int sec = sb.Sections.FindIndex(x => x.Id == "s4");
+                if (sec < 0) return;
+                int beat = sb.Sections[sec].Beats.FindIndex(b => b.Kind == "battle");
+                if (beat < 0) return;
+                _scriptSection = sec;
+                _scriptBeat = beat;
+                _scriptScene = sb.Sections[sec].Scene ?? "";
+                ShowScriptBeat();
+            }),
             ("story-int", "幕间", () =>
             {
                 StoryScript? s2 = StoryScript.Load("interlude-1");
@@ -2493,14 +2507,22 @@ public partial class GameRoot : Control
     private int _scriptBeat;
     private string _scriptScene = "";
 
+    /// <summary>战斗节点：打完回剧情时从哪一拍接着读。</summary>
+    private int _scriptReturnSection;
+    private int _scriptReturnBeat;
+    private bool _scriptBattlePending;
+
     /// <summary>故事列表里的一个章节入口（脚本读不到就置灰）。</summary>
     private void AddScriptEntry(VBoxContainer root, string id, string title)
     {
         StoryScript? script = StoryScript.Load(id);
         bool ok = script is not null && script.Sections.Count > 0;
+        bool cleared = _save.Progress.Stories.TryGetValue(id, out PlayerSave.StoryRecord? rec) && rec.Cleared;
         Button entry = new()
         {
-            Text = ok ? $"{title}　（{script!.Sections.Count} 节 · {script.BeatCount} 拍）" : $"{title}　（待落盘）",
+            Text = ok
+                ? $"{title}　（{script!.Sections.Count} 节 · {script.BeatCount} 拍）" + (cleared ? "　已通关 · 可重看" : "")
+                : $"{title}　（待落盘）",
             CustomMinimumSize = new Vector2(0, 56),
             Disabled = !ok,
         };
@@ -2535,6 +2557,16 @@ public partial class GameRoot : Control
 
         StoryBeat beat = section.Beats[_scriptBeat];
         if (!string.IsNullOrEmpty(beat.Scene)) _scriptScene = beat.Scene!;
+
+        // 战斗节点：直接进战斗，回来时从下一拍继续（不先让玩家点一次"继续"）。
+        if (beat.Kind == "battle" && !string.IsNullOrEmpty(beat.Stage))
+        {
+            _scriptReturnSection = _scriptSection;
+            _scriptReturnBeat = _scriptBeat + 1;
+            _scriptBattlePending = true;
+            ShowBattle(beat.Stage!, tutorial: false, fromStory: true);
+            return;
+        }
 
         Control root = new();
         SetNextBackground(string.IsNullOrEmpty(_scriptScene) ? "" : _scriptScene + ".png");
@@ -2647,9 +2679,39 @@ public partial class GameRoot : Control
 
     private void EndScript()
     {
-        _toast = $"{_script?.Title} 已读到最后一拍（战斗与章节结算待接）。";
+        string title = _script?.Title ?? "本章";
+        string id = _script?.Id ?? "";
         _script = null;
+        _scriptBattlePending = false;
+        if (string.IsNullOrEmpty(id)) { _toast = title + " 已读到最后一拍。"; ShowStoryList(); return; }
+        _ = ReportScriptClearAsync(id, title);
+    }
+
+    /// <summary>一章读到最后一拍：让服务端按 stories.json 的白名单结算（防刷靠 anchorStage）。</summary>
+    private async Task ReportScriptClearAsync(string id, string title)
+    {
+        ShowBusy($"正在结算「{title}」…");
+        ApiClient.Reply reply = await _api.ReportStoryClearAsync(id);
+        await ReloadSaveAsync();
+        _toast = reply.Ok ? $"{title}：已通关。" : $"{title}：上报被拒 —— {reply.Message}";
         ShowStoryList();
+    }
+
+    /// <summary>战后回到剧情：有挂起的脚本就接着读，否则走序章的老路径（S8）。</summary>
+    private void ResumeAfterBattle()
+    {
+        _battleFromStory = false;
+        _battle = null;
+
+        if (_script is not null && _scriptBattlePending)
+        {
+            _scriptBattlePending = false;
+            _scriptSection = _scriptReturnSection;
+            _scriptBeat = _scriptReturnBeat;
+            ShowScriptBeat();
+            return;
+        }
+        ShowStory(IndexOfScene("S8"));
     }
 
     // ── 剧情屏的零件 ─────────────────────────────────────────────────
@@ -3809,7 +3871,11 @@ public partial class GameRoot : Control
 
         // 战斗背景：序章那一场用后山路边的树丛；清剿本暂用同一张，
         // 等属性靶场背景出图后再按 StageDef 分派（美术策划案/02 §3.3）。
-        SetNextBackground(_battleFromStory ? "battle-site14-hill.png" : "site14-hill-dawn.png");
+        // 从剧情进来的战斗：背景就用剧情当前那一幕的场景（第一章在库房，不该突然回后山）。
+        string battleBg = _script is not null && !string.IsNullOrEmpty(_scriptScene)
+            ? _scriptScene + ".png"
+            : _battleFromStory ? "battle-site14-hill.png" : "site14-hill-dawn.png";
+        SetNextBackground(battleBg);
 
         // 敌方区（上方）
         _enemyRow = new VBoxContainer { SizeFlagsHorizontal = SizeFlags.ExpandFill };
@@ -4285,7 +4351,7 @@ public partial class GameRoot : Control
         if (win && _battleFromStory)
         {
             Button onward = new() { Text = "继续剧情", CustomMinimumSize = new Vector2(240, 46) };
-            onward.Pressed += () => ShowStory(IndexOfScene("S8"));
+            onward.Pressed += ResumeAfterBattle;
             box.AddChild(Wrap(onward));
         }
 

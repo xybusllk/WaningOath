@@ -14,6 +14,32 @@
       },
       "repeatable": false,
       "note": "03 §4.1「序章通关奖励：160 协议原码 + 实习日志 ×30」/ 04 §3.1 的 S9 结算行。⚠️ 它与 stage-main-s7 的**主线关卡首通 20 原码是两笔**：20 是「每关首通」，160 是「序章这一章通关」。anchorStage 记录的是「通关哪一关之后算这一章结束」。"
+    },
+    {
+      "id": "chapter-1",
+      "name": "第一章 · 旧账未清",
+      "kind": "main",
+      "anchorStage": "stage-main-c1-s6",
+      "reward": {
+        "protocolCode": 0,
+        "credit": 0,
+        "items": {}
+      },
+      "repeatable": false,
+      "note": "第一章 7 小节（`剧情文本/第一章 第1~7小节`）。anchorStage = 第 6 节的 Boss 战，即「打完第六十一具」算这一章结束；第 7 节是收尾，走到最后一拍才上报。⚠️ 奖励按剧情侧口径**留空**（`08 §8.1`：奖励不归剧情侧），所以这里全是 0 —— 校验器会因此报一条「奖励是空的」，**这是已知且刻意的**，不是漏填。"
+    },
+    {
+      "id": "interlude-1",
+      "name": "第一章幕间 · 请低头",
+      "kind": "interlude",
+      "anchorStage": "stage-main-c1-s6",
+      "reward": {
+        "protocolCode": 0,
+        "credit": 0,
+        "items": {}
+      },
+      "repeatable": false,
+      "note": "幕间 3 幕（`剧情文本/第一章幕间 请低头.md`），**无战斗**。⚠️ 它没有自己的关卡可做锚点，所以复用第一章 Boss 战：「打完第六十一具」才允许上报幕间通关 —— 语义上等于「先把第一章打完」。奖励同样留空（`09 §8.1`）。"
     }
   ]
 }

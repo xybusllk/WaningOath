@@ -16,6 +16,12 @@ import { join } from 'node:path';
 const ROOT = process.cwd();
 const OUT_DIR = join(ROOT, 'WaningOath', 'Assets', 'Story');
 
+// 战斗节点 -> 关卡 id（只有「——战斗开始——」算节点，「战斗结束」丢掉）
+const STAGE_AT = {
+  'chapter-1/s4': 'stage-main-c1-s4',
+  'chapter-1/s6': 'stage-main-c1-s6',
+};
+
 // 按小节定场（旁白里出现地名就切场景并不可靠 —— 车停在门口时也会提到"检查站"）。
 // 以后要在一节内切景，就在这里加 `sN: [[拍号, 'slug'], …]` 的覆盖表。
 const SECTION_SCENE = {
@@ -83,7 +89,7 @@ const stripInline = (s) =>
 const detectScene = (text, current) =>
   SCENES.find(([word]) => text.includes(word))?.[1] ?? current;
 
-function parseBody(body) {
+function parseBody(body, sectionKey) {
   const beats = [];
   let scene = '';
   let table = [];
@@ -117,7 +123,12 @@ function parseBody(body) {
     }
 
     if (/^>\s*\*\*——战斗/.test(line)) {
-      beats.push({ kind: 'battle', text: stripInline(line.replace(/^>\s*/, '')) });
+      if (line.includes('开始')) {
+        const beat = { kind: 'battle', text: '——战斗——' };
+        const stage = STAGE_AT[sectionKey];
+        if (stage) beat.stage = stage;
+        beats.push(beat);
+      }
       continue;
     }
 
@@ -175,7 +186,7 @@ function convert(id, title, files) {
   const sections = [];
   files.forEach((file, i) => {
     for (const raw of splitSections(file)) {
-      const beats = parseBody(raw.body);
+      const beats = parseBody(raw.body, `${id}/s${sections.length + 1}`);
       if (!beats.length) continue;
       const sid = sectionId(raw.title, sections.length);
       const section = { id: sid, title: raw.title, beats };
