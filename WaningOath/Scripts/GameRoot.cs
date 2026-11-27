@@ -2589,7 +2589,8 @@ public partial class GameRoot : Control
 
         Label text = new()
         {
-            Text = isSay ? Pronoun(line) : line,
+            // 章节脚本默认不做"他→她"替换（见 StoryScript.Pronoun 的说明）。
+            Text = isSay && _script is { Pronoun: true } ? Pronoun(line) : line,
             AutowrapMode = TextServer.AutowrapMode.WordSmart,
             CustomMinimumSize = new Vector2(0, isNote ? 120 : 96),
             Modulate = isSay ? Colors.White : new Color(0.86f, 0.90f, 1f, 0.88f),

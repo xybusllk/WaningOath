@@ -61,6 +61,13 @@ public sealed class StoryScript
     public string Id { get; set; } = "";
     public string Title { get; set; } = "";
     public int BeatCount { get; set; }
+
+    /// <summary>
+    /// 是否对台词做「他→她」替换。**只有序章那套内置文本需要**；
+    /// 第一章起正文是按"守约人"称呼写的（`08 §2.1`：本小节没有一处"他"指守约人），
+    /// 硬套替换会把巡检员、影子、第六十一具的"他"一起改掉。默认关闭。
+    /// </summary>
+    public bool Pronoun { get; set; }
     public List<StorySection> Sections { get; set; } = [];
 
     private static readonly Dictionary<string, StoryScript?> Cache = new();
