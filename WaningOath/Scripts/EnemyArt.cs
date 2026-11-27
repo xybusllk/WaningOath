@@ -6,9 +6,11 @@ namespace WaningOath;
 /// 异常体（敌人）立绘：战斗卡牌右侧那张竖图，以及图鉴里的大图。
 /// </summary>
 /// <remarks>
-/// <b>命名规则是约定死的</b>：数据里的 <c>data/enemies/&lt;id&gt;.json</c> 叫
-/// <c>anom-ccrf-017</c>，图就叫 <c>Assets/Enemies/anom-ccrf-017-base.png</c>
-/// （`美术策划案/15` 的 ASCII 名一栏）。图鉴图标另走 <c>-icon</c> 后缀，尺寸 1:1。
+/// <b>命名规则是约定死的</b>：数据里的 <c>data/enemies/&lt;id&gt;.json</c> 叫什么，
+/// 图就叫 <c>Assets/Enemies/&lt;id&gt;-base.png</c>（`美术策划案/15` 的 ASCII 名一栏）。
+/// 例：<c>anom-ccrf-017</c> → <c>anom-ccrf-017-base.png</c>；
+/// 第六十一具的 id 是 <c>anom-ccrf-502-61</c>（**不是** <c>-061</c>）→ <c>anom-ccrf-502-61-base.png</c>。
+/// 图鉴图标另走 <c>-icon</c> 后缀，尺寸 1:1。
 /// <para>
 /// 与 <see cref="Portraits"/> 同一套做法：<see cref="Image.LoadFromFile"/> 直读字节
 /// （绕开 `res://` 导入），**取不到就返回 null**，卡牌少一张图而不是崩掉。

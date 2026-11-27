@@ -89,3 +89,6 @@ tools/story-editor/
 
 # ---- 异常体立绘（AI 生成，不进库）----
 WaningOath/Assets/Enemies/*.png
+
+# ---- 美术初版（白底/带水印，未处理后不进库）----
+未处理初版图/
