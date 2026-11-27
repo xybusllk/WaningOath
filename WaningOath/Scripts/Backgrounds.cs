@@ -43,6 +43,21 @@ public static class Backgrounds
         "site14-hill-ridge.png",    // 序章 S1 后段：远眺 Site 14 设施群（正文第 61 行）
         "battle-site14-hill.png",   // 序章 S7：路边树丛的战斗背景（正文第 81 行）
         "site14-canteen.png",       // 序章 S8：食堂（正文第 102 行）
+
+        // ── 第一章（08 §2.2）与幕间（09 §2.2）的场景 ──
+        // 图还没交：缺一张只是那一屏没有背景层，不影响任何流程。
+        "site14-lobby.png",            // 门厅（第 1 小节开场）
+        "site14-storage-d3.png",       // D 区 3 号惰性库房（主舞台）
+        "site14-corridor-d.png",       // D 区走廊 / 安保室
+        "site14-archive.png",          // 中央档案室
+        "site14-director-office.png",  // 总监办公室
+        "site14-gate-c7.png",          // C 区 7 号备勤通道（章末那扇门）
+        "site14-main-gate.png",        // 大门 / 第四根路灯（幕间出站）
+        "wilds-old-road.png",          // 南边旧路
+        "wilds-318-edge.png",          // CCRF-318 高危区边缘
+        "wilds-318-tunnel.png",        // 318 内部道路 / 触手通道
+        "wilds-coast-overlook.png",    // 旧路岔口 / 海边高地
+        "uneg-checkpoint.png",         // UNEG 边境检查站
     ];
 
     private static readonly System.Collections.Generic.Dictionary<string, Texture2D?> Cache = new();

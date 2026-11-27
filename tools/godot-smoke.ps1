@@ -137,7 +137,7 @@ function Invoke-Pass([string]$label, [string]$uiSize) {
 
     # Portrait counts are checked on the FINAL assets line: the title screen no longer
     # shows any portrait, so portraits only load once the character screens build.
-    $assets = [regex]::Match($text, 'assets portraits=(\d+) missing=(\d+) backgrounds=(\d+)/(\d+) font=(\w+)')
+    $assets = [regex]::Match($text, 'assets portraits=(\d+) missing=(\d+) backgrounds=(\d+)/(\d+) font=(\w+) .*bgreq=(\d+)')
     if (-not $assets.Success) { Fail "the $label pass never reported its asset totals" }
     if ($assets.Groups[1].Value -eq '0') { Fail "no portrait ever loaded (0 loaded)" }
     if ($assets.Groups[2].Value -ne '0') { Fail ("portrait(s) went missing: " + $assets.Groups[2].Value) }
@@ -149,8 +149,9 @@ function Invoke-Pass([string]$label, [string]$uiSize) {
     # staying at 4 is what proves the loader looked at every requested name.
     $bgLoaded = [int]$assets.Groups[3].Value
     $bgMissing = [int]$assets.Groups[4].Value
-    if (($bgLoaded + $bgMissing) -ne 4) {
-        Fail "the background pipeline reported $bgLoaded loaded + $bgMissing missing, expected 4 requested"
+    $bgReq = [int]$assets.Groups[6].Value
+    if (($bgLoaded + $bgMissing) -ne $bgReq) {
+        Fail "the background pipeline reported $bgLoaded loaded + $bgMissing missing, expected $bgReq requested"
     }
 
     $okScreens = ([regex]::Matches($text, 'screen=\S+ .*? ok=1')).Count
@@ -164,14 +165,16 @@ try {
     $a = Invoke-Pass '1920x1080' ''
     $b = Invoke-Pass '1440x1080' '1440x1080'
 
-    $wa = ([regex]::Match($a, 'layout=ok failed=0 screens=22 width=(\d+)')).Groups[1].Value
-    $wb = ([regex]::Match($b, 'layout=ok failed=0 screens=22 width=(\d+)')).Groups[1].Value
+    $ma = [regex]::Match($a, 'layout=ok failed=0 screens=(\d+) width=(\d+)')
+    $wa = $ma.Groups[2].Value
+    $mb = [regex]::Match($b, 'layout=ok failed=0 screens=(\d+) width=(\d+)')
+    $wb = $mb.Groups[2].Value
     if ($wa -ne '1920') { Fail "the default pass did not lay out at 1920 wide (got '$wa')" }
     if ($wb -ne '1440') { Fail "the WO_UI_SIZE pass did not lay out at 1440 wide (got '$wb')" }
 
     Write-Host ''
     Write-Host 'Godot client smoke: PASS - the client boots headless, uses the bundled CJK font,'
-    Write-Host 'loads its portraits, builds all 22 screens, and fits both 1920-wide and 1440-wide.'
+    Write-Host 'loads its portraits and backgrounds, builds every screen, and fits both 1920-wide and 1440-wide.'
     Write-Host 'Not covered (needs human eyes): whether it LOOKS right.'
     exit 0
 }

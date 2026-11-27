@@ -160,6 +160,23 @@ public partial class GameRoot : Control
             ("story-s0", "剧情 S0", () => ShowStory(0)),
             ("story-s5", "剧情 S5", () => ShowStory(20)),
             ("story-s7", "剧情 S7", () => ShowStory(IndexOfScene(BattleScene) + 1)),
+            ("story-c1", "第一章", () =>
+            {
+                StoryScript? s1 = StoryScript.Load("chapter-1");
+                if (s1 is not null) StartScript(s1);
+            }),
+            ("story-int", "幕间", () =>
+            {
+                StoryScript? s2 = StoryScript.Load("interlude-1");
+                if (s2 is not null)
+                {
+                    StartScript(s2);
+                    _scriptSection = s2.Sections.Count - 1;   // 直接看最后一幕
+                    _scriptBeat = 0;
+                    _scriptScene = s2.Sections[_scriptSection].Scene ?? "";
+                    ShowScriptBeat();
+                }
+            }),
             ("characters", "角色", ShowCharacters),
             ("team", "编队", ShowTeam),
             ("character-detail", "角色详情", () => ShowCharacterDetail(FirstOwnedCharacter())),
@@ -238,7 +255,8 @@ public partial class GameRoot : Control
         GD.Print($"[SMOKE] assets portraits={Portraits.LoadedCount} missing={Portraits.MissingCount} " +
                  $"backgrounds={Backgrounds.LoadedCount}/{Backgrounds.MissingCount} " +
                  $"font={(ReferenceEquals(_font.GetType(), typeof(SystemFont)) ? "system" : "bundled")} " +
-                 $"enemies={EnemyArt.LoadedCount}/{EnemyArt.MissingCount}");
+                 $"enemies={EnemyArt.LoadedCount}/{EnemyArt.MissingCount} " +
+                 $"bgreq={Backgrounds.Requested.Length}");
         GD.Print($"[SMOKE] layout={(failed == 0 ? "ok" : "fail")} failed={failed} screens={screens.Length} width={vpWidth:0}");
         GD.Print("[自报] 巡检结束");
         GetTree().Quit(failed == 0 ? 0 : 1);
@@ -1805,12 +1823,9 @@ public partial class GameRoot : Control
         prologue.Pressed += () => ShowStory(0);
         root.AddChild(prologue);
 
-        Label more = new()
-        {
-            Text = "后续章节尚未落盘。",
-            Modulate = new Color(1, 1, 1, 0.5f),
-        };
-        root.AddChild(more);
+        // 第一章与幕间走数据通路：Assets/Story/*.story.json（由 tools/story-convert.mjs 生成）。
+        AddScriptEntry(root, "chapter-1", "第一章 · 旧账未清");
+        AddScriptEntry(root, "interlude-1", "第一章幕间 · 请低头");
 
         root.AddChild(new Control { SizeFlagsVertical = SizeFlags.ExpandFill });
         root.AddChild(Wrap(BackButton(ShowHome)));
@@ -2465,6 +2480,175 @@ public partial class GameRoot : Control
 
         Swap(root);
         StatusLine();
+    }
+
+    // ── 数据驱动的剧情（第一章 / 幕间） ─────────────────────────────
+    //
+    // 序章是内置的 96 拍数组（带 S0~S9 场景号与教学战跳转）；
+    // 第一章 / 幕间走 Assets/Story/*.story.json，四类拍：
+    //   say 台词（带人名与阵营）· act 演出/旁白 · note 系统提示/档案 · battle 战斗节点。
+
+    private StoryScript? _script;
+    private int _scriptSection;
+    private int _scriptBeat;
+    private string _scriptScene = "";
+
+    /// <summary>故事列表里的一个章节入口（脚本读不到就置灰）。</summary>
+    private void AddScriptEntry(VBoxContainer root, string id, string title)
+    {
+        StoryScript? script = StoryScript.Load(id);
+        bool ok = script is not null && script.Sections.Count > 0;
+        Button entry = new()
+        {
+            Text = ok ? $"{title}　（{script!.Sections.Count} 节 · {script.BeatCount} 拍）" : $"{title}　（待落盘）",
+            CustomMinimumSize = new Vector2(0, 56),
+            Disabled = !ok,
+        };
+        if (ok) entry.Pressed += () => StartScript(script!);
+        root.AddChild(entry);
+    }
+
+    private void StartScript(StoryScript script)
+    {
+        _script = script;
+        _scriptSection = 0;
+        _scriptBeat = 0;
+        _scriptScene = script.Sections[0].Scene ?? "";
+        _storySlotLeft = _storySlotCenter = _storySlotRight = "";
+        ShowScriptBeat();
+    }
+
+    private void ShowScriptBeat()
+    {
+        if (_script is null) { ShowStoryList(); return; }
+        if (_scriptSection >= _script.Sections.Count) { EndScript(); return; }
+
+        StorySection section = _script.Sections[_scriptSection];
+        if (_scriptBeat >= section.Beats.Count)
+        {
+            _scriptSection++;
+            _scriptBeat = 0;
+            if (_scriptSection >= _script.Sections.Count) { EndScript(); return; }
+            section = _script.Sections[_scriptSection];
+            _scriptScene = section.Scene ?? _scriptScene;
+        }
+
+        StoryBeat beat = section.Beats[_scriptBeat];
+        if (!string.IsNullOrEmpty(beat.Scene)) _scriptScene = beat.Scene!;
+
+        Control root = new();
+        SetNextBackground(string.IsNullOrEmpty(_scriptScene) ? "" : _scriptScene + ".png");
+
+        Control stage = new() { MouseFilter = MouseFilterEnum.Ignore };
+        stage.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
+        root.AddChild(stage);
+
+        if (beat.Kind == "say" && !string.IsNullOrEmpty(beat.Portrait)) RememberStoryPortrait(beat.Portrait!);
+        AddStoryPortrait(stage, _storySlotLeft, StorySlot.Left);
+        AddStoryPortrait(stage, _storySlotCenter, StorySlot.Center);
+        AddStoryPortrait(stage, _storySlotRight, StorySlot.Right);
+
+        root.AddChild(BottomShade(560f));
+
+        MarginContainer frame = new();
+        frame.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
+        frame.AddThemeConstantOverride("margin_left", 88);
+        frame.AddThemeConstantOverride("margin_right", 88);
+        frame.AddThemeConstantOverride("margin_top", 0);
+        frame.AddThemeConstantOverride("margin_bottom", 30);
+        root.AddChild(frame);
+
+        VBoxContainer stack = new() { Alignment = BoxContainer.AlignmentMode.End };
+        stack.AddThemeConstantOverride("separation", 0);
+        frame.AddChild(stack);
+
+        bool isSay = beat.Kind == "say";
+        bool isNote = beat.Kind == "note";
+        bool isBattle = beat.Kind == "battle";
+
+        if (isSay)
+        {
+            string faction = beat.Faction ?? FactionOf(beat.Speaker ?? "");
+            stack.AddChild(Nameplate(beat.Speaker ?? "", faction));
+        }
+        else if (isNote) stack.AddChild(Nameplate("档案 · 系统", ""));
+        else if (isBattle) stack.AddChild(Nameplate("战斗节点", ""));
+
+        PanelContainer box = new() { SizeFlagsHorizontal = SizeFlags.ExpandFill };
+        box.AddThemeStyleboxOverride("panel", DialogStyle());
+
+        VBoxContainer body = new();
+        body.AddThemeConstantOverride("separation", 10);
+
+        string line = beat.Text ?? "";
+        if (isNote && beat.Table is { Count: > 0 })
+        {
+            line = string.Join("\n", beat.Table.Select(static row => string.Join(" ｜ ", row)));
+        }
+        if (isBattle) line += "\n（战斗关卡数据待建，先按剧情推进）";
+
+        Label text = new()
+        {
+            Text = isSay ? Pronoun(line) : line,
+            AutowrapMode = TextServer.AutowrapMode.WordSmart,
+            CustomMinimumSize = new Vector2(0, isNote ? 120 : 96),
+            Modulate = isSay ? Colors.White : new Color(0.86f, 0.90f, 1f, 0.88f),
+            VerticalAlignment = VerticalAlignment.Top,
+        };
+        text.AddThemeFontSizeOverride("font_size", isNote ? 18 : 22);
+        body.AddChild(text);
+
+        HBoxContainer bar = new() { Alignment = BoxContainer.AlignmentMode.End };
+        bar.AddThemeConstantOverride("separation", 12);
+
+        bool last = _scriptSection == _script.Sections.Count - 1
+                    && _scriptBeat == section.Beats.Count - 1;
+        Button next = new()
+        {
+            Text = last ? "结束本章" : "继续",
+            CustomMinimumSize = new Vector2(220, 48),
+        };
+        next.Pressed += AdvanceScript;
+        bar.AddChild(next);
+        body.AddChild(bar);
+
+        HBoxContainer tools = new() { Alignment = BoxContainer.AlignmentMode.End };
+        tools.AddThemeConstantOverride("separation", 10);
+
+        Label sectionTag = new()
+        {
+            Text = $"{section.Title}　·　{_scriptBeat + 1}/{section.Beats.Count}",
+            Modulate = new Color(1, 1, 1, 0.4f),
+            SizeFlagsHorizontal = SizeFlags.ExpandFill,
+            VerticalAlignment = VerticalAlignment.Center,
+        };
+        sectionTag.AddThemeFontSizeOverride("font_size", 13);
+        tools.AddChild(sectionTag);
+
+        Button back = new() { Text = "返回故事列表", CustomMinimumSize = new Vector2(150, 40) };
+        back.Pressed += ShowStoryList;
+        tools.AddChild(back);
+        body.AddChild(tools);
+
+        Pad(box, body);
+        stack.AddChild(box);
+
+        Swap(root);
+        StatusLine();
+    }
+
+    private void AdvanceScript()
+    {
+        if (_script is null) return;
+        _scriptBeat++;
+        ShowScriptBeat();
+    }
+
+    private void EndScript()
+    {
+        _toast = $"{_script?.Title} 已读到最后一拍（战斗与章节结算待接）。";
+        _script = null;
+        ShowStoryList();
     }
 
     // ── 剧情屏的零件 ─────────────────────────────────────────────────
