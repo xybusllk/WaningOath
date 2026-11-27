@@ -179,6 +179,20 @@ public partial class GameRoot : Control
                 _scriptScene = sb.Sections[sec].Scene ?? "";
                 ShowScriptBeat();
             }),
+            ("story-c1-boss", "第一章Boss节点", () =>
+            {
+                StoryScript? sbb = StoryScript.Load("chapter-1");
+                if (sbb is null) return;
+                StartScript(sbb);
+                int secb = sbb.Sections.FindIndex(x => x.Id == "s6");
+                if (secb < 0) return;
+                int beatb = sbb.Sections[secb].Beats.FindIndex(b => b.Kind == "battle");
+                if (beatb < 0) return;
+                _scriptSection = secb;
+                _scriptBeat = beatb;
+                _scriptScene = sbb.Sections[secb].Scene ?? "";
+                ShowScriptBeat();
+            }),
             ("story-int", "幕间", () =>
             {
                 StoryScript? s2 = StoryScript.Load("interlude-1");
