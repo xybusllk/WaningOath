@@ -92,3 +92,11 @@ WaningOath/Assets/Enemies/*.png
 
 # ---- 美术初版（白底/带水印，未处理后不进库）----
 未处理初版图/
+
+# ---- 发布包（构建产物，本地生成）----
+dist/
+WaningOath/WaningOath.sln.bak
+
+# ---- Godot 编辑器生成的导入元数据（本项目的图走直读，不靠 .import）----
+WaningOath/**/*.import
+WaningOath/**/*.uid

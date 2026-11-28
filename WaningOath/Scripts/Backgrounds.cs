@@ -73,38 +73,19 @@ public static class Backgrounds
     {
         if (Cache.TryGetValue(fileName, out Texture2D? cached)) return cached;
 
-        Texture2D? tex = null;
-        try
+        string path = Dir + fileName;
+        Texture2D? tex = TextureLoader.FromRes(path);
+        if (tex is not null) LoadedCount++;
+        else
         {
-            string path = Dir + fileName;
-            if (!Godot.FileAccess.FileExists(path))
-            {
-                GD.Print($"[场景图] 缺少 {path} —— 这一屏不放背景（不影响其他界面）");
-                MissingCount++;
-            }
-            else
-            {
-                Image? img = Image.LoadFromFile(path);
-                if (img is not null)
-                {
-                    tex = ImageTexture.CreateFromImage(img);
-                    LoadedCount++;
-                }
-                else
-                {
-                    MissingCount++;
-                }
-            }
-        }
-        catch (System.Exception e)
-        {
-            GD.Print($"[场景图] 读取 {fileName} 失败：{e.Message} —— 跳过");
+            GD.Print($"[场景图] 缺少 {path} —— 这一屏不放背景（不影响其他界面）");
             MissingCount++;
         }
 
         Cache[fileName] = tex;
         return tex;
     }
+
 
     /// <summary>这张场景图在不在包里（大厅那种"有专用图就用、没有就退回"的地方用）。</summary>
     public static bool Exists(string fileName)

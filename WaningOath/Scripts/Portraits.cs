@@ -122,40 +122,19 @@ public static class Portraits
     {
         if (Cache.TryGetValue(fileName, out Texture2D? cached)) return cached;
 
-        Texture2D? tex = null;
-        try
+        string path = Dir + fileName;
+        Texture2D? tex = TextureLoader.FromRes(path);
+        if (tex is not null) LoadedCount++;
+        else
         {
-            string path = Dir + fileName;
-            if (!Godot.FileAccess.FileExists(path))
-            {
-                GD.Print($"[立绘] 缺少 {path} —— 跳过（不影响其他界面）");
-                MissingCount++;
-            }
-            else
-            {
-                Image? img = Image.LoadFromFile(path);
-                if (img is not null)
-                {
-                    tex = ImageTexture.CreateFromImage(img);
-                    LoadedCount++;
-                }
-                else
-                {
-                    MissingCount++;
-                }
-            }
-        }
-        catch (System.Exception e)
-        {
-            // 注意：`GD.PushWarning` 在部分宿主里会把消息升级成错误；立绘缺失不算错误。
-            GD.Print($"[立绘] 读取 {fileName} 失败：{e.Message} —— 跳过");
+            // 缺图是常态（不少角色还是占位），不刷屏。
+            GD.Print($"[立绘] 缺少 {path} —— 跳过（不影响其他界面）");
             MissingCount++;
         }
 
         Cache[fileName] = tex;
         return tex;
     }
-
     /// <summary>一张定好尺寸的立绘控件；取不到图时返回 <c>null</c>。</summary>
     public static TextureRect? Tile(string fileName, float width, float height)
     {

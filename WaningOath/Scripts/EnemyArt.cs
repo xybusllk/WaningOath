@@ -60,34 +60,19 @@ public static class EnemyArt
         if (Cache.TryGetValue(defId, out Texture2D? cached)) return cached;
 
         Texture2D? tex = null;
-        try
+        foreach (string fileName in Candidates(defId))
         {
-            foreach (string fileName in Candidates(defId))
-            {
-                string path = Dir + fileName;
-                if (!Godot.FileAccess.FileExists(path)) continue;
-
-                Image? img = Image.LoadFromFile(path);
-                if (img is not null)
-                {
-                    tex = ImageTexture.CreateFromImage(img);
-                    LoadedCount++;
-                }
-                break;
-            }
-
-            // 一个候选都没命中：缺图是常态（多数异常还没出图），不刷屏，只计数。
-            if (tex is null) MissingCount++;
+            tex = TextureLoader.FromRes(Dir + fileName);
+            if (tex is not null) break;
         }
-        catch (System.Exception e)
-        {
-            GD.Print($"[异常体立绘] 读取 {defId} 失败：{e.Message} —— 跳过");
-            MissingCount++;
-        }
+
+        if (tex is not null) LoadedCount++;
+        else MissingCount++;      // 缺图是常态（多数异常还没出图），不刷屏
 
         Cache[defId] = tex;
         return tex;
     }
+
 
     /// <summary>定好尺寸的立绘控件；没有图就返回 <c>null</c>（调用方不加这一列）。</summary>
     public static TextureRect? Tile(string defId, float width, float height)
