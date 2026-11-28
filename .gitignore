@@ -11,7 +11,6 @@ obj/
 WaningOath/.godot/
 WaningOath/.mono/
 WaningOath/android/
-WaningOath/export_presets.cfg
 
 # ---- 工作目录内的工具链与缓存（体积大、可重新获取，不纳入版本控制）----
 .dotnet/
